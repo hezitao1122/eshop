@@ -3,6 +3,8 @@ package com.eshopinventory.inventory.manage.item.repository;
 import com.eshopinventory.inventory.manage.item.entity.TbItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.transaction.Transactional;
+
 /**
  * @author Administrator
  * @description: TbItem操作的JPA接口

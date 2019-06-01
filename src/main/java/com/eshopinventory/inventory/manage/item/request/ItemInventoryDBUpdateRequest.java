@@ -1,5 +1,6 @@
 package com.eshopinventory.inventory.manage.item.request;
 
+import com.eshopinventory.inventory.common.base.BaseWriterRequest;
 import com.eshopinventory.inventory.manage.item.entity.TbItem;
 import com.eshopinventory.inventory.manage.item.service.ItemService;
 
@@ -41,7 +42,7 @@ import com.eshopinventory.inventory.manage.item.service.ItemService;
  * @projectName inventory
  * @date 2019/5/31 21:45
  */
-public class ItemInventoryDBUpdateRequest implements Request<TbItem,Long> {
+public class ItemInventoryDBUpdateRequest implements Request<TbItem,Long> , BaseWriterRequest {
 
     /**
      * 商品信息
@@ -61,7 +62,7 @@ public class ItemInventoryDBUpdateRequest implements Request<TbItem,Long> {
     @Override
     public void process() {
         // 删除redis中的缓存
-        itemService.delete(item.getId());
+        itemService.deleteCacheById(item.getId());
         //修改数据库信息
         itemService.update(item);
     }

@@ -27,7 +27,7 @@ public class EncryptUtil {
      * @return
      * @throws Exception
      */
-    public String decode(String data) throws Exception {
+    public String decode(String data)    throws Exception {
         String result1 = new StringBuffer(data).reverse().toString();
         BigDecimal  result = new BigDecimal(result1).divide(new BigDecimal(2)).subtract(new BigDecimal(1000));
         return result+"";

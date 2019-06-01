@@ -26,7 +26,7 @@ public class ResultDto<T> {
     }
 
     public static <T> ResultDto create(){
-        return new ResultDto<T>();
+        return new ResultDto<T>(ResultEnum.SUCCESS);
     }
     /**
      * 用于返回结果的方法,带data

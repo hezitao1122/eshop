@@ -10,6 +10,7 @@ import com.eshopinventory.inventory.manage.item.service.ItemAsyncService;
 import com.eshopinventory.inventory.manage.item.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +34,7 @@ public class ItemController {
      * 更新商品
      */
     @PostMapping("/update")
-    public ResultDto<TbItem> update(TbItem item) {
+    public ResultDto<TbItem> update(@RequestBody TbItem item) {
         //封装请求
         Request<TbItem, Long> tbItemLongRequest = new ItemInventoryDBUpdateRequest(item, itemService);
         //执行请求
@@ -50,7 +51,10 @@ public class ItemController {
 
         TbItem tbItem = null;
 
-
+        //封装请求
+        Request<TbItem, Long> request = new ItemInventoryCacheRefreshRequest(id, itemService);
+        //将请求发送至异步队列
+        itemAsyncService.process(request);
 
 
         // 将请求扔给service异步去处理以后，就需要while(true)一会儿，在这里hang住
@@ -80,16 +84,14 @@ public class ItemController {
 //             获取等待时间
             waitTime = endTime - startTime;
         }
-        //封装请求
-        Request<TbItem, Long> request = new ItemInventoryCacheRefreshRequest(id, itemService);
-        //将请求发送至异步队列
-        itemAsyncService.process(request);
 
 //        直接尝试从数据库中读取
         TbItem item = itemService.getById(id);
-        if(item != null)
+        if(item != null){
+            //有则进行缓存刷新
+            itemService.setCache(item);
             return ResultDto.create(item);
-
+        }
         return ResultDto.create(new MyException("获取商品信息失败！"));
     }
 

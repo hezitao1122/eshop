@@ -61,7 +61,10 @@ thread:
 logging:
   config: classpath:logback.xml
 
-  #自定义配置
+  # 打印sql
+  level:
+    com.eshopinventory : debug
+    #自定义配置
 rest:
   ReadTimeout: 35000
   ConnectTimeout: 5000

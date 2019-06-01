@@ -31,7 +31,13 @@
         </triggeringPolicy>
     </appender>
 
-    <logger name="org.apache.ibatis.session.defaults.DefaultSqlSession" value="ERROR" />
+    <logger name="log4j.logger.com.ibatis" value="DEBUG" />
+    <logger name="log4j.logger.com.ibatis.common.jdbc.SimpleDataSource" value="DEBUG" />
+    <logger name="log4j.logger.com.ibatis.common.jdbc.ScriptRunner" value="DEBUG" />
+    <logger name="log4j.logger.com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" value="DEBUG" />
+    <logger name="log4j.logger.Java.sql.Connection" value="DEBUG" />
+    <logger name="log4j.logger.java.sql.Statement" value="DEBUG" />
+    <logger name="log4j.logger.java.sql.PreparedStatement" value="DEBUG" />
 
     <root level="INFO">
         <appender-ref ref="fileLog" />

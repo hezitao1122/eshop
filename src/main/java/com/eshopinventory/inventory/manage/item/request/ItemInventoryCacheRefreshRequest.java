@@ -1,5 +1,6 @@
 package com.eshopinventory.inventory.manage.item.request;
 
+import com.eshopinventory.inventory.common.base.BaseReaderRequest;
 import com.eshopinventory.inventory.manage.item.entity.TbItem;
 import com.eshopinventory.inventory.manage.item.service.ItemService;
 
@@ -11,7 +12,7 @@ import com.eshopinventory.inventory.manage.item.service.ItemService;
  * @projectName inventory
  * @date 2019/5/30 23:26
  */
-public class ItemInventoryCacheRefreshRequest  implements Request<TbItem,Long> {
+public class ItemInventoryCacheRefreshRequest  implements Request<TbItem,Long> , BaseReaderRequest {
     /**
      * 商品信息
      */

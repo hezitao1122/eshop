@@ -1,7 +1,8 @@
 package com.eshopinventory.inventory.config.mysql;
 
+import com.baomidou.mybatisplus.entity.GlobalConfiguration;
+import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,13 +32,23 @@ public class DataSourceConfig {
      */
     @Bean
     public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource());
+//        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
+        mybatisSqlSessionFactoryBean.setDataSource(dataSource());
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         //指定mybatis的xml扫描路径
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/*/*.xml"));
-        return sqlSessionFactoryBean.getObject();
+        mybatisSqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/*/*.xml"));
+        return mybatisSqlSessionFactoryBean.getObject();
     }
+    //定义 MybatisPlus 的全局策略配置
+    @Bean
+    public GlobalConfiguration globalConfiguration(){
+        GlobalConfiguration c = new GlobalConfiguration();
+        c.setDbColumnUnderline(true);
+        c.setIdType(0);
+        return c;
+    }
+
 
     /**
      * 事务管理器
@@ -46,4 +57,6 @@ public class DataSourceConfig {
     public PlatformTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
+
+
 }

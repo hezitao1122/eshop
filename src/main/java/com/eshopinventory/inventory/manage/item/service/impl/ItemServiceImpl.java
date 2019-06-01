@@ -2,6 +2,7 @@ package com.eshopinventory.inventory.manage.item.service.impl;
 
 import com.eshopinventory.inventory.common.enums.RedisCachePrefixEnum;
 import com.eshopinventory.inventory.manage.item.entity.TbItem;
+import com.eshopinventory.inventory.manage.item.mapper.ItemMapper;
 import com.eshopinventory.inventory.manage.item.repository.ItemRepository;
 import com.eshopinventory.inventory.manage.item.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
  * @date 2019/5/30 23:37
  */
 @Service
+
 public class ItemServiceImpl implements ItemService {
 
     @Autowired
@@ -26,11 +28,13 @@ public class ItemServiceImpl implements ItemService {
     private RedisTemplate redisTemplate;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private ItemMapper itemMapper;
 
 
     @Override
     public void add(TbItem tbItem) {
-        itemRepository.save(tbItem);
+        itemRepository.saveAndFlush(tbItem);
     }
 
     @Override
@@ -40,7 +44,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void update(TbItem tbItem) {
-        itemRepository.save(tbItem);
+//        itemRepository.saveAndFlush(tbItem);
+        itemMapper.updateById(tbItem);
     }
 
     @Override
