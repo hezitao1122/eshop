@@ -4,6 +4,9 @@ import com.eshopinventory.inventory.common.base.BaseReaderRequest;
 import com.eshopinventory.inventory.manage.item.entity.TbItem;
 import com.eshopinventory.inventory.manage.item.service.ItemService;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * @author Administrator
  * @description: 重新加载商品库存缓存
@@ -24,6 +27,15 @@ public class ItemInventoryCacheRefreshRequest  implements Request<TbItem,Long> ,
     private ItemService itemService;
 
     /**
+     * 是否强制刷新缓存
+     */
+    private boolean forceRefresh ;
+    /**
+     * 标识位map
+     */
+    private Map<Long, Boolean> cacheMap = new ConcurrentHashMap<>();
+
+    /**
      * 构造，传入商品信息
      * @param id 商品信息id
      * @param itemService 商品操作的实体类
@@ -31,6 +43,17 @@ public class ItemInventoryCacheRefreshRequest  implements Request<TbItem,Long> ,
     public ItemInventoryCacheRefreshRequest(Long id, ItemService itemService) {
         this.id = id;
         this.itemService = itemService;
+        forceRefresh = false;
+    }
+    /**
+     * 构造，传入商品信息
+     * @param id 商品信息id
+     * @param itemService 商品操作的实体类
+     */
+    public ItemInventoryCacheRefreshRequest(Long id, ItemService itemService, boolean forceRefresh) {
+        this.id = id;
+        this.itemService = itemService;
+        this.forceRefresh = forceRefresh;
     }
     /**
      * 功能描述: 修改库存的方法<br>
@@ -50,5 +73,13 @@ public class ItemInventoryCacheRefreshRequest  implements Request<TbItem,Long> ,
     @Override
     public Long getId() {
         return id;
+    }
+
+    public boolean isForceRefresh() {
+        return forceRefresh;
+    }
+
+    public Map<Long, Boolean> getCacheMap() {
+        return cacheMap;
     }
 }

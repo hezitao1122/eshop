@@ -2,6 +2,8 @@ package com.eshopinventory.inventory.manage.item.request;
 
 import com.eshopinventory.inventory.common.entity.BaseEntity;
 
+import java.util.Map;
+
 /**
  * @author Administrator
  * @description: 请求接口
@@ -13,4 +15,6 @@ import com.eshopinventory.inventory.common.entity.BaseEntity;
 public interface Request<T extends BaseEntity,I> {
     void process();
     I getId();
+    boolean isForceRefresh();
+    Map<I, Boolean> getCacheMap();
 }

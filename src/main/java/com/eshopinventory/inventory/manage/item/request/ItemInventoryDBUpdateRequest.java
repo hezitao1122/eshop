@@ -71,4 +71,9 @@ public class ItemInventoryDBUpdateRequest implements Request<TbItem,Long> , Base
     public Long getId() {
         return item.getId();
     }
+
+    @Override
+    public boolean isForceRefresh() {
+        return false;
+    }
 }

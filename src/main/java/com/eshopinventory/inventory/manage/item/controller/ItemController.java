@@ -47,7 +47,7 @@ public class ItemController {
      * 获取商品
      */
     @PostMapping("/get")
-    public ResultDto<TbItem> get(Long id) throws InterruptedException {
+    public ResultDto<TbItem> get(Long id) throws Exception {
 
         TbItem tbItem = null;
 
@@ -91,11 +91,18 @@ public class ItemController {
             //有则进行缓存刷新
             //itemService.setCache(item);
 
-            //如果能直接从数据库中进行读取到，但是没有放到队列中去执行，故需要再次放到队列中
-            itemAsyncService.process(request);
+
             
+            //代码运行到这里一般有三种情况
+            //1.就是说上一次也是读请求,数据刷入到了redis中,但是给redis的lru算法给清理掉了,标志位还是处于false状态,所以下一个读请求是拿不到数据的
+            //所以可以再放一个读请求到队列中去,让数据刷新一下
+            //2.可能在200ms内,读请求在队列中一直积压,没有等待它去执行,所以就直接查一次库,然后给队列中塞一条读的请求队列
+            //3.数据库中本身没有,缓存穿透,穿过redis,请求直接打到mysql库中
 
-
+            //如果能直接从数据库中进行读取到，但是没有放到队列中去执行，故需要再次放到队列中
+            //需要强制刷新的请求
+            Request<TbItem, Long> refreshRequest = new ItemInventoryCacheRefreshRequest(id, itemService,true);
+            itemAsyncService.process(refreshRequest);
 
             return ResultDto.create(item);
         }

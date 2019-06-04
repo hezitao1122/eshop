@@ -26,32 +26,13 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class ItemAsyncServiceImpl implements ItemAsyncService {
 
-    private Map<Long, Boolean> cacheMap = new ConcurrentHashMap<>();
+
 
 
     @Override
     public void process(Request<TbItem, Long> request) {
         try {
-            //写请求标志位true ， 读请求标志为 false
-            if (request instanceof BaseWriterRequest) {
-                //如果是写请求，将设置为false
-                cacheMap.put(request.getId(), Boolean.TRUE);
-            } else if (request instanceof BaseReaderRequest) {
-                Boolean aBoolean = cacheMap.get(request.getId());
-                //如果为null
-                if (aBoolean == null) {
-                    cacheMap.put(request.getId(), Boolean.FALSE);
-                }
 
-                //如果是读请求，并且前面也具有一个相同的写请求
-                if (aBoolean != null && !aBoolean)
-                    return;
-
-//                如果是读请求，前面没有相同读请求 , 将此读请求压入队列
-                if (aBoolean != null && aBoolean) {
-                    cacheMap.put(request.getId(), Boolean.FALSE);
-                }
-            }
 
 
             // 做请求的路由，根据每个请求的商品id，路由到对应的内存队列中去
