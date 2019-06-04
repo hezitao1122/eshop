@@ -89,7 +89,14 @@ public class ItemController {
         TbItem item = itemService.getById(id);
         if(item != null){
             //有则进行缓存刷新
-            itemService.setCache(item);
+            //itemService.setCache(item);
+
+            //如果能直接从数据库中进行读取到，但是没有放到队列中去执行，故需要再次放到队列中
+            itemAsyncService.process(request);
+            
+
+
+
             return ResultDto.create(item);
         }
         return ResultDto.create(new MyException("获取商品信息失败！"));
