@@ -4,6 +4,7 @@ import com.eshopinventory.inventory.common.base.BaseReaderRequest;
 import com.eshopinventory.inventory.common.base.BaseWriterRequest;
 import com.eshopinventory.inventory.common.entity.BaseEntity;
 import com.eshopinventory.inventory.manage.item.request.Request;
+import com.eshopinventory.inventory.manage.item.request.RequestQueue;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
@@ -38,12 +39,13 @@ public class RequestProcessorThread<T extends BaseEntity, ID> implements Callabl
                 try {
                     //此方法，如果队列满了或者为空，则会阻塞执行
                     Request<T, ID> take = queue.take();
+                    RequestQueue queue = RequestQueue.getInstance();
                     //查询是否为缓存强制刷新的请求
                     boolean forceRefresh = take.isForceRefresh();
 
                     if (!forceRefresh) {
                         //如果不是强制刷新缓存的请求，需要做请求去重处理
-                        Map<ID, Boolean> cacheMap = take.getCacheMap();
+                        Map<ID, Boolean> cacheMap = queue.getCacheMap();
                         //写请求标志位true ， 读请求标志为 false
                         if (take instanceof BaseWriterRequest) {
                             //如果是写请求，将设置为false

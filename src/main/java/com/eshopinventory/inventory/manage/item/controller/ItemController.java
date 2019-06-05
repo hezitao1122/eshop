@@ -1,5 +1,6 @@
 package com.eshopinventory.inventory.manage.item.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.eshopinventory.inventory.common.dto.ResultDto;
 import com.eshopinventory.inventory.config.exception.MyException;
 import com.eshopinventory.inventory.manage.item.entity.TbItem;
@@ -8,6 +9,7 @@ import com.eshopinventory.inventory.manage.item.request.ItemInventoryDBUpdateReq
 import com.eshopinventory.inventory.manage.item.request.Request;
 import com.eshopinventory.inventory.manage.item.service.ItemAsyncService;
 import com.eshopinventory.inventory.manage.item.service.ItemService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/item")
+@Slf4j
 public class ItemController {
     @Autowired
     private ItemAsyncService itemAsyncService;
@@ -35,6 +38,10 @@ public class ItemController {
      */
     @PostMapping("/update")
     public ResultDto<TbItem> update(@RequestBody TbItem item) {
+
+
+        log.info("===========日志===========: 接收到更新商品库存的请求，商品=[{}]" , JSON.toJSONString(item) );
+
         //封装请求
         Request<TbItem, Long> tbItemLongRequest = new ItemInventoryDBUpdateRequest(item, itemService);
         //执行请求
@@ -48,7 +55,7 @@ public class ItemController {
      */
     @PostMapping("/get")
     public ResultDto<TbItem> get(Long id) throws Exception {
-
+        log.info("===========日志===========: 接收到一个商品库存的读请求，商品id=[{}]" , id);
         TbItem tbItem = null;
 
         //封装请求
@@ -74,6 +81,7 @@ public class ItemController {
             tbItem = itemService.getCacheById(id);
 
             if(tbItem != null){
+                log.info("===========日志===========: 在200ms内读取到了redis中的库存缓存，商品=[{}]", JSON.toJSONString(tbItem));
                 return ResultDto.create(tbItem);
             }
 

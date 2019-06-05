@@ -1,8 +1,12 @@
 package com.eshopinventory.inventory.manage.item.request;
 
+import com.alibaba.fastjson.JSON;
 import com.eshopinventory.inventory.common.base.BaseWriterRequest;
 import com.eshopinventory.inventory.manage.item.entity.TbItem;
 import com.eshopinventory.inventory.manage.item.service.ItemService;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Map;
 
 /**
  * @author Administrator
@@ -42,6 +46,7 @@ import com.eshopinventory.inventory.manage.item.service.ItemService;
  * @projectName inventory
  * @date 2019/5/31 21:45
  */
+@Slf4j
 public class ItemInventoryDBUpdateRequest implements Request<TbItem,Long> , BaseWriterRequest {
 
     /**
@@ -61,8 +66,18 @@ public class ItemInventoryDBUpdateRequest implements Request<TbItem,Long> , Base
 
     @Override
     public void process() {
+       log.info("===========日志===========: 数据库更新请求开始执行，商品id=[{}]" ,item.getId()+", 商品=[{}]" , JSON.toJSONString(item));
         // 删除redis中的缓存
         itemService.deleteCacheById(item.getId());
+
+        try {
+            System.out.println("睡眠一下");
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            log.info(e.toString(),e);
+        }
+
+
         //修改数据库信息
         itemService.update(item);
     }
@@ -75,5 +90,10 @@ public class ItemInventoryDBUpdateRequest implements Request<TbItem,Long> , Base
     @Override
     public boolean isForceRefresh() {
         return false;
+    }
+
+    @Override
+    public Map<Long, Boolean> getCacheMap() {
+        return null;
     }
 }

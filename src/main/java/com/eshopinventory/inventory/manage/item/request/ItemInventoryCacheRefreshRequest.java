@@ -1,8 +1,10 @@
 package com.eshopinventory.inventory.manage.item.request;
 
+import com.alibaba.fastjson.JSON;
 import com.eshopinventory.inventory.common.base.BaseReaderRequest;
 import com.eshopinventory.inventory.manage.item.entity.TbItem;
 import com.eshopinventory.inventory.manage.item.service.ItemService;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @projectName inventory
  * @date 2019/5/30 23:26
  */
+@Slf4j
 public class ItemInventoryCacheRefreshRequest  implements Request<TbItem,Long> , BaseReaderRequest {
     /**
      * 商品信息
@@ -66,6 +69,7 @@ public class ItemInventoryCacheRefreshRequest  implements Request<TbItem,Long> ,
     @Override
     public void process() {
         TbItem item1 = itemService.getById(id);
+        log.info("===========日志===========: 已查询到商品最新的库存数量，商品=[{}]" , JSON.toJSONString(item1));
         // 将最新的商品库存数量，刷新到redis缓存中去
         itemService.setCache(item1);
     }

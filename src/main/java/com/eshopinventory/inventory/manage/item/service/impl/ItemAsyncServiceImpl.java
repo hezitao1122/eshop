@@ -1,7 +1,5 @@
 package com.eshopinventory.inventory.manage.item.service.impl;
 
-import com.eshopinventory.inventory.common.base.BaseReaderRequest;
-import com.eshopinventory.inventory.common.base.BaseWriterRequest;
 import com.eshopinventory.inventory.common.util.HashUtil;
 import com.eshopinventory.inventory.manage.item.entity.TbItem;
 import com.eshopinventory.inventory.manage.item.request.Request;
@@ -10,9 +8,7 @@ import com.eshopinventory.inventory.manage.item.service.ItemAsyncService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author zeryts
@@ -32,8 +28,6 @@ public class ItemAsyncServiceImpl implements ItemAsyncService {
     @Override
     public void process(Request<TbItem, Long> request) {
         try {
-
-
 
             // 做请求的路由，根据每个请求的商品id，路由到对应的内存队列中去
             ArrayBlockingQueue<Request> queue = getRoutingQueue(request.getId());
@@ -63,7 +57,9 @@ public class ItemAsyncServiceImpl implements ItemAsyncService {
         // 对hash值取模，将hash值路由到指定的内存队列中，比如内存队列大小8
         // 用内存队列的数量对hash值取模之后，结果一定是在0~7之间
         // 所以任何一个商品id都会被固定路由到同样的一个内存队列中去的
+
         int index = hash & (requestQueue.getSize() - 1);
+        System.out.println("===========日志===========: 路由内存队列，商品id=" + itemId + ", 队列索引=" + index);
         return requestQueue.getQueue(index);
     }
 
