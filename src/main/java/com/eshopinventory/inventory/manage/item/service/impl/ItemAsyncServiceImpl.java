@@ -1,5 +1,7 @@
 package com.eshopinventory.inventory.manage.item.service.impl;
 
+import com.eshopinventory.inventory.common.base.BaseReaderRequest;
+import com.eshopinventory.inventory.common.base.BaseWriterRequest;
 import com.eshopinventory.inventory.common.util.HashUtil;
 import com.eshopinventory.inventory.manage.item.entity.TbItem;
 import com.eshopinventory.inventory.manage.item.request.Request;
@@ -8,6 +10,7 @@ import com.eshopinventory.inventory.manage.item.service.ItemAsyncService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -28,6 +31,40 @@ public class ItemAsyncServiceImpl implements ItemAsyncService {
     @Override
     public void process(Request<TbItem, Long> request) {
         try {
+            try {
+                RequestQueue queue = RequestQueue.getInstance();
+                //查询是否为缓存强制刷新的请求
+                boolean forceRefresh = request.isForceRefresh();
+
+                if (!forceRefresh) {
+                    //如果不是强制刷新缓存的请求，需要做请求去重处理
+                    Map<Long, Boolean> cacheMap = queue.getCacheMap();
+                    //写请求标志位true ， 读请求标志为 false
+                    if (request instanceof BaseWriterRequest) {
+                        //如果是写请求，将设置为false
+                        cacheMap.put(request.getId(), Boolean.TRUE);
+                    } else if (request instanceof BaseReaderRequest) {
+                        Boolean aBoolean = cacheMap.get(request.getId());
+                        //如果为null
+                        if (aBoolean == null) {
+                            cacheMap.put(request.getId(), Boolean.FALSE);
+                        }
+                        //如果是读请求，并且前面也具有一个相同的写请求
+                        if (aBoolean != null && !aBoolean)
+                            return ;
+                        //如果是读请求，前面没有相同读请求 , 将此读请求压入队列
+                        if (aBoolean != null && aBoolean) {
+                            cacheMap.put(request.getId(), Boolean.FALSE);
+                        }
+                    }
+                }
+
+
+
+            } catch (Exception e) {
+                log.info(e.toString(), e);
+            }
+
 
             // 做请求的路由，根据每个请求的商品id，路由到对应的内存队列中去
             ArrayBlockingQueue<Request> queue = getRoutingQueue(request.getId());
