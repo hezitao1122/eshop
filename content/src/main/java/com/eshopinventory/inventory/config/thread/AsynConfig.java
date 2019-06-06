@@ -1,4 +1,4 @@
-//package com.eshopinventory.inventory.config.thread;
+package com.eshopinventory.inventory.config.thread;//package com.eshopinventory.inventory.config.thread;
 //
 //import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.context.annotation.Bean;

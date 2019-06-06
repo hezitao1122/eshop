@@ -13,5 +13,5 @@ import com.eshopinventory.inventory.manage.item.request.Request;
  */
 public interface ItemAsyncService {
 
-    void process(Request<TbItem,Long> request);
+    void process(Request<TbItem, Long> request);
 }
