@@ -20,7 +20,6 @@
         <module>content</module>
         <module>product_cache</module>
         <module>commons</module>
-        <module>sdk</module>
     </modules>
 
     <properties>
@@ -79,7 +78,11 @@
                 <artifactId>fastjson</artifactId>
                 <version>1.2.58</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.8</version>
+            </dependency>
             <!--swagger -->
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -102,22 +105,7 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>6.0.7.Final</version>
             </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.8</version>
-            </dependency>
 
-            <dependency>
-                <groupId>com.eshop</groupId>
-                <artifactId>commons</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.eshop</groupId>
-                <artifactId>sdk</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
         </dependencies>
     <build>
         <plugins>

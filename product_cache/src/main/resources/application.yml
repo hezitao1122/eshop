@@ -29,9 +29,6 @@ thread:
   queueCapacity: 20
 
 
-logging:
-  config: classpath:logback.xml
-
   # 打印sql
   level:
     com.eshopinventory : debug

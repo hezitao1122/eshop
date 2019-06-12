@@ -52,7 +52,7 @@ public class ControllerConfig {
         long endTime = System.currentTimeMillis();
 
 
-        log.info("执行->[{}]类的[{}]方法的返回报文为:->[{}],执行时长为:[{}] ms",className,methodName, proceed.toString(),(endTime - startTime));
+        log.info("执行->[{}]类的[{}]方法的返回报文为:->[{}],执行时长为:[{}] ms",className,methodName, JSON.toJSONString(proceed),(endTime - startTime));
         return proceed;
     }
 }

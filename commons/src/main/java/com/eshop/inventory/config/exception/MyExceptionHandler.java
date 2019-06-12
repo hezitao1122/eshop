@@ -29,7 +29,7 @@ public class MyExceptionHandler {
     @ExceptionHandler(value = MyException.class)
     @ResponseBody
     public ResultDto error(MyException e) {
-        return ResultDto.create(e);
+        return new ResultDto(e);
     }
 
     /**
@@ -43,6 +43,6 @@ public class MyExceptionHandler {
     @ResponseBody
     public ResultDto error(Exception e) {
         log.info(e.toString(), e);
-        return ResultDto.create(ResultEnum.ERROR);
+        return new ResultDto(ResultEnum.ERROR);
     }
 }

@@ -46,7 +46,7 @@ public class ItemController {
         Request<TbItem, Long> tbItemLongRequest = new ItemInventoryDBUpdateRequest(item, itemService);
         //执行请求
         itemAsyncService.process(tbItemLongRequest);
-        return ResultDto.create();
+        return new ResultDto();
 
     }
 
@@ -82,7 +82,7 @@ public class ItemController {
 
             if(tbItem != null){
                 log.info("===========日志===========: 在200ms内读取到了redis中的库存缓存，商品=[{}]", JSON.toJSONString(tbItem));
-                return ResultDto.create(tbItem);
+                return new ResultDto(tbItem);
             }
 
             //没有读取到则睡眠一段时间
@@ -112,10 +112,9 @@ public class ItemController {
             Request<TbItem, Long> refreshRequest = new ItemInventoryCacheRefreshRequest(id, itemService,true);
             itemAsyncService.process(refreshRequest);
 
-            return ResultDto.create(item);
+            return new ResultDto(item);
         }
-        return ResultDto.create(new MyException("获取商品信息失败！"));
+        return new ResultDto(new MyException("获取商品信息失败！"));
     }
-
 
 }

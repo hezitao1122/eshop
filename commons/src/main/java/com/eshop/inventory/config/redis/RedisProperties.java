@@ -1,6 +1,5 @@
 package com.eshop.inventory.config.redis;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "spring.redis.cluster")
-@Data
 public class RedisProperties {
 
     private String nodes;
