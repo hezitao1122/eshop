@@ -12,6 +12,10 @@
     <artifactId>content</artifactId>
     <packaging>jar</packaging>
 
+    <properties>
+        <common.version>0.0.1-SNAPSHOT</common.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -40,7 +44,12 @@
         <dependency>
             <groupId>com.eshop</groupId>
             <artifactId>commons</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eshop</groupId>
+            <artifactId>sdk</artifactId>
+            <version>${common.version}</version>
         </dependency>
     </dependencies>
 
