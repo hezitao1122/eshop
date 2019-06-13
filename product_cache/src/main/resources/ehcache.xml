@@ -16,7 +16,7 @@
     <!-- memoryStoreEvictionPolicy 当缓存数量达到最大条目数时候，采用一定的缓存算法。LRU代表最近一段时间最少使用的对象干掉 -->
 
     <defaultCache
-            external="false"
+            eternal="false"
             maxElementsInMemory="1000"
             overflowToDisk="false"
             diskPersistent="false"
@@ -29,7 +29,7 @@
     <!-- 不同的数据可以有不同的缓存策略 -->
     <cache
             name="local"
-            external="false"
+            eternal="false"
             maxElementsInMemory="1000"
             overflowToDisk="false"
             diskPersistent="false"

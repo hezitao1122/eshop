@@ -68,3 +68,7 @@ logging:
 rest:
   ReadTimeout: 35000
   ConnectTimeout: 5000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/

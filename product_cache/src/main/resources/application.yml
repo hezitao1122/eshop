@@ -28,6 +28,11 @@ thread:
   maxPoolSize: 400
   queueCapacity: 20
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
 
   # 打印sql
   level:
