@@ -1,0 +1,24 @@
+package com.eshop.inventory;
+
+import com.github.pagehelper.PageHelper;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import java.util.Properties;
+
+/**
+ * @ClassName: ProductCacheApplication
+ * @Title: ProductCacheApplication
+ * @ProjectName: inventory
+ * @Description: 用于缓存框架的启动类
+ * @Author: hzt
+ * @Date: Create in 2019/6/1317:11
+ */
+@SpringBootApplication
+public class ProductCacheApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ProductCacheApplication.class, args);
+    }
+}
