@@ -14,8 +14,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
 * @Description:    swagger-ui可视化接口配置类
-* @Author:         WengGuoQi
-* @CreateDate:     2018/7/2 15:30
+* @Author:         zeryts
+* @CreateDate:     2019/6/17 15:30
 * @Version:        1.0
 */
 
@@ -29,16 +29,16 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .select()
                 //选择controller包
-                .apis(RequestHandlerSelectors.basePackage("com.ph.football")).paths(PathSelectors.any()).build();
+                .apis(RequestHandlerSelectors.basePackage("com.eshop.inventory")).paths(PathSelectors.any()).build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 //自定义信息可按需求填写
-                .title("足球宝贝API")
+                .title("商品详情页")
                 .description("")
                 .termsOfServiceUrl("")
-                .contact("普华众鑫")
+                .contact("Zeryts")
                 .version("1.0")
                 .build();
     }
