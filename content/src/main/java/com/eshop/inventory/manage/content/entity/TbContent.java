@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: TODO
  * ```````````````````````````
  * @title: TbContent

@@ -44,7 +44,7 @@ public class ControllerConfig {
                 sb.append(JSON.toJSONString(o)+",");
             }
         });
-
+        if(sb.length() >0) sb.substring(0,sb.length()-1);
 
 
         log.info("执行->[{}]类的->[{}]方法的请求参数为:->[{}]",className,methodName,sb.toString());

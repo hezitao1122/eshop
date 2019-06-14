@@ -3,7 +3,7 @@ package com.eshop.inventory.common.base;
 import com.eshop.inventory.common.entity.BaseEntity;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 公共的service层接口
  * ```````````````````````````
  * @title: BaseService
@@ -17,7 +17,7 @@ public interface BaseService<T extends BaseEntity,ID> {
      *
      * @param t 对应的数据库entity
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/30 23:32
      */
     void add(T t);
@@ -27,7 +27,7 @@ public interface BaseService<T extends BaseEntity,ID> {
      *
      * @param id 主键
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/30 23:32
      */
     void delete(ID id);
@@ -37,7 +37,7 @@ public interface BaseService<T extends BaseEntity,ID> {
      *
      * @param t entity对象
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/30 23:32
      */
     void update(T t);
@@ -47,7 +47,7 @@ public interface BaseService<T extends BaseEntity,ID> {
      *
      * @param id 主键
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/30 23:32
      */
     T getById(ID id);
@@ -57,7 +57,7 @@ public interface BaseService<T extends BaseEntity,ID> {
      *
      * @param t 存储的对象
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/30 23:32
      */
     void setCache(T t);
@@ -67,7 +67,7 @@ public interface BaseService<T extends BaseEntity,ID> {
      *
      * @param id 单条数据的主键
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/30 23:32
      */
     T getCacheById(ID id);
@@ -77,7 +77,7 @@ public interface BaseService<T extends BaseEntity,ID> {
      *
      * @param id 单条数据的主键
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/30 23:32
      */
     void deleteCacheById(ID id);

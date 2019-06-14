@@ -5,7 +5,7 @@ import com.eshop.inventory.common.entity.BaseEntity;
 import java.util.Map;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 请求接口
  * ```````````````````````````
  * @title: Request

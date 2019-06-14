@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: redis的参数配置类
  * ```````````````````````````
  * @title: RedisProperties

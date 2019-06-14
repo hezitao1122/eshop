@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: TODO
  * ```````````````````````````
  * @title: TbOrderItem

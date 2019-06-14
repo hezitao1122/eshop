@@ -154,7 +154,7 @@ public class DateUtil {
      * @param endDateStr
      * @return
      * long 
-     * @author Administrator
+     * @author zeryts
      */
     public static long getDaySub(String beginDateStr,String endDateStr){
         long day=0;

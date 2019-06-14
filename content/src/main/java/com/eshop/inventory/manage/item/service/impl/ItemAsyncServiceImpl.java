@@ -81,7 +81,7 @@ public class ItemAsyncServiceImpl implements ItemAsyncService {
      *
      * @return: java.util.concurrent.ArrayBlockingQueue<com.eshop.inventory.manage.item.request.Request < com.eshop.inventory.manage.item.entity.TbItem, java.lang.Long>>
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/31 22:09
      */
     public ArrayBlockingQueue<Request> getRoutingQueue(Long itemId) {
@@ -96,7 +96,7 @@ public class ItemAsyncServiceImpl implements ItemAsyncService {
         // 所以任何一个商品id都会被固定路由到同样的一个内存队列中去的
 
         int index = hash & (requestQueue.getSize() - 1);
-        System.out.println("===========日志===========: 路由内存队列，商品id=" + itemId + ", 队列索引=" + index);
+        log.info("===========日志===========: 路由内存队列，商品id=" + itemId + ", 队列索引=" + index);
         return requestQueue.getQueue(index);
     }
 

@@ -1,7 +1,7 @@
 package com.eshop.inventory.common.base;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 读请求的接口标识
  * ```````````````````````````
  * @title: BaseReaderRequest

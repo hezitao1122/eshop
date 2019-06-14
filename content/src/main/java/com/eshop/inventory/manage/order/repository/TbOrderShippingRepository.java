@@ -4,7 +4,7 @@ import com.eshop.inventory.manage.order.entity.TbOrderShipping;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 购物车操作的JPA接口
  * ```````````````````````````
  * @title: TbOrderRepository

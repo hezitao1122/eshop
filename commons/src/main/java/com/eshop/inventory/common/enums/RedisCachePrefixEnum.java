@@ -1,7 +1,7 @@
 package com.eshop.inventory.common.enums;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: redis存储前缀的枚举类
  * ```````````````````````````
  * @title: RedisCachePrefixEnum
@@ -37,7 +37,7 @@ public enum RedisCachePrefixEnum {
      * @param name 枚举的name值
      * @return: com.eshop.inventory.common.enums.RedisCachePrefixEnum
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/30 23:47
      */
     public RedisCachePrefixEnum getEnumByName(String name){

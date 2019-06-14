@@ -4,7 +4,7 @@ import com.eshop.inventory.manage.item.entity.TbItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: TbItem操作的JPA接口
  * ```````````````````````````
  * @title: ItemRepository
