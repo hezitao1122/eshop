@@ -1,7 +1,7 @@
 package com.eshop.inventory.manage.content.repository;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: TbContentCategory操作的JPA接口
  * ```````````````````````````
  * @title: ContentCategoryRepository

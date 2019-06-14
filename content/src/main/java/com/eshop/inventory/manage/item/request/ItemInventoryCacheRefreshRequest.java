@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 重新加载商品库存缓存
  * ```````````````````````````
  * @title: ItemInventoryCacheRefreshRequest
@@ -63,7 +63,7 @@ public class ItemInventoryCacheRefreshRequest  implements Request<TbItem,Long> ,
      * 〈〉
      *
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/31 21:38
      */
     @Override

@@ -1,7 +1,7 @@
 package com.eshop.inventory.common.entity;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 公共entity类
  * ```````````````````````````
  * @title: BaseEntity

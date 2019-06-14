@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.eshop.inventory.manage.item.entity.TbItem;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 商品操作的mapper接口
  * ```````````````````````````
  * @title: ItemMapper

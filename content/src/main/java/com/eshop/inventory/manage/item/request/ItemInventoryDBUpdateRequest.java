@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Map;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description:
  * 比如说一个商品发生了交易，那么就要修改这个商品对应的库存
  *

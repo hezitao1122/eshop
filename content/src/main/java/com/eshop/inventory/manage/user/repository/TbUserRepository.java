@@ -4,7 +4,7 @@ import com.eshop.inventory.manage.user.entity.TbUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 用户表操作的JPA接口
  * ```````````````````````````
  * @title: TbOrderRepository

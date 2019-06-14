@@ -1,7 +1,7 @@
 package com.eshop.inventory.common.base;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 用语缓存的service接口
  * ```````````````````````````
  * @title: CacheService

@@ -55,7 +55,7 @@ public class RequestProcessorThreadPool {
      * 〈〉
      * @return: com.eshop.inventory.config.thread.RequestProcessorThreadPool
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/31 22:46
      */
     public static RequestProcessorThreadPool getInstance(){

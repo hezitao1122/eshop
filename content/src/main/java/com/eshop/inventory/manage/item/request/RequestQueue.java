@@ -7,7 +7,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 请求内存队列
  * ```````````````````````````
  * @title: RequestQueue
@@ -48,7 +48,7 @@ public class RequestQueue<ID> {
      * 功能描述: 获取单例的请求内存队列<br>
      * @return: com.eshop.inventory.manage.item.request.RequestQueue
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/30 23:14
      */
     public static RequestQueue getInstance() {
@@ -60,7 +60,7 @@ public class RequestQueue<ID> {
      *
      * @param queue 内存队列
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/31 22:19
      */
     public void addRequestQueue(ArrayBlockingQueue<Request> queue){this.queues.add(queue);}
@@ -69,7 +69,7 @@ public class RequestQueue<ID> {
      * 功能描述: 获取内存队列的数量<br>
      * @return: int
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/30 23:14
      */
     public int getSize(){
@@ -82,7 +82,7 @@ public class RequestQueue<ID> {
      * @param index hash后的主键
      * @return: java.util.concurrent.ArrayBlockingQueue<com.eshop.inventory.manage.item.request.Request>
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/30 23:17
      */
     public ArrayBlockingQueue<Request> getQueue(int index){

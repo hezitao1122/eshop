@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: User操作的操作类
  * ```````````````````````````
  * @title: UserRepository

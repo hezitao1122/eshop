@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @date 2019/6/12 23:32
  */
 @Service
-public class ItemCacheServiceImpl implements ItemCacheService<TbItemDTO,Long> {
+public class ItemCacheServiceImpl implements ItemCacheService {
     private static final String CACHE_NAME = CacheEnum.CACHE_COMMON_PRE.getCode();
     /**
      * 功能描述: 将商品存入缓存中<br>

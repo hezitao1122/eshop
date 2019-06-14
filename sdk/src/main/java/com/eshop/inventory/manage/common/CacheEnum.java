@@ -3,7 +3,7 @@ package com.eshop.inventory.manage.common;
 import com.eshop.inventory.manage.item.enums.TypeEnum;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 公共缓存的枚举类
  * ```````````````````````````
  * @title: CacheEnum

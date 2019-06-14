@@ -15,7 +15,7 @@ public class HashUtil {
      * @param key
      * @return: int
      * @since: 1.0.0
-     * @Author: Administrator
+     * @author zeryts
      * @Date: 2019/5/31 22:14
      */
     public static int getHash(Object key){

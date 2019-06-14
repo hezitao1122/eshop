@@ -4,7 +4,7 @@ import com.eshop.inventory.manage.item.entity.TbItemDesc;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: TbItemDesc操作的JPA接口
  * ```````````````````````````
  * @title: ItemDescRepository
