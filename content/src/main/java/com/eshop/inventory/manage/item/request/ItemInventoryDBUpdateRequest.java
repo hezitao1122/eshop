@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.eshop.inventory.common.base.BaseWriterRequest;
 import com.eshop.inventory.manage.item.entity.TbItem;
 import com.eshop.inventory.manage.item.service.ItemService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 
 import java.util.Map;
 
@@ -46,9 +46,9 @@ import java.util.Map;
  * @projectName inventory
  * @date 2019/5/31 21:45
  */
-@Slf4j
 public class ItemInventoryDBUpdateRequest implements Request<TbItem,Long> , BaseWriterRequest {
 
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemInventoryDBUpdateRequest.class);
     /**
      * 商品信息
      */

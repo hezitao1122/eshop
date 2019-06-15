@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.eshop.inventory.common.base.BaseReaderRequest;
 import com.eshop.inventory.manage.item.entity.TbItem;
 import com.eshop.inventory.manage.item.service.ItemService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,8 +17,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @projectName inventory
  * @date 2019/5/30 23:26
  */
-@Slf4j
 public class ItemInventoryCacheRefreshRequest  implements Request<TbItem,Long> , BaseReaderRequest {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemInventoryCacheRefreshRequest.class);
     /**
      * 商品信息
      */

@@ -2,6 +2,7 @@ package com.eshop.inventory.config.mysql;
 
 import com.baomidou.mybatisplus.entity.GlobalConfiguration;
 import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
+import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @Component
@@ -58,5 +60,19 @@ public class DataSourceConfig {
         return new DataSourceTransactionManager(dataSource());
     }
 
-
+    //配置mybatis的分页插件pageHelper
+    @Bean
+    public PageHelper pageHelper(){
+        System.out.println("开始配置数据分页插件");
+        PageHelper pageHelper = new PageHelper();
+        // properties暂时放到这里，后期放到配置文件
+        Properties properties = new Properties();
+        properties.setProperty("offsetAsPageNum","true");
+        properties.setProperty("rowBoundsWithCount","true");
+        properties.setProperty("reasonable","true");
+        //配置mysql数据库的方言
+        properties.setProperty("dialect","mysql");
+        pageHelper.setProperties(properties);
+        return pageHelper;
+    }
 }

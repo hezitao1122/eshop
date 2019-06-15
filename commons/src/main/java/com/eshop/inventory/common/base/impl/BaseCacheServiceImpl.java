@@ -3,7 +3,7 @@ package com.eshop.inventory.common.base.impl;
 import com.alibaba.fastjson.JSON;
 import com.eshop.inventory.common.base.BaseCacheService;
 import com.eshop.inventory.common.entity.BaseEntity;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.io.Serializable;
@@ -16,8 +16,9 @@ import java.io.Serializable;
  * @projectName inventory
  * @date 2019/6/15 16:54
  */
-@Slf4j
 public abstract class BaseCacheServiceImpl<T extends BaseEntity,ID extends Serializable> implements BaseCacheService<T,ID> {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(BaseCacheServiceImpl.class);
 
     @Override
     public void setCache(ID id,T t) {

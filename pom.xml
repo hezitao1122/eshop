@@ -19,7 +19,7 @@
 
     <modules>
         <module>content</module>
-        <module>product_cache</module>
+        <module>content_cache</module>
         <module>commons</module>
         <module>sdk</module>
         <module>eureka</module>

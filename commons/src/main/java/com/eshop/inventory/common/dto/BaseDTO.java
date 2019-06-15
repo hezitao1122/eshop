@@ -2,7 +2,6 @@ package com.eshop.inventory.common.dto;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.eshop.inventory.common.entity.BaseEntity;
 
 import java.lang.reflect.Type;
 

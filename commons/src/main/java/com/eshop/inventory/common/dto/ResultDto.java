@@ -2,7 +2,6 @@ package com.eshop.inventory.common.dto;
 
 
 import com.eshop.inventory.config.exception.MyException;
-import lombok.Data;
 
 import java.util.List;
 
@@ -12,7 +11,6 @@ import java.util.List;
  * @version: 1.0
  * @description: 返回实体
  */
-@Data
 public class ResultDto<T> {
 
     private Integer code;
@@ -110,4 +108,77 @@ public class ResultDto<T> {
         this.data = data;
     }
 
+    public Integer getCode() {
+        return this.code;
+    }
+
+    public String getMsg() {
+        return this.msg;
+    }
+
+    public T getData() {
+        return this.data;
+    }
+
+    public List<T> getDataLis() {
+        return this.dataLis;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public void setDataLis(List<T> dataLis) {
+        this.dataLis = dataLis;
+    }
+
+    public boolean equals(final Object o) {
+        if (o == this) return true;
+        if (!(o instanceof ResultDto)) return false;
+        final ResultDto<?> other = (ResultDto<?>) o;
+        if (!other.canEqual((Object) this)) return false;
+        final Object this$code = this.getCode();
+        final Object other$code = other.getCode();
+        if (this$code == null ? other$code != null : !this$code.equals(other$code)) return false;
+        final Object this$msg = this.getMsg();
+        final Object other$msg = other.getMsg();
+        if (this$msg == null ? other$msg != null : !this$msg.equals(other$msg)) return false;
+        final Object this$data = this.getData();
+        final Object other$data = other.getData();
+        if (this$data == null ? other$data != null : !this$data.equals(other$data)) return false;
+        final Object this$dataLis = this.getDataLis();
+        final Object other$dataLis = other.getDataLis();
+        if (this$dataLis == null ? other$dataLis != null : !this$dataLis.equals(other$dataLis)) return false;
+        return true;
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof ResultDto;
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $code = this.getCode();
+        result = result * PRIME + ($code == null ? 43 : $code.hashCode());
+        final Object $msg = this.getMsg();
+        result = result * PRIME + ($msg == null ? 43 : $msg.hashCode());
+        final Object $data = this.getData();
+        result = result * PRIME + ($data == null ? 43 : $data.hashCode());
+        final Object $dataLis = this.getDataLis();
+        result = result * PRIME + ($dataLis == null ? 43 : $dataLis.hashCode());
+        return result;
+    }
+
+    public String toString() {
+        return "ResultDto(code=" + this.getCode() + ", msg=" + this.getMsg() + ", data=" + this.getData() + ", dataLis=" + this.getDataLis() + ")";
+    }
 }

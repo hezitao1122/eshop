@@ -2,7 +2,7 @@ package com.eshop.inventory.config.thread;
 
 import com.eshop.inventory.common.entity.BaseEntity;
 import com.eshop.inventory.manage.item.request.Request;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Callable;
@@ -15,9 +15,9 @@ import java.util.concurrent.Callable;
  * @projectName inventory
  * @date 2019/5/31 22:33
  */
-@Slf4j
 public class RequestProcessorThread<T extends BaseEntity, ID> implements Callable<Boolean> {
 
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(RequestProcessorThread.class);
     /**
      * 自己监控的内存队列
      */

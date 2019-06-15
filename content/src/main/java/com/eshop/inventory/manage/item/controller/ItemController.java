@@ -1,8 +1,8 @@
 package com.eshop.inventory.manage.item.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.eshop.inventory.common.base.impl.BaseDBController;
 import com.eshop.inventory.common.base.BaseDBService;
+import com.eshop.inventory.common.base.impl.BaseDBController;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.config.exception.MyException;
 import com.eshop.inventory.manage.item.entity.TbItem;
@@ -11,9 +11,12 @@ import com.eshop.inventory.manage.item.request.ItemInventoryDBUpdateRequest;
 import com.eshop.inventory.manage.item.request.Request;
 import com.eshop.inventory.manage.item.service.ItemAsyncService;
 import com.eshop.inventory.manage.item.service.ItemService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author zeryts
@@ -25,8 +28,8 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/v1/item")
-@Slf4j
 public class ItemController extends BaseDBController<TbItem,Long> {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemController.class);
     @Autowired
     private ItemAsyncService itemAsyncService;
     @Autowired

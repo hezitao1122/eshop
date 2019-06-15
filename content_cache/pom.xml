@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>product_cache</artifactId>
+    <artifactId>content_cache</artifactId>
 
     <properties>
         <common.version>0.0.1-SNAPSHOT</common.version>

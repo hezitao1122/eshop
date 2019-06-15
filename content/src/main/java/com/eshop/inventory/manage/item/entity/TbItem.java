@@ -13,7 +13,7 @@ import java.util.Objects;
 
 /**
  * @author zeryts
- * @description: TODO
+ * @description: 商品操作的实体类
  * ```````````````````````````
  * @title: TbItem
  * @projectName inventory

@@ -7,7 +7,7 @@ import com.eshop.inventory.manage.item.entity.TbItem;
 import com.eshop.inventory.manage.item.request.Request;
 import com.eshop.inventory.manage.item.request.RequestQueue;
 import com.eshop.inventory.manage.item.service.ItemAsyncService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -22,11 +22,10 @@ import java.util.concurrent.ArrayBlockingQueue;
  * @date 2019/5/31 22:01
  */
 @Service
-@Slf4j
 public class ItemAsyncServiceImpl implements ItemAsyncService {
 
 
-
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemAsyncServiceImpl.class);
 
     @Override
     public void process(Request<TbItem, Long> request) {

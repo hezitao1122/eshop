@@ -1,24 +1,24 @@
-package com.eshop.inventory.common.enums;
+package com.eshop.inventory.manage.common.enums;
 
 /**
  * @author zeryts
- * @description: redis存储前缀的枚举类
+ * @description: TODO
  * ```````````````````````````
- * @title: RedisCachePrefixEnum
+ * @title: EhcacheTypeEnum
  * @projectName inventory
- * @date 2019/5/3023:42
+ * @date 2019/6/15 22:17
  */
-public enum RedisCachePrefixEnum {
-    ITEM("item:","商品信息")
+public enum  EhcacheTypeEnum {
+    ITEM("EHCACHE:ITEM:","商品信息")
     ;
 
-    private static final String prefix = "inventory:";
 
     private String name;
 
     private String msg;
 
-    RedisCachePrefixEnum(String name, String msg) {
+
+    EhcacheTypeEnum(String name, String msg) {
         this.name = name;
         this.msg = msg;
     }
@@ -35,20 +35,18 @@ public enum RedisCachePrefixEnum {
      * 〈〉
      *
      * @param name 枚举的name值
-     * @return: com.eshop.inventory.common.enums.RedisCachePrefixEnum
+     * @return: com.eshop.inventory.manage.common.enums.RedisCachePrefixEnum
      * @since: 1.0.0
      * @author zeryts
      * @Date: 2019/5/30 23:47
      */
-    public RedisCachePrefixEnum getEnumByName(String name){
-        for (RedisCachePrefixEnum  e:RedisCachePrefixEnum.values() ){
+    public EhcacheTypeEnum getEnumByName(String name){
+        for (EhcacheTypeEnum  e:EhcacheTypeEnum.values() ){
             if(e.name.equals(name) ){
                 return e;
             }
         }
         return null;
     }
-
-
 
 }
