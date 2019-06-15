@@ -1,7 +1,6 @@
 package com.eshop.inventory.manage.item.service;
 
-import com.eshop.inventory.common.base.BaseCacheService;
-import com.eshop.inventory.common.base.BaseDBService;
+import com.eshop.inventory.common.base.BaseDBAndCacheService;
 import com.eshop.inventory.manage.item.entity.TbItem;
 
 /**
@@ -12,7 +11,7 @@ import com.eshop.inventory.manage.item.entity.TbItem;
  * @projectName inventory
  * @date 2019/5/3023:27
  */
-public interface ItemService extends BaseDBService<TbItem,Long>, BaseCacheService<TbItem,Long> {
+public interface ItemService extends BaseDBAndCacheService<TbItem,Long> {
 
     TbItem getNumById(Long itemId);
 

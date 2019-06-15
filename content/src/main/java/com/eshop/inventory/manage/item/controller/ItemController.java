@@ -1,7 +1,7 @@
 package com.eshop.inventory.manage.item.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.eshop.inventory.common.base.BaseController;
+import com.eshop.inventory.common.base.impl.BaseDBController;
 import com.eshop.inventory.common.base.BaseDBService;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.config.exception.MyException;
@@ -26,19 +26,22 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/item")
 @Slf4j
-public class ItemController extends BaseController<TbItem,Long> {
+public class ItemController extends BaseDBController<TbItem,Long> {
     @Autowired
     private ItemAsyncService itemAsyncService;
     @Autowired
     private ItemService itemService;
+
+    @Override
+    public BaseDBService<TbItem, Long> getDBService() {
+        return itemService;
+    }
 
     /**
      * 更新商品
      */
     @PostMapping("/update")
     public ResultDto<TbItem> update(@RequestBody TbItem item) {
-
-
         log.info("===========日志===========: 接收到更新商品库存的请求，商品=[{}]" , JSON.toJSONString(item) );
 
         //封装请求
@@ -49,10 +52,7 @@ public class ItemController extends BaseController<TbItem,Long> {
 
     }
 
-    @Override
-    protected BaseDBService<TbItem, Long> getService() {
-        return itemService;
-    }
+
 
     /**
      * 获取商品
@@ -117,4 +117,6 @@ public class ItemController extends BaseController<TbItem,Long> {
         }
         return new ResultDto(new MyException("获取商品信息失败！"));
     }
+
+
 }

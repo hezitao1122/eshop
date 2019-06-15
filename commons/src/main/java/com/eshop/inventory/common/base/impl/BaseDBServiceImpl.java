@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * @author zeryts
- * @description: TODO
+ * @description: 数据库操作的通用service层实现
  * ```````````````````````````
  * @title: BaseDBServiceImpl
  * @projectName inventory

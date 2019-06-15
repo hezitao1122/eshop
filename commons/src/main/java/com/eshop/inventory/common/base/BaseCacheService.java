@@ -3,7 +3,7 @@ package com.eshop.inventory.common.base;
 import com.eshop.inventory.common.entity.BaseEntity;
 
 /**
- * @author Administrator
+ * @author zeryts
  * @description: 操作缓存的公共的service层接口
  * ```````````````````````````
  * @title: BaseCacheService
