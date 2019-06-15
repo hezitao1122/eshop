@@ -1,8 +1,11 @@
 package com.eshop.inventory;
 
+import com.eshop.inventory.config.kafka.InitKafkaListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.Bean;
 
 /**
  * @ClassName: ProductCacheApplication
@@ -17,5 +20,14 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class ProductCacheApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProductCacheApplication.class, args);
+    }
+
+
+    @Bean
+    public ServletListenerRegistrationBean servletListenerRegistrationBean() {
+        ServletListenerRegistrationBean servletListenerRegistrationBean =
+                new ServletListenerRegistrationBean();
+        servletListenerRegistrationBean.setListener(new InitKafkaListener());
+        return servletListenerRegistrationBean;
     }
 }

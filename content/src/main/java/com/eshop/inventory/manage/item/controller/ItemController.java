@@ -1,6 +1,8 @@
 package com.eshop.inventory.manage.item.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.eshop.inventory.common.base.BaseController;
+import com.eshop.inventory.common.base.BaseDBService;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.config.exception.MyException;
 import com.eshop.inventory.manage.item.entity.TbItem;
@@ -11,10 +13,7 @@ import com.eshop.inventory.manage.item.service.ItemAsyncService;
 import com.eshop.inventory.manage.item.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zeryts
@@ -27,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/item")
 @Slf4j
-public class ItemController {
+public class ItemController extends BaseController<TbItem,Long> {
     @Autowired
     private ItemAsyncService itemAsyncService;
     @Autowired
@@ -50,11 +49,16 @@ public class ItemController {
 
     }
 
+    @Override
+    protected BaseDBService<TbItem, Long> getService() {
+        return itemService;
+    }
+
     /**
      * 获取商品
      */
-    @PostMapping("/get")
-    public ResultDto<TbItem> get(Long id) throws Exception {
+    @PostMapping("/getNum")
+    public ResultDto<TbItem> getNum(Long id) throws Exception {
         log.info("===========日志===========: 接收到一个商品库存的读请求，商品id=[{}]" , id);
         TbItem tbItem = null;
 
@@ -76,7 +80,6 @@ public class ItemController {
             if(waitTime > 2000L)
                 break;
 
-
             //尝试去redis中读取一次商品信息
             tbItem = itemService.getCacheById(id);
 
@@ -94,13 +97,11 @@ public class ItemController {
         }
 
 //        直接尝试从数据库中读取
-        TbItem item = itemService.getById(id);
+        TbItem item = itemService.getNumById(id);
         if(item != null){
             //有则进行缓存刷新
             //itemService.setCache(item);
 
-
-            
             //代码运行到这里一般有三种情况
             //1.就是说上一次也是读请求,数据刷入到了redis中,但是给redis的lru算法给清理掉了,标志位还是处于false状态,所以下一个读请求是拿不到数据的
             //所以可以再放一个读请求到队列中去,让数据刷新一下
@@ -115,6 +116,16 @@ public class ItemController {
             return new ResultDto(item);
         }
         return new ResultDto(new MyException("获取商品信息失败！"));
+    }
+
+    /**
+     * 从数据库获取商品详细信息的方法
+     * @param id 商品的id
+     * @throws Exception
+     */
+    @GetMapping("/get")
+    public ResultDto get(Long id) throws Exception {
+        return new ResultDto(itemService.getById(id));
     }
 
 }

@@ -1,5 +1,7 @@
 package com.eshop.inventory.common.entity;
 
+import java.io.Serializable;
+
 /**
  * @author zeryts
  * @description: 公共entity类
@@ -9,7 +11,7 @@ package com.eshop.inventory.common.entity;
  * @date 2019/5/30 22:13
  */
 
-public class BaseEntity {
+public class BaseEntity implements Serializable {
 
 
 

@@ -68,10 +68,10 @@ public class ItemInventoryCacheRefreshRequest  implements Request<TbItem,Long> ,
      */
     @Override
     public void process() {
-        TbItem item1 = itemService.getById(id);
+        TbItem item1 = itemService.getNumById(id);
         log.info("===========日志===========: 已查询到商品最新的库存数量，商品=[{}]" , JSON.toJSONString(item1));
         // 将最新的商品库存数量，刷新到redis缓存中去
-        itemService.setCache(item1);
+        itemService.setCache(item1.getId(),item1);
     }
 
     @Override
