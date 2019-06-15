@@ -117,15 +117,4 @@ public class ItemController extends BaseController<TbItem,Long> {
         }
         return new ResultDto(new MyException("获取商品信息失败！"));
     }
-
-    /**
-     * 从数据库获取商品详细信息的方法
-     * @param id 商品的id
-     * @throws Exception
-     */
-    @GetMapping("/get")
-    public ResultDto get(Long id) throws Exception {
-        return new ResultDto(itemService.getById(id));
-    }
-
 }
