@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.eshop.inventory.common.entity.BaseEntity;
-import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -21,7 +20,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "tb_item", schema = "eshop")
-@Proxy(lazy = false)
+//@Proxy(lazy = false)
 @TableName(value = "tb_item")
 public class TbItem extends BaseEntity  {
     @TableId(value = "id", type = IdType.AUTO)

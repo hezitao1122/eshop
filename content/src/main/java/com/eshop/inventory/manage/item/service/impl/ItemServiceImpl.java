@@ -6,7 +6,6 @@ import com.eshop.inventory.common.base.impl.BaseDBAndCacheServiceImpl;
 import com.eshop.inventory.manage.common.enums.RedisCachePrefixEnum;
 import com.eshop.inventory.manage.item.entity.TbItem;
 import com.eshop.inventory.manage.item.mapper.ItemMapper;
-import com.eshop.inventory.manage.item.repository.ItemRepository;
 import com.eshop.inventory.manage.item.service.ItemService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,6 @@ import org.springframework.stereotype.Service;
 public class ItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItem,Long> implements ItemService {
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemServiceImpl.class);
-    @Autowired
-    private ItemRepository itemRepository;
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
@@ -49,7 +46,7 @@ public class ItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItem,Long> impl
 
     @Override
     public TbItem getNumById(Long itemId) {
-        TbItem item = itemRepository.getOne(itemId);
+        TbItem item = itemMapper.selectById(itemId);
         TbItem it = new TbItem();
         it.setId(itemId);
         it.setNum(item.getNum());
