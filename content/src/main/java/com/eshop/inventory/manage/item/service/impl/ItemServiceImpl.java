@@ -9,7 +9,6 @@ import com.eshop.inventory.manage.item.mapper.ItemMapper;
 import com.eshop.inventory.manage.item.service.ItemService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +24,6 @@ import org.springframework.stereotype.Service;
 public class ItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItem,Long> implements ItemService {
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemServiceImpl.class);
-    @Autowired
-    private RedisTemplate redisTemplate;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
@@ -63,10 +60,6 @@ public class ItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItem,Long> impl
         redisTemplate.opsForValue().set(RedisCachePrefixEnum.ITEM_NUM.getName()+tbItem.getId(),item);
     }
 
-    @Override
-    protected RedisTemplate getRedisTemplate() {
-        return redisTemplate;
-    }
 
     @Override
     protected String getPrefix() {
