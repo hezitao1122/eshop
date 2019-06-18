@@ -37,6 +37,23 @@ public class TbItem extends BaseEntity  {
     private Timestamp created;
     private Timestamp updated;
 
+    public TbItem() {
+    }
+
+    public TbItem(long id, String title, String sellPoint, long price, int num, String barcode, String image, long cid, byte status, Timestamp created, Timestamp updated) {
+        this.id = id;
+        this.title = title;
+        this.sellPoint = sellPoint;
+        this.price = price;
+        this.num = num;
+        this.barcode = barcode;
+        this.image = image;
+        this.cid = cid;
+        this.status = status;
+        this.created = created;
+        this.updated = updated;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public long getId() {

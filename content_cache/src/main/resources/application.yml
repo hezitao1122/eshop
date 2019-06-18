@@ -21,6 +21,13 @@ spring:
   http:
     encoding:
       force: true
+  application:
+    name: content-shop
+
+feign:
+  hystrix:
+    #开启feign的hystrix支持,默认是false
+    enabled: true
 
 #线程池配置
 thread:

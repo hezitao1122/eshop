@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: eshop-content
   datasource:
     url: jdbc:mysql://192.168.31.223:3306/eshop?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: hezitao

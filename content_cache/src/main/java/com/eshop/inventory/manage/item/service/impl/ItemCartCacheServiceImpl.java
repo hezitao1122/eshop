@@ -3,7 +3,6 @@ package com.eshop.inventory.manage.item.service.impl;
 import com.eshop.inventory.common.base.impl.CacheServiceImpl;
 import com.eshop.inventory.manage.common.enums.RedisCachePrefixEnum;
 import com.eshop.inventory.manage.item.dto.TbItemCartDTO;
-import com.eshop.inventory.manage.item.dto.TbItemDTO;
 import com.eshop.inventory.manage.item.service.ItemCartCacheService;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @Date: Create in 2019/6/1814:44
  */
 @Service
-public class ItemCartServiceImpl extends CacheServiceImpl<TbItemCartDTO,Long> implements ItemCartCacheService {
+public class ItemCartCacheServiceImpl extends CacheServiceImpl<TbItemCartDTO,Long> implements ItemCartCacheService {
     /**
      * redis对应商品信息的前缀
      */
