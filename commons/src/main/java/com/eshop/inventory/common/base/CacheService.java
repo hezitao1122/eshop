@@ -4,7 +4,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * @author zeryts
- * @description: 用语缓存的service接口
+ * @description: 用于EhCache缓存的service接口
  * ```````````````````````````
  * @title: CacheService
  * @projectName inventory
@@ -32,15 +32,6 @@ public interface CacheService<T,ID> {
      * @Date: 2019/6/15 22:08
      */
     T getLoadCache(ID id);
-    /**
-     * 功能描述: 获取到redisTemplate的操作对象<br>
-     * 〈〉
-     * @return: RedisTemplate
-     * @since: 1.0.0
-     * @Author: zeryts
-     * @Date: 2019/6/15 22:08
-     */
-    RedisTemplate redisTemplate();
     /**
      * 功能描述: 获取到存储到redis中的前缀<br>
      * 〈〉

@@ -19,18 +19,18 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
-  jpa:
-    database: mysql
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-    properties:
-      hibernate: dialect:org.hibernate.dialect.MySQL5Dialect
-      hibernate.format_sql: true
-    #解决在Spring MVC与JPA之间Session的声明周期问题
-    open-in-view: true
+#  jpa:
+#    database: mysql
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#      naming:
+#        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+#    properties:
+#      hibernate: dialect:org.hibernate.dialect.MySQL5Dialect
+#      hibernate.format_sql: true
+#    #解决在Spring MVC与JPA之间Session的声明周期问题
+#    open-in-view: true
   redis:
     cluster: # 各 Redis 节点信息
       nodes: 192.168.31.226:7001,192.168.31.226:7002,192.168.31.225:7003,192.168.31.225:7004,192.168.31.224:7005,192.168.31.224:7006

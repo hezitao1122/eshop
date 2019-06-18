@@ -10,6 +10,7 @@ package com.eshop.inventory.manage.common.enums;
  */
 public enum RedisCachePrefixEnum {
     ITEM_NUM("INVENTORY:ITEM:NUM:","商品库存信息"),
+    ITEM("INVENTORY:ITEM:","商品信息"),
     ITEM_CART("INVENTORY:ITEM_CART:","商品类目"),
     ITEM_DESC("INVENTORY:ITEM_DESC:","商品描述"),
     ITEM_PARAM("INVENTORY:ITEM_PARAM:","商品参数"),

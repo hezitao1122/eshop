@@ -1,8 +1,9 @@
-package com.eshop.inventory.manage.item.service;
+package com.eshop.inventory.manage.item.service.impl;
 
 import com.eshop.inventory.common.base.impl.CacheServiceImpl;
 import com.eshop.inventory.manage.common.enums.RedisCachePrefixEnum;
 import com.eshop.inventory.manage.item.dto.TbItemDTO;
+import com.eshop.inventory.manage.item.service.ItemCacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,9 +23,7 @@ public class ItemCacheServiceImpl extends CacheServiceImpl<TbItemDTO,Long> imple
     /**
      * redis对应商品信息的前缀
      */
-    private final String redisPrefix = RedisCachePrefixEnum.ITEM_NUM.getName();
-    @Autowired
-    private RedisTemplate redisTemplate;
+    private final String redisPrefix = RedisCachePrefixEnum.ITEM.getName();
 
 
     /**
@@ -52,11 +51,6 @@ public class ItemCacheServiceImpl extends CacheServiceImpl<TbItemDTO,Long> imple
     @Cacheable(value = "local", key = "'EHCACHE:ITEM:'+#id")
     public TbItemDTO getLoadEhCache(Long id) {
         return null;
-    }
-
-    @Override
-    public RedisTemplate redisTemplate() {
-        return redisTemplate;
     }
 
     @Override

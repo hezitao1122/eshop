@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * @author zeryts
- * @description: TODO
+ * @description: 缓存操作的service实现类
  * ```````````````````````````
  * @title: BaseCacheServiceImpl
  * @projectName inventory
