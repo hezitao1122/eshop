@@ -39,7 +39,7 @@ public class DataSourceConfig {
         mybatisSqlSessionFactoryBean.setDataSource(dataSource());
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         //指定mybatis的xml扫描路径
-        mybatisSqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/*/*.xml"));
+//        mybatisSqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/*/*.xml"));
         return mybatisSqlSessionFactoryBean.getObject();
     }
     //定义 MybatisPlus 的全局策略配置

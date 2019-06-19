@@ -35,7 +35,7 @@ public interface BaseFeign<T extends BaseEntity, ID>{
      * @Author: zeryts
      * @Date: 2019/6/15 17:33
      */
-    @RequestMapping(value = "/add",method = RequestMethod.GET)
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
     ResultDto<T> delete(ID id);
     /**
      * 功能描述: 根据id查找一条数据<br>
@@ -46,7 +46,7 @@ public interface BaseFeign<T extends BaseEntity, ID>{
      * @Author: zeryts
      * @Date: 2019/6/15 17:33
      */
-    @RequestMapping(value = "/add",method = RequestMethod.GET)
+    @RequestMapping(value = "/find",method = RequestMethod.GET)
     ResultDto<T> find(ID id);
     /**
      * 功能描述: 修改一条数据<br>
@@ -57,7 +57,7 @@ public interface BaseFeign<T extends BaseEntity, ID>{
      * @Author: zeryts
      * @Date: 2019/6/15 17:33
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
     ResultDto<T> update(T t);
 
 }

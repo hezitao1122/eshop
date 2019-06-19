@@ -74,7 +74,7 @@ public class KafkaConsumer implements Runnable{
         //指定groupid消费者id
         props.put("group.id", "eshop-cache-group");
         //session过期时间
-        props.put("zookeeper.session.timeout.ms", "400");
+        props.put("zookeeper.session.timeout.ms", "40000");
         //等待时间
         props.put("zookeeper.sync.time.ms", "200");
         //提交超时时间

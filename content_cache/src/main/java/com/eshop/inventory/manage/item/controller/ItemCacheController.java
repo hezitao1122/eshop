@@ -4,10 +4,7 @@ import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.manage.item.dto.TbItemDTO;
 import com.eshop.inventory.manage.item.service.ItemCacheService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zeryts
@@ -24,12 +21,12 @@ public class ItemCacheController {
     private ItemCacheService itemCacheService;
 
     @PostMapping("/add")
-    public ResultDto<TbItemDTO> add(TbItemDTO dto){
+    public ResultDto<TbItemDTO> add(@RequestBody TbItemDTO dto){
         return new ResultDto<>(itemCacheService.saveLoadEhCache(dto));
     }
     @GetMapping("/get")
     public  ResultDto<TbItemDTO> get(Long id){
-        return new ResultDto<>(itemCacheService.getLoadCache(id));
+        return new ResultDto<>(itemCacheService.getLoadEhCache(id));
     }
 
 }

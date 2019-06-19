@@ -2,7 +2,6 @@ package com.eshop.inventory.manage.item.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.eshop.inventory.manage.item.entity.TbItemParamItem;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author zeryts
@@ -12,6 +11,5 @@ import org.springframework.stereotype.Repository;
  * @projectName inventory
  * @date 2019/6/1722:42
  */
-@Repository
 public interface ItemParamItemMapper extends BaseMapper<TbItemParamItem> {
 }

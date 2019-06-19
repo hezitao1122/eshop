@@ -12,6 +12,5 @@ import org.springframework.stereotype.Repository;
  * @projectName inventory
  * @date 2019/6/17 22:25
  */
-@Repository
 public interface ItemDescMapper  extends BaseMapper<TbItemDesc> {
 }

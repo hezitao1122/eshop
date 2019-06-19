@@ -12,6 +12,5 @@ import org.springframework.stereotype.Repository;
  * @projectName inventory
  * @date 2019/6/1723:03
  */
-@Repository
 public interface ContentMapper extends BaseMapper<TbContent> {
 }

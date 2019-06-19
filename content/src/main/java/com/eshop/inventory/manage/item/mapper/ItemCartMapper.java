@@ -12,6 +12,5 @@ import org.springframework.stereotype.Repository;
  * @projectName inventory
  * @date 2019/6/1722:15
  */
-@Repository
 public interface ItemCartMapper extends BaseMapper<TbItemCat> {
 }
