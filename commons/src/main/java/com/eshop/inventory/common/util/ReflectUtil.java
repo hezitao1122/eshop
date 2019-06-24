@@ -232,6 +232,4 @@ public class ReflectUtil {
         method.setAccessible(true);
         return method.invoke(object,types);
     }
-
-
 }
