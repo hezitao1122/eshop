@@ -1,6 +1,6 @@
 package com.eshop.inventory.common.base.impl;
 
-import com.eshop.inventory.common.base.BaseDBService;
+import com.eshop.inventory.common.base.IBaseDBService;
 import com.eshop.inventory.common.base.IBaseController;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.common.entity.BaseEntity;
@@ -32,11 +32,13 @@ public abstract class BaseDBController<T extends BaseEntity, ID> implements IBas
     public ResultDto<T> update(T t){
         return new ResultDto<T>(getDBService().update(t));
     }
+    @RequestMapping("/findByCondition")
+    public ResultDto<T> findByCondition(T t){return new ResultDto<T>(getDBService().getByCondition(t));}
 
     /**
      * 获取执行业务逻辑的service接口
      * @return getService 业务逻辑service
      */
-    public abstract BaseDBService<T,ID> getDBService();
+    public abstract IBaseDBService<T,ID> getDBService();
 
 }

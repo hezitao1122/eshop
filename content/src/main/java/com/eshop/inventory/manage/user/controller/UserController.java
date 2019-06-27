@@ -1,6 +1,6 @@
 package com.eshop.inventory.manage.user.controller;
 
-import com.eshop.inventory.common.base.BaseDBService;
+import com.eshop.inventory.common.base.IBaseDBService;
 import com.eshop.inventory.common.base.impl.BaseDBController;
 import com.eshop.inventory.manage.order.entity.TbOrder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/user")
 public class UserController extends BaseDBController<TbOrder, Long> {
     @Override
-    public BaseDBService<TbOrder, Long> getDBService() {
+    public IBaseDBService<TbOrder, Long> getDBService() {
         return null;
     }
 }

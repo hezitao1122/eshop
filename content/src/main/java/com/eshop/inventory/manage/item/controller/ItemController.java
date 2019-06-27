@@ -1,16 +1,16 @@
 package com.eshop.inventory.manage.item.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.eshop.inventory.common.base.BaseDBService;
+import com.eshop.inventory.common.base.IBaseDBService;
 import com.eshop.inventory.common.base.impl.BaseDBController;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.config.exception.MyException;
 import com.eshop.inventory.manage.item.entity.TbItem;
-import com.eshop.inventory.manage.item.request.ItemInventoryCacheRefreshRequest;
-import com.eshop.inventory.manage.item.request.ItemInventoryDBUpdateRequest;
+import com.eshop.inventory.manage.item.request.ItemInventoryCacheRefreshRequestI;
+import com.eshop.inventory.manage.item.request.ItemInventoryDBUpdateRequestI;
 import com.eshop.inventory.manage.item.request.Request;
 import com.eshop.inventory.manage.item.service.ItemAsyncService;
-import com.eshop.inventory.manage.item.service.ItemService;
+import com.eshop.inventory.manage.item.service.ItemServiceII;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,10 +33,10 @@ public class ItemController extends BaseDBController<TbItem,Long> {
     @Autowired
     private ItemAsyncService itemAsyncService;
     @Autowired
-    private ItemService itemService;
+    private ItemServiceII itemService;
 
     @Override
-    public BaseDBService<TbItem, Long> getDBService() {
+    public IBaseDBService<TbItem, Long> getDBService() {
         return itemService;
     }
 
@@ -48,7 +48,7 @@ public class ItemController extends BaseDBController<TbItem,Long> {
         log.info("===========日志===========: 接收到更新商品库存的请求，商品=[{}]" , JSON.toJSONString(item) );
 
         //封装请求
-        Request<TbItem, Long> tbItemLongRequest = new ItemInventoryDBUpdateRequest(item, itemService);
+        Request<TbItem, Long> tbItemLongRequest = new ItemInventoryDBUpdateRequestI(item, itemService);
         //执行请求
         itemAsyncService.process(tbItemLongRequest);
         return new ResultDto();
@@ -66,7 +66,7 @@ public class ItemController extends BaseDBController<TbItem,Long> {
         TbItem tbItem = null;
 
         //封装请求
-        Request<TbItem, Long> request = new ItemInventoryCacheRefreshRequest(id, itemService);
+        Request<TbItem, Long> request = new ItemInventoryCacheRefreshRequestI(id, itemService);
         //将请求发送至异步队列
         itemAsyncService.process(request);
 
@@ -113,7 +113,7 @@ public class ItemController extends BaseDBController<TbItem,Long> {
 
             //如果能直接从数据库中进行读取到，但是没有放到队列中去执行，故需要再次放到队列中
             //需要强制刷新的请求
-            Request<TbItem, Long> refreshRequest = new ItemInventoryCacheRefreshRequest(id, itemService,true);
+            Request<TbItem, Long> refreshRequest = new ItemInventoryCacheRefreshRequestI(id, itemService,true);
             itemAsyncService.process(refreshRequest);
 
             return new ResultDto(item);

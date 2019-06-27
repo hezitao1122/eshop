@@ -1,0 +1,33 @@
+package com.eshop.inventory.manage.content.service.impl;
+
+import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.eshop.inventory.common.base.impl.IIBaseDBAndCacheServiceImpl;
+import com.eshop.inventory.manage.common.enums.RedisCachePrefixEnum;
+import com.eshop.inventory.manage.content.entity.TbContentCategory;
+import com.eshop.inventory.manage.content.mapper.ContentCategoryMapper;
+import com.eshop.inventory.manage.content.service.ContentCategoryServiceII;
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ * @author zeryts
+ * @description: 内容操作的service层实现类
+ * ```````````````````````````
+ * @title: ContentCategoryServiceImplII
+ * @projectName inventory
+ * @date 2019/6/17 23:11
+ */
+public class ContentCategoryServiceImplII extends IIBaseDBAndCacheServiceImpl<TbContentCategory, Long> implements ContentCategoryServiceII {
+    @Autowired
+    private ContentCategoryMapper contentCategoryMapper;
+
+
+    @Override
+    protected String getPrefix() {
+        return RedisCachePrefixEnum.CONTENT.getName();
+    }
+
+    @Override
+    protected BaseMapper<TbContentCategory> getMapper() {
+        return contentCategoryMapper;
+    }
+}

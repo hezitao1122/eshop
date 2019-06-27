@@ -1,6 +1,6 @@
 package com.eshop.inventory.manage.content.controller;
 
-import com.eshop.inventory.common.base.BaseDBService;
+import com.eshop.inventory.common.base.IBaseDBService;
 import com.eshop.inventory.common.base.impl.BaseDBController;
 import com.eshop.inventory.manage.content.entity.TbContentCategory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ public class ContentCategoryController extends BaseDBController<TbContentCategor
 
 
     @Override
-    public BaseDBService<TbContentCategory, Long> getDBService() {
+    public IBaseDBService<TbContentCategory, Long> getDBService() {
         return null;
     }
 }

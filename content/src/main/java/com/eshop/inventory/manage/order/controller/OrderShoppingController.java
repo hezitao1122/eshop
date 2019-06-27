@@ -1,9 +1,9 @@
 package com.eshop.inventory.manage.order.controller;
 
-import com.eshop.inventory.common.base.BaseDBService;
+import com.eshop.inventory.common.base.IBaseDBService;
 import com.eshop.inventory.common.base.impl.BaseDBController;
 import com.eshop.inventory.manage.order.entity.TbOrderShipping;
-import com.eshop.inventory.manage.order.service.OrderShoppingService;
+import com.eshop.inventory.manage.order.service.OrderShoppingServiceII;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/shopping")
 public class OrderShoppingController  extends BaseDBController<TbOrderShipping, String> {
     @Autowired
-    private OrderShoppingService orderShoppingService;
+    private OrderShoppingServiceII orderShoppingService;
 
 
 
     @Override
-    public BaseDBService<TbOrderShipping, String> getDBService() {
+    public IBaseDBService<TbOrderShipping, String> getDBService() {
         return orderShoppingService;
     }
 }

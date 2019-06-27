@@ -2,7 +2,7 @@ package com.eshop.inventory.manage.item.controller;
 
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.manage.item.dto.TbItemDTO;
-import com.eshop.inventory.manage.item.service.ItemCacheService;
+import com.eshop.inventory.manage.item.service.ItemICacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
  * @date 2019/6/18 23:44
  */
 @RestController
-@RequestMapping("/api/v1/cache/item")
+@RequestMapping("/item")
 public class ItemCacheController {
     @Autowired
-    private ItemCacheService itemCacheService;
+    private ItemICacheService itemCacheService;
 
     @PostMapping("/add")
     public ResultDto<TbItemDTO> add(@RequestBody TbItemDTO dto){

@@ -1,7 +1,7 @@
 package com.eshop.inventory.manage.item.service.impl;
 
-import com.eshop.inventory.common.base.BaseReaderRequest;
-import com.eshop.inventory.common.base.BaseWriterRequest;
+import com.eshop.inventory.common.base.IBaseReaderRequest;
+import com.eshop.inventory.common.base.IBaseWriterRequest;
 import com.eshop.inventory.common.util.HashUtil;
 import com.eshop.inventory.manage.item.entity.TbItem;
 import com.eshop.inventory.manage.item.request.Request;
@@ -39,10 +39,10 @@ public class ItemAsyncServiceImpl implements ItemAsyncService {
                     //如果不是强制刷新缓存的请求，需要做请求去重处理
                     Map<Long, Boolean> cacheMap = queue.getCacheMap();
                     //写请求标志位true ， 读请求标志为 false
-                    if (request instanceof BaseWriterRequest) {
+                    if (request instanceof IBaseWriterRequest) {
                         //如果是写请求，将设置为false
                         cacheMap.put(request.getId(), Boolean.TRUE);
-                    } else if (request instanceof BaseReaderRequest) {
+                    } else if (request instanceof IBaseReaderRequest) {
                         Boolean aBoolean = cacheMap.get(request.getId());
                         //如果为null
                         if (aBoolean == null) {

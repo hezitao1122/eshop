@@ -1,7 +1,6 @@
 package com.eshop.inventory.common.base;
 
 import com.eshop.inventory.common.dto.ResultDto;
-import com.eshop.inventory.common.entity.BaseEntity;
 
 /**
  * @author zeryts
@@ -11,7 +10,7 @@ import com.eshop.inventory.common.entity.BaseEntity;
  * @projectName inventory
  * @date 2019/6/1517:31
  */
-public interface IBaseController<T extends BaseEntity, ID> {
+public interface IBaseController<T, ID> {
     /**
      * 功能描述: 添加一条数据<br>
      * 〈〉
@@ -52,6 +51,14 @@ public interface IBaseController<T extends BaseEntity, ID> {
      * @Date: 2019/6/15 17:33
      */
     ResultDto<T> update(T t);
-
-
+    /**
+     * 功能描述: 根据实体的条件进行查询<br>
+     * 〈〉
+     * @param t
+     * @return: com.eshop.inventory.common.dto.ResultDto<T>
+     * @since: 1.0.0
+     * @Author: zeryts
+     * @Date: 2019/6/15 17:33
+     */
+    ResultDto<T> findByCondition(T t);
 }

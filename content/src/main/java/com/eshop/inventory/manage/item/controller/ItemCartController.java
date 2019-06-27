@@ -1,9 +1,9 @@
 package com.eshop.inventory.manage.item.controller;
 
-import com.eshop.inventory.common.base.BaseDBService;
+import com.eshop.inventory.common.base.IBaseDBService;
 import com.eshop.inventory.common.base.impl.BaseDBController;
 import com.eshop.inventory.manage.item.entity.TbItemCat;
-import com.eshop.inventory.manage.item.service.ItemCartService;
+import com.eshop.inventory.manage.item.service.ItemCartServiceII;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/item/cart")
 public class ItemCartController extends BaseDBController<TbItemCat,Long> {
     @Autowired
-    private ItemCartService itemCartService;
+    private ItemCartServiceII itemCartService;
 
 
 
 
     @Override
-    public BaseDBService<TbItemCat, Long> getDBService() {
+    public IBaseDBService<TbItemCat, Long> getDBService() {
         return itemCartService;
     }
 }

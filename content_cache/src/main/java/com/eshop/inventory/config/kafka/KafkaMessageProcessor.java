@@ -9,7 +9,7 @@ import com.eshop.inventory.manage.common.enums.RedisCachePrefixEnum;
 import com.eshop.inventory.manage.item.dto.TbItemDTO;
 import com.eshop.inventory.manage.item.entity.TbItem;
 import com.eshop.inventory.manage.item.feign.ItemFeign;
-import com.eshop.inventory.manage.item.service.ItemCacheService;
+import com.eshop.inventory.manage.item.service.ItemICacheService;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +55,7 @@ public class KafkaMessageProcessor implements Runnable{
             if(kafkaBaseVo.getServiceId().equals(RedisCachePrefixEnum.ITEM.getName())){
                 //获取service操作对象
                 ItemFeign itemFeign = ProductCacheApplication.app.getBean(ItemFeign.class);
-                ItemCacheService itemCacheService = ProductCacheApplication.app.getBean(ItemCacheService.class);
+                ItemICacheService itemCacheService = ProductCacheApplication.app.getBean(ItemICacheService.class);
 
                 //对象转换
                 TbItem item = (TbItem)kafkaBaseVo.parseEntity(TbItem.class);
