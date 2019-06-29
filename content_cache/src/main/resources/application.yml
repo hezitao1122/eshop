@@ -23,7 +23,8 @@ spring:
       force: true
   application:
     name: content-shop
-
+  main:
+    allow-bean-definition-overriding: true
 feign:
   hystrix:
     #开启feign的hystrix支持,默认是false
@@ -40,10 +41,19 @@ eureka:
     serviceUrl:
       defaultZone: http://127.0.0.1:8761/eureka/
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000
+        timeout:
+          enabled: false
 
   # 打印sql
   level:
-    com.eshopinventory : debug
+    com.eshopinventory: debug
     #自定义配置
 rest:
   ReadTimeout: 35000

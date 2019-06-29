@@ -59,7 +59,7 @@ public class ResultDto<T> {
      * @param resultEnum 结果枚举
      * @param t
      */
-    private ResultDto(ResultEnum resultEnum, T t) {
+    public ResultDto(ResultEnum resultEnum, T t) {
         this.code = resultEnum.getCode();
         this.msg = resultEnum.getMsg();
         this.data = t;
@@ -70,19 +70,30 @@ public class ResultDto<T> {
      *
      * @param resultEnum 结果枚举
      */
-    private ResultDto(ResultEnum resultEnum) {
+    public ResultDto(ResultEnum resultEnum) {
         code = resultEnum.getCode();
         msg = resultEnum.getMsg();
     }
+    /**
+     * 用于返回结果的方法,不带data
+     *
+     * @param resultEnum 结果枚举
+     */
+    private ResultDto(ResultEnum resultEnum,String msg) {
+        this.code = resultEnum.getCode();
+        this.msg = msg;
+    }
+
+
     /**
      * @Description: 发生异常的构造方法
      * @Params: MyException
      * @Author: hzt
      * @Date: 2018/9/6 11:45
      */
-    private ResultDto(MyException e) {
-        code = e.getCode();
-        msg = e.getMsg();
+    public ResultDto(MyException e) {
+        this.code = e.getCode();
+        this.msg = e.getMsg();
     }
     /**
      * 不通过枚举进行返回的方法,不带参数
@@ -90,7 +101,7 @@ public class ResultDto<T> {
      * @param code 返回码
      * @param msg  返回提示信息
      */
-    private ResultDto(Integer code, String msg) {
+    public ResultDto(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }
@@ -102,7 +113,7 @@ public class ResultDto<T> {
      * @param msg  返回提示信息
      * @param data 返回体
      */
-    private ResultDto(Integer code, String msg, T data) {
+    public ResultDto(Integer code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;

@@ -1,7 +1,9 @@
 package com.eshop.inventory.common.base;
 
+import com.eshop.inventory.common.dto.BaseDTO;
 import com.eshop.inventory.common.dto.ResultDto;
-import com.eshop.inventory.common.entity.BaseEntity;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @projectName inventory
  * @date 2019/6/1823:17
  */
-public interface BaseFeign<T extends BaseEntity, ID>{
+public interface BaseFeign<T extends BaseDTO, ID>{
 
     /**
      * 功能描述: 添加一条数据<br>
@@ -24,8 +26,8 @@ public interface BaseFeign<T extends BaseEntity, ID>{
      * @Author: zeryts
      * @Date: 2019/6/15 17:33
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    ResultDto<T> add(T t);
+    @RequestMapping(value = "/add",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    ResultDto<T> add(@RequestBody T t);
     /**
      * 功能描述: 删除一条数据<br>
      * 〈〉
@@ -57,7 +59,19 @@ public interface BaseFeign<T extends BaseEntity, ID>{
      * @Author: zeryts
      * @Date: 2019/6/15 17:33
      */
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    ResultDto<T> update(T t);
+    @RequestMapping(value = "/update",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    ResultDto<T> update(@RequestBody T t);
+    /**
+     * 功能描述: 根据实体类的条件进行查找<br>
+     * 〈〉
+     *
+     * @param t
+     * @return: com.eshop.inventory.common.dto.ResultDto<T>
+     * @since: 1.0.0
+     * @Author: zeryts
+     * @Date: 2019/6/29 12:52
+     */
+    @RequestMapping(value = "/findByCondition",method =  RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    ResultDto<T> findByCondition(@RequestBody T t);
 
 }

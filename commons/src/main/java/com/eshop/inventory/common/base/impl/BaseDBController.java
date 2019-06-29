@@ -4,6 +4,7 @@ import com.eshop.inventory.common.base.IBaseDBService;
 import com.eshop.inventory.common.base.IBaseController;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.common.entity.BaseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 public abstract class BaseDBController<T extends BaseEntity, ID> implements IBaseController<T,ID> {
 
-    @RequestMapping("/add")
+    @PostMapping("/add")
     public ResultDto<T> add(T t){
         return new ResultDto<T>(getDBService().add(t));
     }
@@ -26,13 +27,13 @@ public abstract class BaseDBController<T extends BaseEntity, ID> implements IBas
     }
     @RequestMapping("/find")
     public ResultDto<T> find(ID id){
-        return new ResultDto<T>(getDBService().getById(id));
+        return new ResultDto<>(getDBService().getById(id));
     }
-    @RequestMapping("/update")
+    @PostMapping("/update")
     public ResultDto<T> update(T t){
         return new ResultDto<T>(getDBService().update(t));
     }
-    @RequestMapping("/findByCondition")
+    @PostMapping("/findByCondition")
     public ResultDto<T> findByCondition(T t){return new ResultDto<T>(getDBService().getByCondition(t));}
 
     /**

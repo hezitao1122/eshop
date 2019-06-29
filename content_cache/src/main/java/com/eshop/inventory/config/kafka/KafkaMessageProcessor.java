@@ -9,7 +9,7 @@ import com.eshop.inventory.manage.common.enums.RedisCachePrefixEnum;
 import com.eshop.inventory.manage.item.dto.TbItemDTO;
 import com.eshop.inventory.manage.item.entity.TbItem;
 import com.eshop.inventory.manage.item.feign.ItemFeign;
-import com.eshop.inventory.manage.item.service.ItemICacheService;
+import com.eshop.inventory.manage.item.service.ItemCacheService;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import lombok.extern.slf4j.Slf4j;
@@ -55,16 +55,16 @@ public class KafkaMessageProcessor implements Runnable{
             if(kafkaBaseVo.getServiceId().equals(RedisCachePrefixEnum.ITEM.getName())){
                 //获取service操作对象
                 ItemFeign itemFeign = ProductCacheApplication.app.getBean(ItemFeign.class);
-                ItemICacheService itemCacheService = ProductCacheApplication.app.getBean(ItemICacheService.class);
+                ItemCacheService itemCacheService = ProductCacheApplication.app.getBean(ItemCacheService.class);
 
                 //对象转换
                 TbItem item = (TbItem)kafkaBaseVo.parseEntity(TbItem.class);
                 //远程调用获取商品对象信息
-                ResultDto<TbItem> res = itemFeign.find(item.getId());
+                ResultDto<TbItemDTO> res = itemFeign.find(item.getId());
 
                 //代表获取对象成功
                 if(res.getCode().equals(ResultEnum.SUCCESS.getCode())){
-                    TbItemDTO dto = new TbItemDTO(res.getData());
+                    TbItemDTO dto = res.getData();
                     log.info("Item ------> 将获取的商品信息id->[{}]",dto.getId(),",内容->[{}]",JSON.toJSONString(dto),"保存至缓存和ehcache中!");
                     //缓存到ehcache中
                     itemCacheService.saveLoadEhCache(dto);

@@ -1,5 +1,9 @@
 package com.eshop.inventory.manage.item.entity;
 
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 import com.eshop.inventory.common.entity.BaseEntity;
 
 import javax.persistence.*;
@@ -16,8 +20,11 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "tb_item_desc", schema = "eshop", catalog = "")
+@TableName(value = "tb_item_desc")
 public class TbItemDesc extends BaseEntity  {
+    @TableId(value = "item_id",type = IdType.ID_WORKER)
     private long itemId;
+    @TableField(value = "item_desc")
     private String itemDesc;
     private Timestamp created;
     private Timestamp updated;

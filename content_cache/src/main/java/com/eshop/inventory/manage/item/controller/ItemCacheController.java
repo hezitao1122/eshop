@@ -1,10 +1,15 @@
 package com.eshop.inventory.manage.item.controller;
 
+import com.eshop.inventory.common.base.ICacheService;
+import com.eshop.inventory.common.base.impl.BaseCacheController;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.manage.item.dto.TbItemDTO;
-import com.eshop.inventory.manage.item.service.ItemICacheService;
+import com.eshop.inventory.manage.item.service.ItemCacheService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author zeryts
@@ -16,17 +21,18 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/item")
-public class ItemCacheController {
+public class ItemCacheController extends BaseCacheController<TbItemDTO,Long> {
     @Autowired
-    private ItemICacheService itemCacheService;
+    private ItemCacheService itemCacheService;
+
 
     @PostMapping("/add")
     public ResultDto<TbItemDTO> add(@RequestBody TbItemDTO dto){
-        return new ResultDto<>(itemCacheService.saveLoadEhCache(dto));
+        return new ResultDto<>(itemCacheService.saveLoadCache(dto.getId(),dto));
     }
-    @GetMapping("/get")
-    public  ResultDto<TbItemDTO> get(Long id){
-        return new ResultDto<>(itemCacheService.getLoadEhCache(id));
+    @Override
+    public ICacheService<TbItemDTO, Long> getCacheService() {
+        return itemCacheService;
     }
 
 }

@@ -9,6 +9,7 @@ package com.eshop.inventory.common.dto;
 public enum ResultEnum {
     ERROR(0, "服务器异常!"),
     SUCCESS(1, "请求成功!"),
+    FEIGN_ERROR(2, "远程调用异常!"),
     BUSINESS_EXCEPTION(3, "业务异常!");
 
     private Integer code;

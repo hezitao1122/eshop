@@ -1,8 +1,8 @@
 package com.eshop.inventory.manage.item.feign.rollback;
 
 import com.eshop.inventory.common.base.impl.BaseFeignImpl;
-import com.eshop.inventory.manage.item.dto.TbItemDTO;
-import com.eshop.inventory.manage.item.feign.ItemFeign;
+import com.eshop.inventory.manage.item.dto.TbItemDescDTO;
+import com.eshop.inventory.manage.item.feign.ItemDescFeign;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @date 2019/6/18 23:20
  */
 @Component
-public class ItemFeignRollback extends BaseFeignImpl<TbItemDTO,Long> implements ItemFeign {
+public class ItemDescFeignRollback extends BaseFeignImpl<TbItemDescDTO,Long> implements ItemDescFeign {
 
     @Override
     public String getClassName() {
