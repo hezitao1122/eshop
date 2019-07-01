@@ -4,32 +4,34 @@ import com.alibaba.fastjson.JSON;
 import com.eshop.inventory.common.base.IBaseCacheService;
 import com.eshop.inventory.common.entity.BaseEntity;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.io.Serializable;
 
 /**
  * @author zeryts
- * @description: 缓存操作的service实现类
+ * @description: 即存在DB逻辑也存在Cache逻辑的service实现类
  * ```````````````````````````
- * @title: IBaseCacheServiceImpl
+ * @title: BaseDBAndCacheServiceImpl
  * @projectName inventory
- * @date 2019/6/15 16:54
+ * @date 2019/6/15 17:04
  */
-public abstract class IBaseCacheServiceImpl<T extends BaseEntity,ID extends Serializable> implements IBaseCacheService<T,ID> {
+public abstract class BaseDBAndCacheServiceImpl<T extends BaseEntity, ID extends Serializable> extends BaseDBServiceImpl<T,ID> implements IBaseCacheService<T,ID> {
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(IBaseCacheServiceImpl.class);
-
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(BaseDBAndCacheServiceImpl.class);
+    @Autowired
+    protected RedisTemplate redisTemplate;
     @Override
     public void setCache(ID id,T t) {
         log.info("===========日志===========: 将数据加入缓存中，key=[{}]" ,getPrefix()+id+", data=[{}]" , JSON.toJSONString(t));
-        getRedisTemplate().opsForValue().set(id,t);
+        redisTemplate.opsForValue().set(id,t);
     }
 
     @Override
     public T getCacheById(ID id) {
         String key = getPrefix()+ id;
-        T t = (T)getRedisTemplate().opsForValue().get(key);
+        T t = (T)redisTemplate.opsForValue().get(key);
         log.info("===========日志===========: 根据id获取到缓存，data=[{}]" , JSON.toJSONString(t));
         return t;
     }
@@ -37,10 +39,8 @@ public abstract class IBaseCacheServiceImpl<T extends BaseEntity,ID extends Seri
     @Override
     public void deleteCacheById(ID id) {
         log.info("===========日志===========: 已删除redis中的缓存，key=[{}]" , getPrefix()+id);
-        getRedisTemplate().delete(getPrefix()+id);
+        redisTemplate.delete(getPrefix()+id);
     }
-
-    protected abstract RedisTemplate getRedisTemplate();
 
     protected abstract String getPrefix();
 

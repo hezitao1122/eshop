@@ -2,11 +2,11 @@ package com.eshop.inventory.manage.item.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.eshop.inventory.common.base.impl.IIBaseDBAndCacheServiceImpl;
+import com.eshop.inventory.common.base.impl.BaseDBAndCacheServiceImpl;
 import com.eshop.inventory.manage.common.enums.RedisCachePrefixEnum;
 import com.eshop.inventory.manage.item.entity.TbItem;
 import com.eshop.inventory.manage.item.mapper.ItemMapper;
-import com.eshop.inventory.manage.item.service.ItemServiceII;
+import com.eshop.inventory.manage.item.service.ItemServiceI;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -16,14 +16,14 @@ import org.springframework.stereotype.Service;
  * @author zeryts
  * @description: TODO
  * ```````````````````````````
- * @title: ItemServiceImplII
+ * @title: ItemServiceImpl
  * @projectName inventory
  * @date 2019/5/30 23:37
  */
 @Service
-public class ItemServiceImplII extends IIBaseDBAndCacheServiceImpl<TbItem,Long> implements ItemServiceII {
+public class ItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItem,Long> implements ItemServiceI {
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemServiceImplII.class);
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemServiceImpl.class);
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Autowired

@@ -1,6 +1,6 @@
 package com.eshop.inventory.manage.item.service.impl;
 
-import com.eshop.inventory.common.base.impl.ICacheServiceImpl;
+import com.eshop.inventory.common.base.impl.CacheServiceImpl;
 import com.eshop.inventory.manage.common.enums.RedisCachePrefixEnum;
 import com.eshop.inventory.manage.item.dto.TbItemDTO;
 import com.eshop.inventory.manage.item.service.ItemICacheService;
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
  * @author zeryts
  * @description: 商品信息操作的实现类
  * ```````````````````````````
- * @title: ItemICacheServiceImpl
+ * @title: ItemCacheServiceImpl
  * @projectName inventory
  * @date 2019/6/12 23:32
  */
 @Service
-public class ItemICacheServiceImpl extends ICacheServiceImpl<TbItemDTO,Long> implements ItemICacheService {
+public class ItemCacheServiceImpl extends CacheServiceImpl<TbItemDTO,Long> implements ItemICacheService {
     /**
      * redis对应商品信息的前缀
      */

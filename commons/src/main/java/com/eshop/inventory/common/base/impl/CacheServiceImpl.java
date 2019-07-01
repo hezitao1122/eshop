@@ -8,11 +8,11 @@ import org.springframework.data.redis.core.RedisTemplate;
  * @author zeryts
  * @description: 封装对缓存操作的一些共有操作实体类
  * ```````````````````````````
- * @title: ICacheServiceImpl
+ * @title: CacheServiceImpl
  * @projectName inventory
  * @date 2019/6/15 21:57
  */
-public abstract class ICacheServiceImpl<T, ID> implements ICacheService<T, ID> {
+public abstract class CacheServiceImpl<T, ID> implements ICacheService<T, ID> {
     @Autowired
     private RedisTemplate redisTemplate;
 

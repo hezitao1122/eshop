@@ -3,7 +3,7 @@ package com.eshop.inventory.manage.item.request;
 import com.alibaba.fastjson.JSON;
 import com.eshop.inventory.common.base.IBaseWriterRequest;
 import com.eshop.inventory.manage.item.entity.TbItem;
-import com.eshop.inventory.manage.item.service.ItemServiceII;
+import com.eshop.inventory.manage.item.service.ItemServiceI;
 import org.slf4j.Logger;
 
 import java.util.Map;
@@ -57,9 +57,9 @@ public class ItemInventoryDBUpdateRequestI implements Request<TbItem,Long> , IBa
     /**
      * 商品操作的service
      */
-    private ItemServiceII itemService;
+    private ItemServiceI itemService;
 
-    public ItemInventoryDBUpdateRequestI(TbItem item, ItemServiceII itemService) {
+    public ItemInventoryDBUpdateRequestI(TbItem item, ItemServiceI itemService) {
         this.item = item;
         this.itemService = itemService;
     }

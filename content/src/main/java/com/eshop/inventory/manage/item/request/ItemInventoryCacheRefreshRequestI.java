@@ -3,7 +3,7 @@ package com.eshop.inventory.manage.item.request;
 import com.alibaba.fastjson.JSON;
 import com.eshop.inventory.common.base.IBaseReaderRequest;
 import com.eshop.inventory.manage.item.entity.TbItem;
-import com.eshop.inventory.manage.item.service.ItemServiceII;
+import com.eshop.inventory.manage.item.service.ItemServiceI;
 import org.slf4j.Logger;
 
 import java.util.Map;
@@ -27,7 +27,7 @@ public class ItemInventoryCacheRefreshRequestI implements Request<TbItem,Long> ,
     /**
      * 商品操作的service
      */
-    private ItemServiceII itemService;
+    private ItemServiceI itemService;
 
     /**
      * 是否强制刷新缓存
@@ -43,7 +43,7 @@ public class ItemInventoryCacheRefreshRequestI implements Request<TbItem,Long> ,
      * @param id 商品信息id
      * @param itemService 商品操作的实体类
      */
-    public ItemInventoryCacheRefreshRequestI(Long id, ItemServiceII itemService) {
+    public ItemInventoryCacheRefreshRequestI(Long id, ItemServiceI itemService) {
         this.id = id;
         this.itemService = itemService;
         forceRefresh = false;
@@ -53,7 +53,7 @@ public class ItemInventoryCacheRefreshRequestI implements Request<TbItem,Long> ,
      * @param id 商品信息id
      * @param itemService 商品操作的实体类
      */
-    public ItemInventoryCacheRefreshRequestI(Long id, ItemServiceII itemService, boolean forceRefresh) {
+    public ItemInventoryCacheRefreshRequestI(Long id, ItemServiceI itemService, boolean forceRefresh) {
         this.id = id;
         this.itemService = itemService;
         this.forceRefresh = forceRefresh;

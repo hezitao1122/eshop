@@ -12,11 +12,11 @@ import java.util.List;
  * @author zeryts
  * @description: 数据库操作的通用service层实现
  * ```````````````````````````
- * @title: IBaseDBServiceImpl
+ * @title: BaseDBServiceImpl
  * @projectName inventory
  * @date 2019/6/15 16:35
  */
-public abstract class IBaseDBServiceImpl<T extends BaseEntity,ID extends Serializable> implements IBaseDBService<T,ID> {
+public abstract class BaseDBServiceImpl<T extends BaseEntity,ID extends Serializable> implements IBaseDBService<T,ID> {
     @Override
     public T add(T t) {
         getMapper().insert(t);

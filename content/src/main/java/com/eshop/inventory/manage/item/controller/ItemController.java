@@ -10,7 +10,7 @@ import com.eshop.inventory.manage.item.request.ItemInventoryCacheRefreshRequestI
 import com.eshop.inventory.manage.item.request.ItemInventoryDBUpdateRequestI;
 import com.eshop.inventory.manage.item.request.Request;
 import com.eshop.inventory.manage.item.service.ItemAsyncService;
-import com.eshop.inventory.manage.item.service.ItemServiceII;
+import com.eshop.inventory.manage.item.service.ItemServiceI;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +33,7 @@ public class ItemController extends BaseDBController<TbItem,Long> {
     @Autowired
     private ItemAsyncService itemAsyncService;
     @Autowired
-    private ItemServiceII itemService;
+    private ItemServiceI itemService;
 
     @Override
     public IBaseDBService<TbItem, Long> getDBService() {

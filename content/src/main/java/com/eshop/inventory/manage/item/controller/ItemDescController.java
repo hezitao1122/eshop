@@ -3,7 +3,7 @@ package com.eshop.inventory.manage.item.controller;
 import com.eshop.inventory.common.base.IBaseDBService;
 import com.eshop.inventory.common.base.impl.BaseDBController;
 import com.eshop.inventory.manage.item.entity.TbItemDesc;
-import com.eshop.inventory.manage.item.service.ItemDescServiceII;
+import com.eshop.inventory.manage.item.service.ItemDescServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/item/desc")
 public class ItemDescController extends BaseDBController<TbItemDesc,Long> {
     @Autowired
-    private ItemDescServiceII itemDescService;
+    private ItemDescServiceI itemDescService;
 
 
 
