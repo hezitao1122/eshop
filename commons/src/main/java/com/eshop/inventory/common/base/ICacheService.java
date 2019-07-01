@@ -2,7 +2,7 @@ package com.eshop.inventory.common.base;
 
 /**
  * @author zeryts
- * @description: 用于EhCache缓存的service接口
+ * @description: 用于Cache缓存的service接口
  * ```````````````````````````
  * @title: ICacheService
  * @projectName inventory
