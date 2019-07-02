@@ -4,6 +4,7 @@ import com.eshop.inventory.common.base.IBaseCacheController;
 import com.eshop.inventory.common.base.IBaseEhCacheController;
 import com.eshop.inventory.common.dto.BaseDTO;
 import com.eshop.inventory.common.dto.ResultDto;
+import com.eshop.inventory.common.queue.RebuildCacheQueue;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.Serializable;
@@ -42,9 +43,17 @@ public abstract class BaseCacheController<T extends BaseDTO,ID extends Serializa
         if(t == null){
             t = getCacheService().getLoadEhCache(id);
         }
-        //取不出来再去调用数据库
+        /**
+         * 如果缓存中取不出来,则需要被动重建数据
+         * 1.直接去对应的服务器数据库中取
+         * 2.返回给nginx
+         * 3.同时推送一条消息到内存队列中
+         * 4.后台异步去执行更新缓存
+        */
         if(t == null ){
-
+            ResultDto<T> tResultDto = getFeign().find(id);
+            t = tResultDto.getData();
+            RebuildCacheQueue.getInstance().add(tResultDto.getData());
         }
         return new ResultDto<T>(t);
     }

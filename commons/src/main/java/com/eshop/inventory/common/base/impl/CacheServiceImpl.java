@@ -24,7 +24,11 @@ public abstract class CacheServiceImpl<T, ID> implements ICacheService<T, ID> {
 
     @Override
     public T getLoadCache(ID id) {
-        return (T)redisTemplate.opsForValue().get(prefix()+id);
+        Object o = redisTemplate.opsForValue().get(prefix() + id);
+        if(o == null){
+            return null;
+        }
+        return (T)o;
     }
 
     @Override

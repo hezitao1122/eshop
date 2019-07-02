@@ -1,5 +1,8 @@
 package com.eshop.inventory.config.kafka;
 
+import com.eshop.inventory.common.rebuild.RebuildCacheThread;
+import com.eshop.inventory.config.zk.ZooKeeperSession;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -18,6 +21,14 @@ public class InitKafkaListener implements ServletContextListener {
          * 创建一个kafka的消费者，消费的topic为 cache-message
          */
         new Thread(new KafkaConsumer("cache-message")).start();
+        /**
+         * 初始化zookeerper
+         */
+        ZooKeeperSession.init();
+        /**
+         * 消费的线程池
+         */
+        new Thread(new RebuildCacheThread()).start();
     }
 
     @Override

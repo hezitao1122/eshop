@@ -58,3 +58,5 @@ hystrix:
 rest:
   ReadTimeout: 35000
   ConnectTimeout: 5000
+logging:
+  config: classpath:logback.xml

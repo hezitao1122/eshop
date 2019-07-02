@@ -1,9 +1,11 @@
 package com.eshop.inventory.manage.item.controller;
 
+import com.eshop.inventory.common.base.BaseFeign;
 import com.eshop.inventory.common.base.ICacheService;
 import com.eshop.inventory.common.base.impl.BaseCacheController;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.manage.item.dto.TbItemDescDTO;
+import com.eshop.inventory.manage.item.feign.ItemDescFeign;
 import com.eshop.inventory.manage.item.service.ItemDescCacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.*;
 public class ItemDescCacheController extends BaseCacheController<TbItemDescDTO,Long> {
     @Autowired
     private ItemDescCacheService itemDescCacheService;
+    @Autowired
+    private ItemDescFeign itemDescFeign;
+
 
     @PostMapping("/add")
     public ResultDto<TbItemDescDTO> add(@RequestBody TbItemDescDTO dto){
@@ -30,6 +35,11 @@ public class ItemDescCacheController extends BaseCacheController<TbItemDescDTO,L
     @Override
     public ICacheService<TbItemDescDTO, Long> getCacheService() {
         return itemDescCacheService;
+    }
+
+    @Override
+    public BaseFeign<TbItemDescDTO, Long> getFeign() {
+        return itemDescFeign;
     }
 
 

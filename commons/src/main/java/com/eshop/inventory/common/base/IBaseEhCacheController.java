@@ -21,4 +21,6 @@ public interface IBaseEhCacheController<T extends BaseDTO,ID  extends Serializab
 
     ICacheService<T,ID> getCacheService();
 
+    BaseFeign<T,ID> getFeign();
+
 }

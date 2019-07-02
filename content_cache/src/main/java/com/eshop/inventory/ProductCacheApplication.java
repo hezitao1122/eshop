@@ -28,7 +28,6 @@ public class ProductCacheApplication {
     public static ApplicationContext app= null;
 
     public static void main(String[] args) {
-
         ConfigurableApplicationContext run = SpringApplication.run(ProductCacheApplication.class, args);
         app = run;
     }
