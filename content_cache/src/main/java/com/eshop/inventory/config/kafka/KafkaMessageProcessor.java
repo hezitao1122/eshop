@@ -69,6 +69,7 @@ public class KafkaMessageProcessor implements Runnable {
                 TbItem item = (TbItem) kafkaBaseVo.parseEntity(TbItem.class);
                 //远程调用获取商品对象信息
                 ResultDto<TbItemDTO> res = itemFeign.find(item.getId());
+//                ResultDto<TbItemDTO> res = null;
                 //代表获取对象成功
                 if (res.getCode().equals(ResultEnum.SUCCESS.getCode())) {
                     TbItemDTO dto = res.getData();

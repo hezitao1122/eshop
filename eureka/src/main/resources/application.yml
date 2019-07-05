@@ -5,14 +5,11 @@ spring:
   application:
     name: eureka-server-1
 eureka:
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://127.0.0.1:${server.port}/eureka/
   server:
     eviction-interval-timer-in-ms: 4000
     enable-self-preservation: false

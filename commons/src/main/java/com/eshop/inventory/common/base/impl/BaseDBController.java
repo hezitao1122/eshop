@@ -4,8 +4,7 @@ import com.eshop.inventory.common.base.IBaseDBService;
 import com.eshop.inventory.common.base.IBaseController;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.common.entity.BaseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zeryts
@@ -18,23 +17,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public abstract class BaseDBController<T extends BaseEntity, ID> implements IBaseController<T,ID> {
 
     @PostMapping("/add")
-    public ResultDto<T> add(T t){
+    public ResultDto<T> add(@RequestBody T t){
         return new ResultDto<T>(getDBService().add(t));
     }
     @RequestMapping("/delete")
-    public ResultDto<T> delete(ID id){
+    public ResultDto<T> delete(@RequestParam ID id){
         return new ResultDto<T>(getDBService().delete(id));
     }
     @RequestMapping("/find")
-    public ResultDto<T> find(ID id){
+    public ResultDto<T> find(@RequestParam ID id){
         return new ResultDto<>(getDBService().getById(id));
     }
     @PostMapping("/update")
-    public ResultDto<T> update(T t){
+    public ResultDto<T> update(@RequestBody T t){
         return new ResultDto<T>(getDBService().update(t));
     }
     @PostMapping("/findByCondition")
-    public ResultDto<T> findByCondition(T t){return new ResultDto<T>(getDBService().getByCondition(t));}
+    public ResultDto<T> findByCondition(@RequestBody T t){return new ResultDto<T>(getDBService().getByCondition(t));}
 
     /**
      * 获取执行业务逻辑的service接口

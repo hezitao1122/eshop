@@ -1,4 +1,4 @@
-package com.eshop.inventory.config.controller;
+package com.eshop.inventory.config.web;
 
 import com.alibaba.fastjson.JSON;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -28,8 +28,11 @@ public class ControllerConfig {
     @Pointcut(value = "execution(public * com.eshop.inventory.*.*.controller.*.*(..) )")
     private void point(){}
 
+    @Pointcut(value = "execution(public * com.eshop.inventory.common.base.impl.*Controller.*(..) )")
+    private void pointBase(){}
 
-    @Around("point()")
+
+    @Around(value = "point() || pointBase()")
     public Object pointcut(ProceedingJoinPoint proceedingJoinPoint)throws Throwable {
         long startTime = System.currentTimeMillis();
 

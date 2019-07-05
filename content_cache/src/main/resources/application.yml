@@ -22,7 +22,7 @@ spring:
     encoding:
       force: true
   application:
-    name: content-shop
+    name: cache-content
   main:
     allow-bean-definition-overriding: true
 feign:
@@ -40,17 +40,15 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:8761/eureka/
-
 hystrix:
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 6000
+            timeoutInMilliseconds: 100000
         timeout:
           enabled: false
-
   # 打印sql
   level:
     com.eshopinventory: debug
@@ -60,3 +58,6 @@ rest:
   ConnectTimeout: 5000
 logging:
   config: classpath:logback.xml
+ribbon:
+  eureka:
+    enabled: true

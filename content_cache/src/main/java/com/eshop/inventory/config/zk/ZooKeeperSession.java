@@ -74,7 +74,7 @@ public class ZooKeeperSession {
      */
     public void releaseDistributedLock(String path){
         try{
-            zooKeeper.delete(path,-1);
+            zooKeeper.delete("/"+path,-1);
         }catch (Exception e){
             log.info(e.toString(),e);
         }
@@ -135,8 +135,8 @@ public class ZooKeeperSession {
         int count = 0;
         while (true){
             try{
-                zooKeeper.create(path,"".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
-                log.info("创建临时节点成功!节点路径为：[{}]",path);
+                zooKeeper.create("/"+path,"".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+                log.info("创建临时节点成功!节点路径为：[{}]",("/"+path));
             }catch (Exception ex){
                 count ++ ;
                 try {
@@ -144,6 +144,7 @@ public class ZooKeeperSession {
                 } catch (InterruptedException e) {
                     log.info(e.toString(),e);
                 }
+                if(count >= 20)break;
                 continue;
             }
             log.info("创建临时节点[{}],[{}]次后成功！",path,count);

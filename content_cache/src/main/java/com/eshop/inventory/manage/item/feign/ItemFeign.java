@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @projectName inventory
  * @date 2019/6/18 23:05
  */
-@FeignClient(name = "eshop-content",fallback = ItemFeignRollback.class)
-@RequestMapping(value = "/api/v1/item")
+@FeignClient(name = "eshop-content",path = "/api/v1/item",fallback = ItemFeignRollback.class)
 @Component
 public interface ItemFeign extends BaseFeign<TbItemDTO,Long> {
 }

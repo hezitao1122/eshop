@@ -53,7 +53,7 @@ public abstract class BaseCacheController<T extends BaseDTO,ID extends Serializa
         if(t == null ){
             ResultDto<T> tResultDto = getFeign().find(id);
             t = tResultDto.getData();
-            RebuildCacheQueue.getInstance().add(tResultDto.getData());
+            RebuildCacheQueue.getInstance().add(t);
         }
         return new ResultDto<T>(t);
     }

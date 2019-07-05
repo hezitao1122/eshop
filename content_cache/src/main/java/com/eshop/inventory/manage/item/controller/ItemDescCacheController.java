@@ -8,7 +8,10 @@ import com.eshop.inventory.manage.item.dto.TbItemDescDTO;
 import com.eshop.inventory.manage.item.feign.ItemDescFeign;
 import com.eshop.inventory.manage.item.service.ItemDescCacheService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author zeryts
@@ -20,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/item/desc")
-public class ItemDescCacheController extends BaseCacheController<TbItemDescDTO,Long> {
+public class ItemDescCacheController extends BaseCacheController<TbItemDescDTO, Long> {
     @Autowired
     private ItemDescCacheService itemDescCacheService;
     @Autowired
@@ -28,8 +31,8 @@ public class ItemDescCacheController extends BaseCacheController<TbItemDescDTO,L
 
 
     @PostMapping("/add")
-    public ResultDto<TbItemDescDTO> add(@RequestBody TbItemDescDTO dto){
-        return new ResultDto<>(itemDescCacheService.saveLoadCache(dto.getItemId(),dto));
+    public ResultDto<TbItemDescDTO> add(@RequestBody TbItemDescDTO dto) {
+        return new ResultDto<>(itemDescCacheService.saveLoadCache(dto.getItemId(), dto));
     }
 
     @Override

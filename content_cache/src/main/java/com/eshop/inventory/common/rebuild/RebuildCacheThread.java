@@ -28,7 +28,7 @@ public class RebuildCacheThread implements Runnable {
         RebuildCacheQueue instance = RebuildCacheQueue.getInstance();
         while (true) {
             try {
-                Object obj = instance.take();
+                 Object obj = instance.take();
                 if(obj instanceof TbItemDTO){
                     //代表是商品详情的信息
                     TbItemDTO dto = (TbItemDTO)obj;

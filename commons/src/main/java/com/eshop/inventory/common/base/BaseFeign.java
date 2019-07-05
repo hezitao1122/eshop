@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author zeryts
@@ -27,7 +28,7 @@ public interface BaseFeign<T extends BaseDTO, ID>{
      * @Date: 2019/6/15 17:33
      */
     @RequestMapping(value = "/add",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    ResultDto<T> add(@RequestBody T t);
+    ResultDto<T> add( @RequestBody T t);
     /**
      * 功能描述: 删除一条数据<br>
      * 〈〉
@@ -38,7 +39,7 @@ public interface BaseFeign<T extends BaseDTO, ID>{
      * @Date: 2019/6/15 17:33
      */
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
-    ResultDto<T> delete(ID id);
+    ResultDto<T> delete(@RequestParam ID id);
     /**
      * 功能描述: 根据id查找一条数据<br>
      * 〈〉
@@ -49,7 +50,7 @@ public interface BaseFeign<T extends BaseDTO, ID>{
      * @Date: 2019/6/15 17:33
      */
     @RequestMapping(value = "/find",method = RequestMethod.GET)
-    ResultDto<T> find(ID id);
+    ResultDto<T> find( @RequestParam ID id);
     /**
      * 功能描述: 修改一条数据<br>
      * 〈〉
@@ -72,6 +73,6 @@ public interface BaseFeign<T extends BaseDTO, ID>{
      * @Date: 2019/6/29 12:52
      */
     @RequestMapping(value = "/findByCondition",method =  RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    ResultDto<T> findByCondition(@RequestBody T t);
+    ResultDto<T> findByCondition( @RequestBody T t);
 
 }
