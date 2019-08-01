@@ -56,8 +56,20 @@ hystrix:
 rest:
   ReadTimeout: 35000
   ConnectTimeout: 5000
+zookeeper:
+  connect: 192.168.31.226:2181,192.168.31.225:2181,192.168.31.224:2181
+  group:
+    id: eshop-cache-group
+  session:
+    timeout: 40000
+  sync:
+    time: 200
+  auto:
+    commit:
+      interval: 1000
 logging:
   config: classpath:logback.xml
 ribbon:
   eureka:
     enabled: true
+

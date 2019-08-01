@@ -23,6 +23,7 @@
         <module>commons</module>
         <module>sdk</module>
         <module>eureka</module>
+        <module>eshop-storm</module>
     </modules>
 
     <properties>

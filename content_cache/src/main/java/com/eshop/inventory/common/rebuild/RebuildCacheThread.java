@@ -55,6 +55,7 @@ public class RebuildCacheThread implements Runnable {
                         log.info(e.toString(),e);
                     }finally {
                         //释放锁
+                        log.info("释放锁，id=[{}]",dto.getId());
                         zooKeeperSession.releaseDistributedLock(RedisCachePrefixEnum.ITEM.getName()+dto.getId());
                     }
                 }

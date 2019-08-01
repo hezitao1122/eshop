@@ -70,15 +70,15 @@ public class KafkaConsumer implements Runnable{
     private static ConsumerConfig createConsumerConfig() {
         Properties props = new Properties();
         //指定集群连接地址
-        props.put("zookeeper.connect", "192.168.31.226:2181,192.168.31.225:2181,192.168.31.224:2181");
+        props.put("zookeeper.connect", KafkaConfig.ZOOKEEPER_CONNECT);
         //指定groupid消费者id
-        props.put("group.id", "eshop-cache-group");
+        props.put("group.id", KafkaConfig.GROUP_ID);
         //session过期时间
-        props.put("zookeeper.session.timeout.ms", "40000");
+        props.put("zookeeper.session.timeout.ms", KafkaConfig.ZOOKEEPER_SESSION_TIMEOUT);
         //等待时间
-        props.put("zookeeper.sync.time.ms", "200");
+        props.put("zookeeper.sync.time.ms", KafkaConfig.ZOOKEEPER_SYNC_TIME);
         //提交超时时间
-        props.put("auto.commit.interval.ms", "1000");
+        props.put("auto.commit.interval.ms", KafkaConfig.AUTO_COMMIT_INTERVAL);
         return new ConsumerConfig(props);
     }
 }
