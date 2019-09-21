@@ -33,6 +33,14 @@ public class KafkaConstant {
      * 监听的topic
      */
     public final static String TOPIC = "access-log";
+    /**
+     * message
+     */
+    public final static String MESSAGE = "message";
+    /**
+     * id
+     */
+    public final static String ID = "id";
 
 
 }

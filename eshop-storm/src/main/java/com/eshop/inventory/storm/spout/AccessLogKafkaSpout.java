@@ -1,15 +1,21 @@
 package com.eshop.inventory.storm.spout;
 
+import com.eshop.inventory.storm.config.KafkaConstant;
 import com.eshop.inventory.storm.config.KafkaConsumerConfig;
+import com.eshop.inventory.storm.processor.KafkaMessageProcessor;
 import kafka.consumer.KafkaStream;
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.topology.base.BaseRichSpout;
+import org.apache.storm.tuple.Fields;
+import org.apache.storm.tuple.Values;
+import org.apache.storm.utils.Utils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @author zeryts
@@ -26,6 +32,8 @@ public class AccessLogKafkaSpout extends BaseRichSpout {
      */
     private SpoutOutputCollector collector;
 
+    private ArrayBlockingQueue<String> queue = new ArrayBlockingQueue<String>(1000);
+
     /**
      * 功能描述: 对spout进行初始化的方法，此从kafka中获取需要的数据<br>
      * 〈〉
@@ -40,16 +48,16 @@ public class AccessLogKafkaSpout extends BaseRichSpout {
      */
     public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
         this.collector = collector;
-
         Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
         //消费的topic,以及打算用几个线程去消费topic
         topicCountMap.put(KafkaConsumerConfig.TOPIC, 1);
         //这里代表每个topic会对应多个kafka的stream,代表每个topic传入几个数字,其就会给你几个stream
         Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = KafkaConsumerConfig.getConsumerConnector().createMessageStreams(topicCountMap);
+        //监听一个Topic
         List<KafkaStream<byte[], byte[]>> streams = consumerMap.get(KafkaConsumerConfig.TOPIC);
-
+        //获取到这个流的集合
         for (KafkaStream stream : streams) {
-//            new Thread(new KafkaMessageProcessor(stream)).start();
+            new Thread(new KafkaMessageProcessor(stream,queue)).start();
         }
 
     }
@@ -63,7 +71,20 @@ public class AccessLogKafkaSpout extends BaseRichSpout {
      * @Date: 2019/7/9 23:37
      */
     public void nextTuple() {
-
+        if(queue.size()> 0 ){
+            //如果存在，则需要发射出去
+            try {
+                //获取message
+                String message = queue.take();
+                //发射
+                collector.emit(new Values(message));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }else{
+            //否则休眠一会再去查询
+            Utils.sleep(100);
+        }
     }
     /**
      * 功能描述: 定义一个你发射出去的每个tuple中的每个field的名称是什么<br>
@@ -75,6 +96,6 @@ public class AccessLogKafkaSpout extends BaseRichSpout {
      * @Date: 2019/7/9 23:45
      */
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-
+        declarer.declare(new Fields(KafkaConstant.MESSAGE));
     }
 }

@@ -11,11 +11,22 @@ package com.eshop.inventory.storm.vo;
 public abstract class KafkaBaseVo {
     private String serviceId;
 
-    public String getServiceId() {
+     private Long id;
+
+   public String getServiceId() {
         return serviceId;
     }
 
     public void setServiceId(String serviceId) {
         this.serviceId = serviceId;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
