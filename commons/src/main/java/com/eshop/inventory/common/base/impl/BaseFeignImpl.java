@@ -6,6 +6,8 @@ import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.common.dto.ResultEnum;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 /**
  * @author zeryts
  * @description: Feign回调的通用类
@@ -46,5 +48,11 @@ public abstract class BaseFeignImpl<T extends BaseDTO,ID>  {
         log.info("查询[{}]时产生异常!数据为:[{}]",getClassName(), t);
         return new ResultDto(ResultEnum.FEIGN_ERROR,"查询"+getClassName()+"时产生异常!");
     }
-    public abstract String getClassName();
+    public ResultDto<T> findByIds(List<ID> ids) {
+        log.info("批量查询[{}]时产生异常!数据为:[{}]",getClassName(), ids);
+        return new ResultDto(ResultEnum.FEIGN_ERROR,"查询"+getClassName()+"时产生异常!");
+    }
+
+
+   public abstract String getClassName();
 }

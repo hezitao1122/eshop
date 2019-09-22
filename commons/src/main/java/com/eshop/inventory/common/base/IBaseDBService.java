@@ -64,6 +64,17 @@ public interface IBaseDBService<T extends BaseEntity,ID> {
      * @Date: 2019/6/27 23:51
      */
     List<T> getByCondition(T t);
+    /**
+     * 功能描述: 根据主键查询数据的集合<br>
+     * 〈〉
+     *
+     * @param ids
+     * @return: java.util.List<T>
+     * @since: 1.0.0
+     * @Author: zeryts
+     * @Date: 2019/6/27 23:51
+     */
+    List<T> getByIds(List<ID> ids);
 
 
 }

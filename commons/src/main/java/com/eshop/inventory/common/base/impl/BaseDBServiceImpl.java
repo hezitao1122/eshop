@@ -48,5 +48,10 @@ public abstract class BaseDBServiceImpl<T extends BaseEntity,ID extends Serializ
         return getMapper().selectList(wrapper);
     }
 
+    @Override
+    public List<T> getByIds(List<ID> ids) {
+        return getMapper().selectBatchIds(ids);
+    }
+
     protected abstract BaseMapper<T> getMapper();
 }

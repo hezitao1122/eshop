@@ -1,5 +1,6 @@
 package com.eshop.inventory.manage.item.controller;
 
+import com.eshop.inventory.cache.perwarm.CachePerwarmThread;
 import com.eshop.inventory.common.base.BaseFeign;
 import com.eshop.inventory.common.base.ICacheService;
 import com.eshop.inventory.common.base.impl.BaseCacheController;
@@ -8,10 +9,7 @@ import com.eshop.inventory.manage.item.dto.TbItemDTO;
 import com.eshop.inventory.manage.item.feign.ItemFeign;
 import com.eshop.inventory.manage.item.service.ItemCacheService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zeryts
@@ -33,6 +31,14 @@ public class ItemCacheController extends BaseCacheController<TbItemDTO,Long> {
     public ResultDto<TbItemDTO> add(@RequestBody TbItemDTO dto){
         return new ResultDto<>(itemCacheService.saveLoadCache(dto.getId(),dto));
     }
+
+    @GetMapping("/perwarmCache")
+    public void perwarmCache(){
+        new CachePerwarmThread().start();
+    }
+
+
+
     @Override
     public ICacheService<TbItemDTO, Long> getCacheService() {
         return itemCacheService;

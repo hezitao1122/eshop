@@ -1,4 +1,4 @@
-package com.eshop.inventory.storm.config;
+package com.eshop.inventory.common.enums;
 
 /**
  * @author zeryts
@@ -43,18 +43,26 @@ public class KafkaConstant {
     public final static String ID = "id";
 
     /**
-     * 用于获取task-id任务的分布式锁列表
-     */
-    public static final String TASK_ID_LIST = "task-id-list";
-    /**
      * 用于获取task-id任务的分布式锁
      */
-    public static final String TASK_ID_LOCK = "task-id-lock";
+    public static final String TASK_ID_LIST = "task-id-list";
     /**
      * 存储数据的节点
      */
     public static final String TASK_HOT = "task-hot-item-list-";
 
+    /**
+     * 用于获取task-id任务的分布式锁
+     */
+    public static final String TASK_ID_LOCK = "task-id-lock";
+    /**
+     * 预热状态检查锁
+     */
+    public static final String TASK_ID_STATUS_LOCK = "task-id-status-lock-";
+    /**
+     * 状态存储的path
+      */
+    public static final String TASK_ID_STATUS = "task-id-status-";
 
 
 }

@@ -1,6 +1,8 @@
 package com.eshop.inventory.storm.zk;
 
+import org.apache.logging.log4j.core.util.Assert;
 import org.apache.zookeeper.*;
+import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,6 +68,27 @@ public class ZooKeeperSession {
     public void acquireDistributedLock(String path){
         create(path);
     }
+
+    /**
+     * 功能描述: 分布式加锁的逻辑,没获取到锁直接失败<br>
+     * 〈〉
+     * @param path 需要加锁的节点路径
+     * @return: void
+     * @since: 1.0.0
+     * @Author: zeryts
+     * @Date: 2019/7/1 23:08
+     */
+    public boolean acquireFastFaildDistributedLock(String path){
+        try{
+            String s = zooKeeper.create(path, "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+            log.info("sucess to path acquire lock for [{}]  " , path);
+            return true;
+        }catch (Exception e){
+            log.info("get "+path+" is fail");
+            return false;
+        }
+    }
+
     /**
      * 功能描述: 根据路径释放分布式锁的逻辑<br>
      * 〈〉
@@ -154,6 +177,50 @@ public class ZooKeeperSession {
             }
             log.info("创建临时节点[{}],[{}]次后成功！",path,count);
             break;
+        }
+    }
+    /**
+     * 功能描述: 往zookeeper的中读取数据的方法<br>
+     * 〈〉
+     *
+     * @param path 节点路径
+     * @return: java.lang.String
+     * @since: 1.0.0
+     * @Author: zeryts
+     * @Date: 2019/9/22 16:55
+     */
+    public String getNodeData(String path){
+
+        try {
+            String data = new String(zooKeeper.getData(path,false,new Stat()));
+            return data;
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * 功能描述: 往zookeeper中写数据的方法<br>
+     * 〈〉
+     *
+     * @param path 节点路径
+     * @param data
+     * @return: void
+     * @since: 1.0.0
+     * @Author: zeryts
+     * @Date: 2019/9/22 16:54
+     */
+    public void setNodeData(String path ,String data){
+
+        Assert.isNonEmpty(data);
+        try {
+            zooKeeper.setData(path,data.getBytes(),-1);
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

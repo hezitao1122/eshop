@@ -2,6 +2,8 @@ package com.eshop.inventory.storm.bolt;
 
 import com.eshop.inventory.storm.config.KafkaConstant;
 import com.eshop.inventory.storm.processor.ItemCountThread;
+import com.eshop.inventory.storm.zk.ZooKeeperSession;
+import org.apache.storm.shade.org.apache.commons.lang.StringUtils;
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.OutputFieldsDeclarer;
@@ -27,7 +29,11 @@ public class HotCountBolt extends BaseRichBolt {
     /**
      * 统计存储的MAP集合，初始值为可以存多少
      */
-    private LRUMap<Long,Long> countMap = new LRUMap<Long,Long>(1000);
+    private LRUMap<Long, Long> countMap = new LRUMap<Long, Long>(1000);
+    /**
+     * 实例化zookeeper单例
+     */
+    private ZooKeeperSession session = ZooKeeperSession.getInstance();
 
     /**
      * 功能描述: 对于blot来说此为第一个方法<br>
@@ -42,15 +48,41 @@ public class HotCountBolt extends BaseRichBolt {
      */
     public void prepare(Map conf, TopologyContext context, OutputCollector collector) {
         this.collector = collector;
-        new Thread(new ItemCountThread(countMap)).start();
+        new Thread(new ItemCountThread(countMap,session,context.getThisTaskId())).start();
         //1. 将自己的一个taskid写入一个zookeeper node中，形成taskid的列表
         //2. 然后每次都将自己的热门商品列表,写入自己的taskid对应的zookeeper节点
         //3. 并行的预热程序才能从第一步中知道,那些taskid
         //4. 然后并行预热程序根据每个taskid去获取一个锁,然后去对应的znode列表中拿具体数据
+        initTaskId(context.getThisTaskId());
+    }
 
+    /**
+     * 功能描述: 所有的HoltCountBolt启动的时候都会将自己的task写入到同一个node的值中，格式是 1,2<br>
+     * 〈〉
+     *
+     * @param taskId 任务的id
+     * @since: 1.0.0
+     * @Author: zeryts
+     * @Date: 2019/9/22 17:03
+     */
+    private void initTaskId(int taskId) {
+
+
+        //加锁
+        session.acquireDistributedLock(KafkaConstant.TASK_ID_LIST);
+        String nodeData = session.getNodeData("/" + KafkaConstant.TASK_ID_LIST);
+        if(StringUtils.isNotEmpty(nodeData)){
+            nodeData += ","+taskId;
+        }else{
+            nodeData = taskId+"";
+        }
+        session.setNodeData("/" + KafkaConstant.TASK_ID_LIST,nodeData);
+        //释放锁
+        session.releaseDistributedLock(KafkaConstant.TASK_ID_LIST);
 
     }
-    /**
+
+    /*
      * 功能描述: 每次接收到一条数据后就会交付给此方法来执行<br>
      * 〈〉
      *
@@ -63,14 +95,15 @@ public class HotCountBolt extends BaseRichBolt {
         //获取id
         Long id = tuple.getLongByField(KafkaConstant.ID);
         Long count = countMap.get(id);
-        if(count == null)
+        if (count == null)
             count = 0L;
-        count ++ ;
+        count++;
         //计算
-        countMap.put(id,count);
+        countMap.put(id, count);
 
 
     }
+
     /**
      * 功能描述: 定义发送field的名称<br>
      * 〈〉

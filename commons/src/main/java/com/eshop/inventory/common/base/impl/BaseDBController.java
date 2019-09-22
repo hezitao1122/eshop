@@ -6,6 +6,8 @@ import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.common.entity.BaseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author zeryts
  * @description: 公共controller的接口
@@ -34,6 +36,9 @@ public abstract class BaseDBController<T extends BaseEntity, ID> implements IBas
     }
     @PostMapping("/findByCondition")
     public ResultDto<T> findByCondition(@RequestBody T t){return new ResultDto<T>(getDBService().getByCondition(t));}
+    @PostMapping("/findByIds")
+    public ResultDto<T> findByIds(@RequestBody List<ID> ids){return new ResultDto<T>(getDBService().getByIds(ids));}
+
 
     /**
      * 获取执行业务逻辑的service接口

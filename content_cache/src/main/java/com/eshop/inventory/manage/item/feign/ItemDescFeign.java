@@ -1,11 +1,16 @@
 package com.eshop.inventory.manage.item.feign;
 
 import com.eshop.inventory.common.base.BaseFeign;
+import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.manage.item.dto.TbItemDescDTO;
 import com.eshop.inventory.manage.item.feign.rollback.ItemDescFeignRollback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @author zeryts
@@ -18,4 +23,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @FeignClient(name = "eshop-content",path = "/api/v1/item/desc",fallback = ItemDescFeignRollback.class)
 @Component
 public interface ItemDescFeign extends BaseFeign<TbItemDescDTO,Long> {
+
+    /**
+     * 功能描述: 根据itemId查找数据<br>
+     * 〈〉
+     * @param itemIds
+     * @return: com.eshop.inventory.common.dto.ResultDto<T>
+     * @since: 1.0.0
+     * @Author: zeryts
+     * @Date: 2019/6/15 17:33
+     */
+    @RequestMapping(value = "/findByItemIds",method = RequestMethod.GET)
+    ResultDto<TbItemDescDTO> findByItemIds(@RequestParam List<Long> itemIds);
 }

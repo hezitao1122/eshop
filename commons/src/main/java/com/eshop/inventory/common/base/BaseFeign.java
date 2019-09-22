@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * @author zeryts
  * @description: feign操作的公共类
@@ -74,5 +76,16 @@ public interface BaseFeign<T extends BaseDTO, ID>{
      */
     @RequestMapping(value = "/findByCondition",method =  RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     ResultDto<T> findByCondition( @RequestBody T t);
+    /**
+     * 功能描述: 根据主键批量进行查找<br>
+     * 〈〉
+     *
+     * @param ids
+     * @return: com.eshop.inventory.common.dto.ResultDto<T>
+     * @since: 1.0.0
+     * @Author: zeryts
+     * @Date: 2019/6/29 12:52
+     */
+    ResultDto<T> findByIds(@RequestBody List<ID> ids);
 
 }

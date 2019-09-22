@@ -29,6 +29,7 @@ public class InitKafkaListener implements ServletContextListener {
          * 消费的线程池
          */
         new Thread(new RebuildCacheThread()).start();
+
     }
 
     @Override
