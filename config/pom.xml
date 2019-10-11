@@ -37,27 +37,26 @@
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 
-		<!-- 添加oracle jdbc driver -->
+		<!--  jdbc driver -->
 		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0.3</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<!-- 数据库相关操作的依赖 -->
 
 		<dependency>
-			<groupId>cn.agree.amap</groupId>
+			<groupId>com.eshop</groupId>
 			<artifactId>scca-plugin-db</artifactId>
 			<version>${version.scca}</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.agree.amap</groupId>
+			<groupId>com.eshop</groupId>
 			<artifactId>scca-discovery-eureka</artifactId>
 			<version>${version.scca}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>cn.agree.amap</groupId>
+			<groupId>com.eshop</groupId>
 			<artifactId>scca-core</artifactId>
 			<version>${version.scca}</version>
 		</dependency>
