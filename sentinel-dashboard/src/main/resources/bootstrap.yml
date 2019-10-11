@@ -1,0 +1,56 @@
+server:
+  port: 8015
+logging:
+  pattern:
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
+  level:
+    org:
+      springframework:
+        web: INFO
+spring:
+  application:
+    name: amap-dashboard
+  http:
+    encoding:
+      enabled: 'true'
+      charset: UTF-8
+      force: 'true'
+  datasource:
+    url: jdbc:mysql://192.168.31.223:3306/eshop?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: hezitao
+    password: hezitao
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialSize: 5
+    maxActive: 200
+    minIdle: 5
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties:
+      hibernate: dialect:org.hibernate.dialect.MySQL5Dialect
+      hibernate.format_sql: true
+    #解决在Spring MVC与JPA之间Session的声明周期问题
+    open-in-view: true
+auth:
+  filter:
+    exclude-urls: '/,/auth/login,/auth/logout,/registry/machine'
+    exclude-url-suffixes: 'htm,html,js,css,map,ico,ttf,woff,png'
+  password: amap
+  username: amap
+sentinel:
+  dashboard:
+    data:
+      timeOut: 90

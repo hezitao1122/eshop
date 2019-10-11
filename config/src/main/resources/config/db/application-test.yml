@@ -1,0 +1,182 @@
+# 加解密根密码
+jasypt:
+  encryptor:
+    password: amap #根密码
+# redis 相关
+spring:
+  redis:
+    host: 10.0.116.110
+    port: 58100
+    password: amap-redis
+    sentinel:
+      nodes: 10.0.116.110:58103,10.0.116.112:58104
+      master: mymaster
+    database: 0
+    timeout: 0
+    pool:
+      # 连接池中的最大空闲连接
+      max-idle: 100
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池最大连接数,默认8个，（使用负值表示没有限制）
+      max-active: 1000
+      # 连接池中的最小空闲连接
+      min-idle: 50
+    jackson:
+      time-zone: GMT+8
+      date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      max-request-size: 1000Mb
+      max-file-size: 1000Mb
+# 暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+# feign 配置
+feign:
+  hystrix:
+    enabled: true
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+  client:
+    config:
+      feignName:
+        connectTimeout: 10000
+        readTimeout: 10000
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+# hystrix If you need to use ThreadLocal bound variables in your RequestInterceptor`s
+# you will need to either set the thread isolation strategy for Hystrix to `SEMAPHORE or disable Hystrix in Feign.
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 60000
+  shareSecurityContext: true
+
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  eureka:
+    enabled: true
+
+#mybaits-plus配置，修改主键类型，mapper.xml、type 别名等
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 1
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 1
+    #oracle主键生成器
+    key-generator: com.baomidou.mybatisplus.incrementer.OracleKeyGenerator
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: false
+    # 逻辑删除字段
+    logic-delete-value: 1
+    logic-not-delete-value: 0
+    #自定义SQL注入器
+    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true #配置的缓存的全局开关
+    lazyLoadingEnabled: true #延时加载的开关
+    multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全
+
+#swagger公共信息
+swagger:
+  host: http://10.0.116.72:30759
+  title: Amap Swagger API
+  description: AMAP移动运营平台
+  version: 1.6.5
+  license: Powered By Amap
+  licenseUrl: https://www.agree.com.cn/
+  terms-of-service-url: https://www.agree.com.cn/
+  contact:
+    name: amap平台开发项目组
+    email: agree@agree.com.cn
+    url: https://amap.com/about.html
+  authorization:
+    name: Amap OAuth
+    auth-regex: ^.*$
+    authorization-scope-list:
+      - scope: server
+        description: server all
+    token-url-list:
+      - ${security.auth.server}/token
+
+## spring security 配置
+security:
+  auth:
+    server: http://10.0.116.72:30759/auth/oauth
+  oauth2:
+    resource:
+      token-info-uri: ${security.auth.server}/check_token
+
+#AMAP参数配置
+amap:
+  file:
+    #文件保存目录
+    path: /amap/uploadFile/jxnxbm/
+  redis:
+    user:
+      key: all_user_no
+    dept:
+      key: all_dept_no
+    config:
+      key: all_config_no
+    dict:
+      key: all_dict_no
+  user:
+#是否允许用户被锁定
+    islock: true
+#密码输入最多错误次数
+    passwordFailNum: 5
+  inter: 
+    basic: 
+      #iOS版本下载地址
+      ios-location: https://devmob.jxnxs.com:30759/jxnxbm/
+      #安卓版本下载地址
+      android-location: https://devmob.jxnxs.com:30759/jxnxbm/
+      #秘钥交换时的RSA私钥文件存放目录
+      exchange-key-rsa-pri: ${HOME}/configs/rsa.pem
+      exchange-key-rsa-pub: ${HOME}/configs/rsa_public_key.pem
+    afa: 
+      #afa访问地址
+      #url: http://10.0.116.110:30759/afa/
+      #url: http://10.0.116.110:8080/forwordproject/AFA
+      url: http://10.0.116.111:58200/
+    #版本更新差量文件下载地址
+    download: https://devmob.jxnxs.com:30759/jxnxbm/
+  manager: 
+    download: https://devmob.jxnxs.com:30759/jxnxbm/index.html?bbbh=
+    ios-location: https://devmob.jxnxs.com:30759/jxnxbm/
+  push:
+    path: http://10.0.120.16:7015/file/upload
+    hwTokenPath: http://10.0.120.16:7015/api/v1/push/refreshTokenHW
+    hwPushPath: http://10.0.120.16:7015/api/v1/hw/push
+    iosPushPath: http://10.0.120.16:7015/api/v1/ios/push
+    mzPushPath: http://10.0.120.16:7015/api/v1/mz/push
+    ddPushPath: http://10.0.120.16:7015/api/v1/ddpush/push
+    xmPushPath: http://10.0.120.16:7015/api/v1/xm/push
+
+#minio配置
+minio:
+  url: http://192.9.200.95:9001
+  access-key: admin
+  secret-key: 12345678
