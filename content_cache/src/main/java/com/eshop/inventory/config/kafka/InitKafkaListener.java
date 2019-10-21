@@ -1,6 +1,5 @@
 package com.eshop.inventory.config.kafka;
 
-import com.eshop.inventory.common.rebuild.RebuildCacheThread;
 import com.eshop.inventory.config.zk.ZooKeeperSession;
 
 import javax.servlet.ServletContextEvent;
@@ -28,7 +27,7 @@ public class InitKafkaListener implements ServletContextListener {
         /**
          * 消费的线程池
          */
-        new Thread(new RebuildCacheThread()).start();
+        //new Thread(new RebuildCacheThread()).start();
 
     }
 

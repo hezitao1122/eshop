@@ -5,10 +5,11 @@ import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.manage.item.dto.TbItemDescDTO;
 import com.eshop.inventory.manage.item.feign.rollback.ItemDescFeignRollback;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -33,6 +34,6 @@ public interface ItemDescFeign extends BaseFeign<TbItemDescDTO,Long> {
      * @Author: zeryts
      * @Date: 2019/6/15 17:33
      */
-    @RequestMapping(value = "/findByItemIds",method = RequestMethod.GET)
-    ResultDto<TbItemDescDTO> findByItemIds(@RequestParam List<Long> itemIds);
+    @RequestMapping(value = "/findByItemIds",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    ResultDto<TbItemDescDTO> findByItemIds(@RequestBody List<Long> itemIds);
 }

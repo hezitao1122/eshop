@@ -1126,10 +1126,10 @@
         "env" : {
           "$ref" : "#/definitions/Env"
         },
-        "pkey" : {
+        "pvalue" : {
           "type" : "string"
         },
-        "pvalue" : {
+        "pkey" : {
           "type" : "string"
         }
       }
@@ -1140,10 +1140,10 @@
         "id" : {
           "type" : "string"
         },
-        "pkey" : {
+        "pvalue" : {
           "type" : "string"
         },
-        "pvalue" : {
+        "pkey" : {
           "type" : "string"
         },
         "pKey" : {
@@ -1182,13 +1182,13 @@
     "Page" : {
       "type" : "object",
       "properties" : {
-        "totalPages" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
         "totalElements" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "totalPages" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "number" : {
           "type" : "integer",
@@ -1207,17 +1207,20 @@
         "sort" : {
           "$ref" : "#/definitions/Sort"
         },
-        "last" : {
+        "first" : {
           "type" : "boolean"
         },
         "pageable" : {
           "$ref" : "#/definitions/Pageable"
         },
+        "last" : {
+          "type" : "boolean"
+        },
         "numberOfElements" : {
           "type" : "integer",
           "format" : "int32"
         },
-        "first" : {
+        "empty" : {
           "type" : "boolean"
         }
       }
@@ -1225,13 +1228,13 @@
     "PageUserLog" : {
       "type" : "object",
       "properties" : {
-        "totalPages" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
         "totalElements" : {
           "type" : "integer",
           "format" : "int64"
+        },
+        "totalPages" : {
+          "type" : "integer",
+          "format" : "int32"
         },
         "number" : {
           "type" : "integer",
@@ -1250,17 +1253,20 @@
         "sort" : {
           "$ref" : "#/definitions/Sort"
         },
-        "last" : {
+        "first" : {
           "type" : "boolean"
         },
         "pageable" : {
           "$ref" : "#/definitions/Pageable"
         },
+        "last" : {
+          "type" : "boolean"
+        },
         "numberOfElements" : {
           "type" : "integer",
           "format" : "int32"
         },
-        "first" : {
+        "empty" : {
           "type" : "boolean"
         }
       }
@@ -1275,19 +1281,19 @@
         "sort" : {
           "$ref" : "#/definitions/Sort"
         },
-        "pageNumber" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
         "unpaged" : {
           "type" : "boolean"
         },
-        "pageSize" : {
+        "pageNumber" : {
           "type" : "integer",
           "format" : "int32"
         },
         "paged" : {
           "type" : "boolean"
+        },
+        "pageSize" : {
+          "type" : "integer",
+          "format" : "int32"
         }
       }
     },
@@ -1410,10 +1416,13 @@
     "Sort" : {
       "type" : "object",
       "properties" : {
+        "unsorted" : {
+          "type" : "boolean"
+        },
         "sorted" : {
           "type" : "boolean"
         },
-        "unsorted" : {
+        "empty" : {
           "type" : "boolean"
         }
       }

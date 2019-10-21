@@ -69,10 +69,9 @@ public class HotCountBolt extends BaseRichBolt {
      * @Date: 2019/9/22 17:03
      */
     private void initTaskId(int taskId) {
-
-
         //加锁
         session.acquireDistributedLock(KafkaConstant.TASK_ID_LIST);
+        log.info("[Item获取到taskid list] taskid list = {}",taskId);
         String nodeData = session.getNodeData("/" + KafkaConstant.TASK_ID_LIST);
         if(StringUtils.isNotEmpty(nodeData)){
             nodeData += ","+taskId;
@@ -80,6 +79,7 @@ public class HotCountBolt extends BaseRichBolt {
             nodeData = taskId+"";
         }
         session.setNodeData("/" + KafkaConstant.TASK_ID_LIST,nodeData);
+        log.info("[ItemCountBlot设置taskId List] taskIdList = {}" , nodeData);
         //释放锁
         session.releaseDistributedLock(KafkaConstant.TASK_ID_LIST);
 
@@ -97,13 +97,14 @@ public class HotCountBolt extends BaseRichBolt {
     public void execute(Tuple tuple) {
         //获取id
         Long id = tuple.getLongByField(KafkaConstant.ID);
+        log.info("[接收到一个itemId] id ->[{}]",id);
         Long count = countMap.get(id);
         if (count == null)
             count = 0L;
         count++;
         //计算
         countMap.put(id, count);
-
+        log.info("[ItemId 完成商品访问次数统计]， id->[{}] , count->[{}]",id,count);
 
     }
 

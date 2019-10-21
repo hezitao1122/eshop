@@ -12,7 +12,7 @@ public class KafkaConstant {
     /**
      * 指定ZK集群连接地址
      */
-    public static final String ZOOKEEPER_CONNECT = "192.168.31.226:2181,192.168.31.225:2181,192.168.31.224:2181";
+    public static final String ZOOKEEPER_CONNECT = "192.168.31.224:2181,192.168.31.226:2181,192.168.31.225:2181";
     /**
      * 指定groupid消费者id
      */

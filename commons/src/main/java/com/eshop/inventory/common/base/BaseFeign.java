@@ -41,7 +41,7 @@ public interface BaseFeign<T extends BaseDTO, ID>{
      * @Date: 2019/6/15 17:33
      */
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
-    ResultDto<T> delete(@RequestParam ID id);
+    ResultDto<T> delete(@RequestParam(name = "id") ID id);
     /**
      * 功能描述: 根据id查找一条数据<br>
      * 〈〉
@@ -52,7 +52,7 @@ public interface BaseFeign<T extends BaseDTO, ID>{
      * @Date: 2019/6/15 17:33
      */
     @RequestMapping(value = "/find",method = RequestMethod.GET)
-    ResultDto<T> find( @RequestParam ID id);
+    ResultDto<T> find( @RequestParam(name = "id") ID id);
     /**
      * 功能描述: 修改一条数据<br>
      * 〈〉
@@ -86,6 +86,7 @@ public interface BaseFeign<T extends BaseDTO, ID>{
      * @Author: zeryts
      * @Date: 2019/6/29 12:52
      */
+    @RequestMapping(value = "/findByIds",method =  RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     ResultDto<T> findByIds(@RequestBody List<ID> ids);
 
 }

@@ -51,7 +51,9 @@ public class ItemCountThread implements Runnable{
 
 
         while(true){
+
             Map<Long,Long> resourceMap = new LinkedHashMap<>(countMap);
+            log.info("[ItemCountThread打印topNItemList的长度] size ->[{}]",resourceMap.size());
             if(resourceMap == null || resourceMap.isEmpty()){
                 Utils.sleep(100);
                 continue;
@@ -66,6 +68,7 @@ public class ItemCountThread implements Runnable{
                 topNList.add(map);
             });
             String str = JSONArray.toJSONString(topNList);
+            log.info("[ItemCountThread计算出一份topN热门商品数据]， TopN信息为-》["+str+"]");
             session.setNodeData("/" + KafkaConstant.TASK_HOT + taskId,str);
             log.info("task hot node taskId -> [{}] , value -> [{}]",taskId,str);
             //间隔性的

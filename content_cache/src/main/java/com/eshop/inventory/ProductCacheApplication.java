@@ -42,5 +42,4 @@ public class ProductCacheApplication {
         servletListenerRegistrationBean.setListener(new InitKafkaListener());
         return servletListenerRegistrationBean;
     }
-
 }

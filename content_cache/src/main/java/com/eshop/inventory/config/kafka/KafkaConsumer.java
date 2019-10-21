@@ -53,7 +53,6 @@ public class KafkaConsumer implements Runnable{
         List<KafkaStream<byte[], byte[]>> streams = consumerMap.get(topic);
 
         for (KafkaStream stream : streams) {
-
             new Thread(new KafkaMessageProcessor(stream)).start();
         }
     }

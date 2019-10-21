@@ -71,7 +71,7 @@ public class HotItemTopology {
         Config config = new Config();
 
 
-        if(args != null && args.length > 1){
+        if(args != null && args.length > 0){
             //说明在命令行执行，打算提交到storm集群上去
             /**
              * 此处提交到集群的storm要启动几个work

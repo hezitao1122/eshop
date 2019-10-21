@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -17,7 +18,7 @@ import java.util.concurrent.CountDownLatch;
  * @projectName inventory
  * @date 2019/6/30 17:26
  */
-public class ZooKeeperSession {
+public class ZooKeeperSession implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(ZooKeeperSession.class);
 
