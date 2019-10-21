@@ -10,6 +10,8 @@ import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.topology.base.BaseRichBolt;
 import org.apache.storm.trident.util.LRUMap;
 import org.apache.storm.tuple.Tuple;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -22,6 +24,7 @@ import java.util.Map;
  * @date 2019/9/21 15:05
  */
 public class HotCountBolt extends BaseRichBolt {
+    private static final Logger log = LoggerFactory.getLogger(HotCountBolt.class);
     /**
      * 发射器
      */

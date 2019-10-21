@@ -10,6 +10,8 @@ import org.apache.storm.topology.base.BaseRichBolt;
 import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -22,6 +24,9 @@ import java.util.Map;
  * @date 2019/9/21 14:54
  */
 public class LogAnalysisBolt extends BaseRichBolt {
+
+    private static final Logger log = LoggerFactory.getLogger(LogAnalysisBolt.class);
+
     /**
      * 发射器
      */
@@ -53,6 +58,9 @@ public class LogAnalysisBolt extends BaseRichBolt {
     public void execute(Tuple tuple) {
         //拿到一条message
         String message = tuple.getStringByField(KafkaConstant.MESSAGE);
+
+        log.info("[LogAnalysisBolt接收到一条日志]");
+
         JSONObject obje = JSON.parseObject(message);
         //获取到这条数据的id
         Long id = obje.getLong(KafkaConstant.ID);
