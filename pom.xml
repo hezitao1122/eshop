@@ -23,15 +23,6 @@
         <module>gateway</module>
         <module>sentinel-dashboard</module>
 
-
-        <module>config-ui-src/scca-core</module>
-        <module>config-ui-src/scca-discovery-consul</module>
-        <module>config-ui-src/scca-discovery-eureka</module>
-        <module>config-ui-src/scca-persistence-db</module>
-        <module>config-ui-src/scca-plugin-core</module>
-        <module>config-ui-src/scca-plugin-db</module>
-        <module>config-ui-src/scca-rest</module>
-        <module>config-ui-src/scca-ui</module>
     </modules>
 
     <properties>
