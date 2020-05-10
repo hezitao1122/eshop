@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.nio.charset.Charset;
 
 /**
- * @author: hzt
+ * @author: zeryts
  * @date: 2018-09-04 22:29
  * @version: 1.0
  * @description: json操作的配置类

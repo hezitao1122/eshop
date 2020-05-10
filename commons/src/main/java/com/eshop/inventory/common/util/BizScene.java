@@ -83,7 +83,7 @@ public abstract class BizScene {
      * @Description: 根据集合遍历成树, 树可以有多个根
      * ----------------------------
      * @Method: listToTree
-     * @Author: hzt
+     * @Author: zeryts
      * @Return: java.util.List<T>
      * @Date: Create in 2019/5/7 20:30
      */
@@ -172,7 +172,7 @@ public abstract class BizScene {
      * @Description: 根据集合遍历成树, 树可以有多个根
      * ----------------------------
      * @Method: listToTree
-     * @Author: hzt
+     * @Author: zeryts
      * @Return: java.util.List<T>
      * @Date: Create in 2019/5/7 20:30
      */
@@ -186,7 +186,7 @@ public abstract class BizScene {
      * @Description: 根据某个字段对list进行排序的方法
      * ----------------------------
      * @Method: listSortByField
-     * @Author: hzt
+     * @Author: zeryts
      * @Return: void
      * @Date: Create in 2019/6/3 15:34
      */

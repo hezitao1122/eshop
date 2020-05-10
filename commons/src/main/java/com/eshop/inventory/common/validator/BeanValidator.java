@@ -10,7 +10,7 @@ import javax.validation.ValidatorFactory;
 import java.util.*;
 
 /**
- * @author: hzt
+ * @author: zeryts
  * @date: 2018-11-04 15:22
  * @version: 1.0
  * @description: 用于校验bean的工具类
@@ -23,7 +23,7 @@ public class BeanValidator {
      * @param t      校验的类
      * @param groups 校验的集合
      * @description: 校验类的发膜护发
-     * @author: hzt
+     * @author: zeryts
      * @return: java.util.Map<java.lang.String, java.lang.String>
      * @date: 2018/11/4 15:42
      */
@@ -51,7 +51,7 @@ public class BeanValidator {
     /**
      * @param collection 校验的集合
      * @description: 校验集合的方法
-     * @author: hzt
+     * @author: zeryts
      * @return: java.util.Map<java.lang.String, java.lang.String>
      * @date: 2018/11/4 15:43
      */
@@ -73,7 +73,7 @@ public class BeanValidator {
      * @param first   传入此值则校验类
      * @param objects 传入此值则校验集合
      * @description: 校验object的方法 进行封装
-     * @author: hzt
+     * @author: zeryts
      * @return: java.util.Map<java.lang.String, java.lang.String>
      * @date: 2018/11/4 15:45
      * @throws:
@@ -89,7 +89,7 @@ public class BeanValidator {
     /**
      * @param param 校验的数据
      * @description: 校验的方法, 如果有错误抛出异常
-     * @author: hzt
+     * @author: zeryts
      * @date: 2018/11/4 15:58
      */
     public static void check(Object param) {

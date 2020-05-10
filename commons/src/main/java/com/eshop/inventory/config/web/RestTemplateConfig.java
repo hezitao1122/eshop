@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @author: hzt
+ * @author: zeryts
  * @date: 2018-09-04 22:33
  * @version: 1.0
  * @description: 用于restTemplate配置的类

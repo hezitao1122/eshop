@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
  * @Title: ProductCacheApplication
  * @ProjectName: inventory
  * @Description: 用于缓存框架的启动类
- * @Author: hzt
+ * @Author: zeryts
  * @Date: Create in 2019/6/1317:11
  */
 @SpringBootApplication

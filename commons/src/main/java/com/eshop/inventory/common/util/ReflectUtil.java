@@ -16,7 +16,7 @@ import java.util.Set;
  * @Title: ReflectUtil
  * @ProjectName: inventory
  * @Description: 反射操作的工具类
- * @Author: hzt
+ * @Author: zeryts
  * @Date: Create in 2019/6/1815:01
  */
 public class ReflectUtil {
@@ -27,7 +27,7 @@ public class ReflectUtil {
      * @param: clazz类的类型
      * @param:
      * @Method: getClassField
-     * @Author: hzt
+     * @Author: zeryts
      * @Return: Map<String, Field>
      * @Date: Create in 2019/6/18 15:12
      */
@@ -54,7 +54,7 @@ public class ReflectUtil {
      * @Description: 根据方法名获取具体的方法对象
      * ----------------------------
      * @Method: getMethod
-     * @Author: hzt
+     * @Author: zeryts
      * @Return: java.lang.reflect.Method
      * @Date: Create in 2019/6/18 15:53
      */
@@ -76,7 +76,7 @@ public class ReflectUtil {
      * @Description: 根据字段名获取对象的字段信息
      * ----------------------------
      * @Method: getFiledByFiledName
-     * @Author: hzt
+     * @Author: zeryts
      * @Return: java.lang.reflect.Field
      * @Date: Create in 2019/6/18 16:02
      */
@@ -97,7 +97,7 @@ public class ReflectUtil {
      * @Description: 根据字段名获取对象的字段属性
      * ----------------------------
      * @Method: getValueByFieldName
-     * @Author: hzt
+     * @Author: zeryts
      * @Return: java.lang.Object
      * @Date: Create in 2019/6/18 16:21
      */
@@ -122,7 +122,7 @@ public class ReflectUtil {
      * @Description: 根据注解获取对象的该字段, 只会获取到其中的一个字段
      * ----------------------------
      * @Method: getFieldByAnnotation
-     * @Author: hzt
+     * @Author: zeryts
      * @Return: java.lang.reflect.Field
      * @Date: Create in 2019/6/18 16:23
      */
@@ -146,7 +146,7 @@ public class ReflectUtil {
      * @Description: 根据注解获取对象的该字段集合
      * ----------------------------
      * @Method: getFieldsByAnnotation
-     * @Author: hzt
+     * @Author: zeryts
      * @Return: java.util.List<java.lang.reflect.Field>
      * @Date: Create in 2019/6/18 16:28
      */
@@ -171,7 +171,7 @@ public class ReflectUtil {
      * @Description: 给对象的指定字段赋值指定的值
      * ----------------------------
      * @Method: setValueByFieldName
-     * @Author: hzt
+     * @Author: zeryts
      * @Date: Create in 2019/6/18 16:34
      */
     public static void setValueByFieldName(Object object, String fieldName, Object value) throws NoSuchFieldException, IllegalAccessException {
@@ -192,7 +192,7 @@ public class ReflectUtil {
      * @Description: 获取类的所有字段的集合
      * ----------------------------
      * @Method: getFieldName
-     * @Author: hzt
+     * @Author: zeryts
      * @Return: java.util.Set<java.lang.String>
      * @Date: Create in 2019/6/18 16:47
      */
@@ -216,7 +216,7 @@ public class ReflectUtil {
      * @Description: 根据方法名和参数列表去执行制定的方法，并获取返回值
      * ----------------------------
      * @Method: invokeMethod
-     * @Author: hzt
+     * @Author: zeryts
      * @Return: java.lang.Object
      * @Date: Create in 2019/6/18 17:02
      */

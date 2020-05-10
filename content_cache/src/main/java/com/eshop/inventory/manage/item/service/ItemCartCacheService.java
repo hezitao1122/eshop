@@ -8,7 +8,7 @@ import com.eshop.inventory.manage.item.dto.TbItemCartDTO;
  * @Title: ItemCartCacheService
  * @ProjectName: inventory
  * @Description: 商品类目缓存用的service层接口
- * @Author: hzt
+ * @Author: zeryts
  * @Date: Create in 2019/6/1814:42
  */
 public interface ItemCartCacheService extends ICacheService<TbItemCartDTO, Long> {

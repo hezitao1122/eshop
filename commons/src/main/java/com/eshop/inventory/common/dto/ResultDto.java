@@ -6,7 +6,7 @@ import com.eshop.inventory.config.exception.MyException;
 import java.util.List;
 
 /**
- * @author: hzt
+ * @author: zeryts
  * @date: 2018-09-03 21:57
  * @version: 1.0
  * @description: 返回实体
@@ -90,7 +90,7 @@ public class ResultDto<T> {
     /**
      * @Description: 发生异常的构造方法
      * @Params: MyException
-     * @Author: hzt
+     * @Author: zeryts
      * @Date: 2018/9/6 11:45
      */
     public ResultDto(MyException e) {

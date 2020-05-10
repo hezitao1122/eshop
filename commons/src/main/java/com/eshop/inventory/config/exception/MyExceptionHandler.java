@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @description: 用于统一异常处理的类
- * @author: hzt
+ * @author: zeryts
  * @date: 2018-09-05 19:53
  */
 @ControllerAdvice
@@ -22,7 +22,7 @@ public class MyExceptionHandler {
     /**
      * @Description: 如果是MyException的异常
      * @Params: MyException.class
-     * @Author: hzt
+     * @Author: zeryts
      * @Date: 2018/9/6 11:46
      * @Return: ResultDto 转化json的异常结果集
      */
@@ -35,7 +35,7 @@ public class MyExceptionHandler {
     /**
      * @param e 异常对象
      * @Description: 其他异常的异常处理机制
-     * @Author: hzt
+     * @Author: zeryts
      * @Date: 2018/9/6 16:52
      * @Return: com.slp.cms.common.vo.ResultDto
      */

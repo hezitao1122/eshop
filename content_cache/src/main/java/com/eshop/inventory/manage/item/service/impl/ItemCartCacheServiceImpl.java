@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @Title: ItemCartServiceImpl
  * @ProjectName: inventory
  * @Description: 商品类目缓存操作的service实现类
- * @Author: hzt
+ * @Author: zeryts
  * @Date: Create in 2019/6/1814:44
  */
 @Service

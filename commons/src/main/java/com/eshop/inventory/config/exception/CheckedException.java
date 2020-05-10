@@ -3,8 +3,9 @@ package com.eshop.inventory.config.exception;
 import lombok.NoArgsConstructor;
 
 /**
- * @author yangjian
- * @date 😴2018年06月22日16:21:57
+ * @description: 验证的异常
+ * @author: zeryts
+ * @date: 2018-09-06 11:38
  */
 @NoArgsConstructor
 public class CheckedException extends RuntimeException {

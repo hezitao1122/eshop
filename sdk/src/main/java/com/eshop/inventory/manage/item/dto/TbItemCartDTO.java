@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * @Title: TbItemCartDTO
  * @ProjectName: inventory
  * @Description: 商品类目的操作DTO类
- * @Author: hzt
+ * @Author: zeryts
  * @Date: Create in 2019/6/1814:43
  */
 @Data

@@ -17,7 +17,7 @@ import java.util.Arrays;
 /**
  * @description: 用于打印请求和返回日志的AOP配置类
  * @ClassName: ControllerConfig
- * @author: hzt
+ * @author: zeryts
  * @date: 2018-11-30 13:05
  */
 @Aspect

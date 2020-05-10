@@ -1,7 +1,7 @@
 package com.eshop.inventory.common.dto;
 
 /**
- * @author: hzt
+ * @author: zeryts
  * @date: 2018-09-03 21:58
  * @version: 1.0
  * @description:

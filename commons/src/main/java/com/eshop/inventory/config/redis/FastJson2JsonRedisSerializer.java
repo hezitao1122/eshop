@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 /**
  * @description: 自定义fastjson的序列化类
  * @ClassName: FastJson2JsonRedisSerializer
- * @author: hzt
+ * @author: zeryts
  * @date: 2018-12-05 10:08
  */
 public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T> {

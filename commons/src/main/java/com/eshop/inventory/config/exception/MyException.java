@@ -4,7 +4,7 @@ import com.eshop.inventory.common.dto.ResultEnum;
 
 /**
  * @description: 用于json处理的异常
- * @author: hzt
+ * @author: zeryts
  * @date: 2018-09-06 11:38
  */
 public class MyException extends RuntimeException {

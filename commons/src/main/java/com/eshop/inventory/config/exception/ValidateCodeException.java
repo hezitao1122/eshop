@@ -1,7 +1,7 @@
 package com.eshop.inventory.config.exception;
 
 /**
- * @author yangjian
+ * @author zeryts
  * @date 2018年06月22日16:22:15
  */
 public class ValidateCodeException extends Exception {

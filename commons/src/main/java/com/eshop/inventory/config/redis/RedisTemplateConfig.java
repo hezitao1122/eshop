@@ -10,7 +10,7 @@ package com.eshop.inventory.config.redis;//package com.eshop.inventory.config.re
 ///**
 // * @description: 连接redis的工具类配置
 // * @ClassName: RedisTemplateConfig
-// * @author: hzt
+// * @author: zeryts
 // * @date: 2018-12-05 10:09
 // */
 //@Configuration
