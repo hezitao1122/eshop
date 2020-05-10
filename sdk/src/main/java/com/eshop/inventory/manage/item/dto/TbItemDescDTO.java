@@ -22,5 +22,4 @@ public class TbItemDescDTO extends BaseDTO<TbItemDesc> {
     private Timestamp updated;
 
 
-
 }

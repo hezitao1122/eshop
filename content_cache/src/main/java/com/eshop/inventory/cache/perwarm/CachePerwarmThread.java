@@ -30,7 +30,7 @@ public class CachePerwarmThread extends Thread {
         ZooKeeperSession session = ZooKeeperSession.getInstance();
         //获取task-id列表|
         String dataStr = session.getNodeData("/" + KafkaConstant.TASK_ID_LIST);
-        log.info("[CachePerwarmThread获取到TaskId列表]taskIdList ->{}",dataStr);
+        log.info("[CachePerwarmThread获取到TaskId列表]taskIdList ->{}", dataStr);
         if (StringUtils.isNotEmpty(dataStr)) {
             String[] arr = dataStr.split("[,]");
             for (int i = 0; i < arr.length; i++) {
@@ -43,9 +43,9 @@ public class CachePerwarmThread extends Thread {
                     continue;
                 //拿到了
                 //检查预热状态
-                session.acquireDistributedLock("/" + KafkaConstant.TASK_ID_STATUS_LOCK+taskId);
-                String status = session.getNodeData("/" + KafkaConstant.TASK_ID_STATUS+taskId);
-                log.info("[CachePerwarmThread获取task的预热状态]，taskId->{} , status -> {}" , taskId,status);
+                session.acquireDistributedLock("/" + KafkaConstant.TASK_ID_STATUS_LOCK + taskId);
+                String status = session.getNodeData("/" + KafkaConstant.TASK_ID_STATUS + taskId);
+                log.info("[CachePerwarmThread获取task的预热状态]，taskId->{} , status -> {}", taskId, status);
                 if (StringUtils.isEmpty(status)) {
                     //代表未进行过预热
                     String nodeData = session.getNodeData("/" + KafkaConstant.TASK_HOT + taskId);
@@ -54,7 +54,7 @@ public class CachePerwarmThread extends Thread {
 
                     ItemCacheService itemCacheService = ProductCacheApplication.app.getBean(ItemCacheService.class);
 
-                    log.info("[CachePerwarmThread获取到task热门商品列表], itemIdlist ->{}" , itemIds);
+                    log.info("[CachePerwarmThread获取到task热门商品列表], itemIdlist ->{}", itemIds);
 
                     ItemFeign itemFeign = ProductCacheApplication.app.getBean(ItemFeign.class);
                     //TODO 暂时先注释掉，缺少批量查询的逻辑
@@ -68,16 +68,16 @@ public class CachePerwarmThread extends Thread {
                     //查询出数据信息
                     ResultDto<TbItemDTO> items = itemFeign.findByIds(itemIds);
                     //存放至redis中
-                    items.getDataLis().forEach(it->{
-                        log.info("[CachePerwarmThread将Item信息设置到缓存中] id ->{} , item->{}",it.getId(),JSON.toJSONString(it));
-                        itemCacheService.saveLoadCache(it.getId(),it);
+                    items.getDataLis().forEach(it -> {
+                        log.info("[CachePerwarmThread将Item信息设置到缓存中] id ->{} , item->{}", it.getId(), JSON.toJSONString(it));
+                        itemCacheService.saveLoadCache(it.getId(), it);
                         itemCacheService.saveLoadEhCache(it);
                     });
 
                     //预热完
-                    session.setNodeData("/" + KafkaConstant.TASK_ID_STATUS+taskId,"success");
+                    session.setNodeData("/" + KafkaConstant.TASK_ID_STATUS + taskId, "success");
                 }
-                session.releaseDistributedLock("/" + KafkaConstant.TASK_ID_STATUS_LOCK+taskId);
+                session.releaseDistributedLock("/" + KafkaConstant.TASK_ID_STATUS_LOCK + taskId);
 
 
                 session.releaseDistributedLock(key);

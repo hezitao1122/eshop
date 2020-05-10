@@ -18,24 +18,32 @@ import org.springframework.stereotype.Service;
  * @date 2019/6/29 11:49
  */
 @Service
-public class ItemDescCacheServiceImpl extends CacheServiceImpl<TbItemDescDTO,Long> implements ItemDescCacheService {
+public class ItemDescCacheServiceImpl extends CacheServiceImpl<TbItemDescDTO, Long> implements ItemDescCacheService {
     /**
      * redis对应商品描述信息的前缀
      */
     private final String redisPrefix = RedisCachePrefixEnum.ITEM_DESC.getName();
+
     @Override
-    public String prefix() {return redisPrefix;}
+    public String prefix() {
+        return redisPrefix;
+    }
 
     @Override
     @CachePut(value = "local", key = "'EHCACHE:ITEM:DESC:'+#tbItemDescDTO.itemId")
-    public TbItemDescDTO saveLoadEhCache(TbItemDescDTO tbItemDescDTO) {return null;}
+    public TbItemDescDTO saveLoadEhCache(TbItemDescDTO tbItemDescDTO) {
+        return null;
+    }
 
     @Override
     @Cacheable(value = "local", key = "'EHCACHE:ITEM:DESC:'+#id")
-    public TbItemDescDTO getLoadEhCache(Long id) {return null;}
+    public TbItemDescDTO getLoadEhCache(Long id) {
+        return null;
+    }
 
     @Override
     @CacheEvict(value = "local", key = "'EHCACHE:ITEM:DESC:'+#id")
-    public void delLoadEhCache(Long id) {}
+    public void delLoadEhCache(Long id) {
+    }
 
 }

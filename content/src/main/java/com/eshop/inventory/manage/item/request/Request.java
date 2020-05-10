@@ -12,9 +12,12 @@ import java.util.Map;
  * @projectName inventory
  * @date 2019/5/3023:04
  */
-public interface Request<T extends BaseEntity,I> {
+public interface Request<T extends BaseEntity, I> {
     void process();
+
     I getId();
+
     boolean isForceRefresh();
+
     Map<I, Boolean> getCacheMap();
 }

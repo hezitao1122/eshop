@@ -23,8 +23,6 @@ public class UserServiceImpl extends BaseDBAndCacheServiceImpl<TbUser, Long> imp
     private UserMapper userMapper;
 
 
-
-
     @Override
     protected String getPrefix() {
         return RedisCachePrefixEnum.USER.getName();

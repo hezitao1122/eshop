@@ -23,7 +23,6 @@ public class OrderItemServiceImpl extends BaseDBAndCacheServiceImpl<TbOrderItem,
     private OrderItemMapper orderItemMapper;
 
 
-
     @Override
     protected String getPrefix() {
         return RedisCachePrefixEnum.ORDER_ITEM.getName();

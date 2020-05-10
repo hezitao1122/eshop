@@ -18,12 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/item/desc")
-public class ItemDescController extends BaseDBController<TbItemDesc,Long> {
+public class ItemDescController extends BaseDBController<TbItemDesc, Long> {
     @Autowired
     private ItemDescServiceI itemDescService;
-
-
-
 
 
     @Override

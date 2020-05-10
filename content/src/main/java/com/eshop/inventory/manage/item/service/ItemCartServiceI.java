@@ -11,5 +11,5 @@ import com.eshop.inventory.manage.item.entity.TbItemCat;
  * @projectName inventory
  * @date 2019/6/1722:14
  */
-public interface ItemCartServiceI extends IBaseDBAndCacheService<TbItemCat,Long> {
+public interface ItemCartServiceI extends IBaseDBAndCacheService<TbItemCat, Long> {
 }

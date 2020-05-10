@@ -185,43 +185,44 @@ public class ReflectUtil {
             field.setAccessible(false);
         }
     }
+
     /**
+     * @param clazz 操作的类
+     * @param set   所有字段的集合
      * @Description: 获取类的所有字段的集合
      * ----------------------------
      * @Method: getFieldName
      * @Author: hzt
-     * @param clazz 操作的类
-     * @param set 所有字段的集合
      * @Return: java.util.Set<java.lang.String>
      * @Date: Create in 2019/6/18 16:47
      */
-    public static Set<String> getFieldName(Class<?> clazz,Set<String> set) {
-        if(clazz == Object.class)
+    public static Set<String> getFieldName(Class<?> clazz, Set<String> set) {
+        if (clazz == Object.class)
             return null;
-        if(set == null)
+        if (set == null)
             set = new HashSet<>();
         Field[] fields = clazz.getDeclaredFields();
-        for (Field field:fields)
+        for (Field field : fields)
             set.add(field.getName());
         Class<?> superClazz = clazz.getSuperclass();
-        getFieldName(superClazz,set);
+        getFieldName(superClazz, set);
         return set;
     }
 
     /**
+     * @param object     操作的对象
+     * @param methodName 方法名
+     * @param types      参数列表
      * @Description: 根据方法名和参数列表去执行制定的方法，并获取返回值
      * ----------------------------
      * @Method: invokeMethod
      * @Author: hzt
-     * @param object 操作的对象
-     * @param methodName 方法名
-     * @param types 参数列表
      * @Return: java.lang.Object
      * @Date: Create in 2019/6/18 17:02
      */
-    public static Object invokeMethod(Object object,String methodName,Object... types) throws InvocationTargetException, IllegalAccessException {
+    public static Object invokeMethod(Object object, String methodName, Object... types) throws InvocationTargetException, IllegalAccessException {
 
-        Class<?> [] clazzs = new Class<?>[types.length];
+        Class<?>[] clazzs = new Class<?>[types.length];
         for (int i = 0; i < types.length; i++) {
             clazzs[i] = types.getClass();
         }
@@ -230,6 +231,6 @@ public class ReflectUtil {
         if (method == null)
             return null;
         method.setAccessible(true);
-        return method.invoke(object,types);
+        return method.invoke(object, types);
     }
 }

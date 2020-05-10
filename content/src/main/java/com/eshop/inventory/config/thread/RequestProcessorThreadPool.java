@@ -30,38 +30,43 @@ public class RequestProcessorThreadPool {
      */
     public RequestProcessorThreadPool() {
         RequestQueue requestQueue = RequestQueue.getInstance();
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             ArrayBlockingQueue<Request> queue = new ArrayBlockingQueue<Request>(100);
             requestQueue.addRequestQueue(queue);
             threadPool.submit(new RequestProcessorThread(queue));
         }
     }
+
     /**
      * 匿名内部类进行单例
      */
-    private static class Singleton{
+    private static class Singleton {
 
-        private static RequestProcessorThreadPool install ;
+        private static RequestProcessorThreadPool install;
 
         static {
             install = new RequestProcessorThreadPool();
         }
+
         public static RequestProcessorThreadPool getInstance() {
             return install;
         }
     }
+
     /**
      * 功能描述: 获取单例的线程池<br>
      * 〈〉
+     *
      * @return: com.eshop.inventory.config.thread.RequestProcessorThreadPool
      * @since: 1.0.0
      * @author zeryts
      * @Date: 2019/5/31 22:46
      */
-    public static RequestProcessorThreadPool getInstance(){
+    public static RequestProcessorThreadPool getInstance() {
 
         return Singleton.getInstance();
     }
+
     /**
      * 初始化的便捷方法
      */

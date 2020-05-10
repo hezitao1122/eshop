@@ -21,18 +21,20 @@ import org.springframework.core.io.ClassPathResource;
 public class EhcacheConfig {
     /**
      * 功能描述: 初始化ehcache缓存的工厂类<br>
+     *
      * @return: org.springframework.cache.ehcache.EhCacheManagerFactoryBean
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2019/6/12 22:02
      */
     @Bean
-    public EhCacheManagerFactoryBean ehCacheManagerFactoryBean(){
+    public EhCacheManagerFactoryBean ehCacheManagerFactoryBean() {
         EhCacheManagerFactoryBean factoryBean = new EhCacheManagerFactoryBean();
         factoryBean.setConfigLocation(new ClassPathResource("ehcache.xml"));
         factoryBean.setShared(true);
         return factoryBean;
     }
+
     /**
      * 功能描述: 初始化<br>
      * 〈〉
@@ -45,7 +47,7 @@ public class EhcacheConfig {
      */
     @Autowired
     @Bean
-    public EhCacheCacheManager ehCacheCacheManager(EhCacheManagerFactoryBean factoryBean){
+    public EhCacheCacheManager ehCacheCacheManager(EhCacheManagerFactoryBean factoryBean) {
         return new EhCacheCacheManager(factoryBean.getObject());
     }
 

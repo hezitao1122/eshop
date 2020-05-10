@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Component
 @Slf4j
-public class ItemDescFeignRollback extends BaseFeignImpl<TbItemDescDTO,Long> implements ItemDescFeign {
+public class ItemDescFeignRollback extends BaseFeignImpl<TbItemDescDTO, Long> implements ItemDescFeign {
 
     @Override
     public String getClassName() {

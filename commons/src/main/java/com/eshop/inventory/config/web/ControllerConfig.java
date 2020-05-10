@@ -26,14 +26,16 @@ public class ControllerConfig {
     private Logger log = LoggerFactory.getLogger(getClass().getName());
 
     @Pointcut(value = "execution(public * com.eshop.inventory.*.*.controller.*.*(..) )")
-    private void point(){}
+    private void point() {
+    }
 
     @Pointcut(value = "execution(public * com.eshop.inventory.common.base.impl.*Controller.*(..) )")
-    private void pointBase(){}
+    private void pointBase() {
+    }
 
 
     @Around(value = "point() || pointBase()")
-    public Object pointcut(ProceedingJoinPoint proceedingJoinPoint)throws Throwable {
+    public Object pointcut(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
 
         String methodName = proceedingJoinPoint.getSignature().getName();
@@ -42,20 +44,21 @@ public class ControllerConfig {
         Object[] args = proceedingJoinPoint.getArgs();
 
         StringBuilder sb = new StringBuilder();
-        Arrays.asList(args).forEach((o)->{
-            if(!(o instanceof ServletRequest) && !(o instanceof MultipartFile) && !(o instanceof ServletResponse)){
-                sb.append(JSON.toJSONString(o)+",");
+        Arrays.asList(args).forEach((o) -> {
+            if (!(o instanceof ServletRequest) && !(o instanceof MultipartFile) && !(o instanceof ServletResponse)) {
+                sb.append(JSON.toJSONString(o) + ",");
             }
         });
-        if(sb.length() >0) sb.substring(0,sb.length()-1);
+        String content = sb.toString();
+        if (sb.length() > 0) content = sb.substring(0, sb.length() - 1);
 
 
-        log.info("执行->[{}]类的->[{}]方法的请求参数为:->[{}]",className,methodName,sb.toString());
+        log.info("执行->[{}]类的->[{}]方法的请求参数为:->[{}]", className, methodName, content);
         Object proceed = proceedingJoinPoint.proceed();
         long endTime = System.currentTimeMillis();
 
 
-        log.info("执行->[{}]类的[{}]方法的返回报文为:->[{}],执行时长为:[{}] ms",className,methodName, JSON.toJSONString(proceed),(endTime - startTime));
+        log.info("执行->[{}]类的[{}]方法的返回报文为:->[{}],执行时长为:[{}] ms", className, methodName, JSON.toJSONString(proceed), (endTime - startTime));
         return proceed;
     }
 }

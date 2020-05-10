@@ -95,7 +95,7 @@ public class WordCountTopology {
             //从句子里面随机拿个句子出来
             final String sentence = sentences[random.nextInt(sentences.length - 1)];
 
-            log.error("发射句子:["+ sentence+"]");
+            log.error("发射句子:[" + sentence + "]");
             //发射
             /**
              * values的作用为构建一个tuple的对象
@@ -197,10 +197,10 @@ public class WordCountTopology {
             if (count == null) {
                 count = 1;
             }
-            count ++;
+            count++;
             countMap.put(sentence, count);
 
-            log.error("单词计数，单词["+sentence+"]，的数量为["+count+"]");
+            log.error("单词计数，单词[" + sentence + "]，的数量为[" + count + "]");
             //再发射出去
             collector.emit(new Values(sentence, count));
         }
@@ -212,6 +212,7 @@ public class WordCountTopology {
 
 
     private static final Logger log = LoggerFactory.getLogger(WordCountTopology.class);
+
     /**
      * 功能描述: 在这个main方法中，会将spout和slot组合起来，构建成一个Topology拓扑<br>
      * 〈〉
@@ -262,7 +263,7 @@ public class WordCountTopology {
         Config config = new Config();
 
 
-        if(args != null && args.length > 0){
+        if (args != null && args.length > 0) {
             //说明在命令行执行，打算提交到storm集群上去
             /**
              * 此处提交到集群的storm要启动几个work
@@ -273,7 +274,7 @@ public class WordCountTopology {
                 /**
                  * 其传入集群有多种方式，包括拓扑、jar
                  */
-                StormSubmitter.submitTopology(args[0],config,builder.createTopology());
+                StormSubmitter.submitTopology(args[0], config, builder.createTopology());
             } catch (AlreadyAliveException e) {
                 e.printStackTrace();
             } catch (InvalidTopologyException e) {
@@ -281,15 +282,15 @@ public class WordCountTopology {
             } catch (AuthorizationException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             //代表在idea里面进行执行
             config.setMaxTaskParallelism(20);
 
             LocalCluster cluster = new LocalCluster();
-            try{
-                cluster.submitTopology("WorkCountTopology",config,builder.createTopology());
-            }catch (Exception e){
-                log.error(e.toString(),e);
+            try {
+                cluster.submitTopology("WorkCountTopology", config, builder.createTopology());
+            } catch (Exception e) {
+                log.error(e.toString(), e);
             }
 
 

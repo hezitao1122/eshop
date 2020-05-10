@@ -33,11 +33,22 @@ public class TbItemDTO extends BaseDTO<TbItem> {
 
     public TbItemDTO() {
     }
-    public TbItemDTO(TbItem tbItem) {
-        if(entity ==null)
-            entity = new TbItem(id,title,sellPoint,price,num,barcode,image,cid,status,created,updated);
-    }
 
+    public TbItemDTO(TbItem tbItem) {
+        id = tbItem.getId();
+        title = tbItem.getTitle();
+        sellPoint = tbItem.getSellPoint();
+        price = tbItem.getPrice();
+        num = tbItem.getNum();
+        barcode = tbItem.getBarcode();
+        image = tbItem.getImage();
+        cid = tbItem.getCid();
+        status = tbItem.getStatus();
+        created = tbItem.getCreated();
+        updated = tbItem.getUpdated();
+        if (entity == null)
+            entity = new TbItem(id, title, sellPoint, price, num, barcode, image, cid, status, created, updated);
+    }
 
 
 }

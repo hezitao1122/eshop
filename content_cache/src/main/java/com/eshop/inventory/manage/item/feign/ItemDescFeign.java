@@ -21,19 +21,20 @@ import java.util.List;
  * @projectName inventory
  * @date 2019/6/18 23:05
  */
-@FeignClient(name = "eshop-content",path = "/api/v1/item/desc",fallback = ItemDescFeignRollback.class)
+@FeignClient(name = "eshop-content", path = "/api/v1/item/desc", fallback = ItemDescFeignRollback.class)
 @Component
-public interface ItemDescFeign extends BaseFeign<TbItemDescDTO,Long> {
+public interface ItemDescFeign extends BaseFeign<TbItemDescDTO, Long> {
 
     /**
      * 功能描述: 根据itemId查找数据<br>
      * 〈〉
+     *
      * @param itemIds
      * @return: com.eshop.inventory.common.dto.ResultDto<T>
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2019/6/15 17:33
      */
-    @RequestMapping(value = "/findByItemIds",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/findByItemIds", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     ResultDto<TbItemDescDTO> findByItemIds(@RequestBody List<Long> itemIds);
 }

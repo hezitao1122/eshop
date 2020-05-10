@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "tb_item_cat", schema = "eshop", catalog = "")
-public class TbItemCat extends BaseEntity  {
+public class TbItemCat extends BaseEntity {
     private long id;
     private Long parentId;
     private String name;

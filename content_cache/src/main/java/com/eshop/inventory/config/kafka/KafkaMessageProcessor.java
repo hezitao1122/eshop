@@ -97,8 +97,8 @@ public class KafkaMessageProcessor implements Runnable {
                         //缓存到redis中
                         itemCacheService.saveLoadCache(dto.getId(), dto);
                     } catch (Exception e) {
-                        log.info(e.toString(),e);
-                    }finally {
+                        log.info(e.toString(), e);
+                    } finally {
                         //释放锁是有必要的
                         instance.releaseDistributedLock(name + dto.getId());
                     }

@@ -44,48 +44,50 @@ public class ZooKeeperSession implements Serializable {
                     50000,
                     new ZookeeperWatcher());
 
-            log.info("zk status [{}]",zooKeeper.getState().toString());
+            log.info("zk status [{}]", zooKeeper.getState().toString());
 
-            try{
+            try {
                 connectedSemaphore.await();
-            }catch (Exception e){
-                log.info(e.toString(),e);
+            } catch (Exception e) {
+                log.info(e.toString(), e);
             }
             log.info("ZK session established ...... ");
         } catch (IOException e) {
-            log.info(e.toString(),e);
+            log.info(e.toString(), e);
         }
     }
 
     /**
      * 功能描述: 分布式加锁的逻辑<br>
      * 〈〉
+     *
      * @param path 需要加锁的节点路径
      * @return: void
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2019/7/1 23:08
      */
-    public void acquireDistributedLock(String path){
+    public void acquireDistributedLock(String path) {
         create(path);
     }
 
     /**
      * 功能描述: 分布式加锁的逻辑,没获取到锁直接失败<br>
      * 〈〉
+     *
      * @param path 需要加锁的节点路径
      * @return: void
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2019/7/1 23:08
      */
-    public boolean acquireFastFaildDistributedLock(String path){
-        try{
+    public boolean acquireFastFaildDistributedLock(String path) {
+        try {
             String s = zooKeeper.create(path, "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
-            log.info("sucess to path acquire lock for [{}]  " , path);
+            log.info("sucess to path acquire lock for [{}]  ", path);
             return true;
-        }catch (Exception e){
-            log.info("get "+path+" is fail");
+        } catch (Exception e) {
+            log.info("get " + path + " is fail");
             return false;
         }
     }
@@ -93,19 +95,20 @@ public class ZooKeeperSession implements Serializable {
     /**
      * 功能描述: 根据路径释放分布式锁的逻辑<br>
      * 〈〉
+     *
      * @param path
      * @return: void
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2019/7/1 23:10
      */
-    public void releaseDistributedLock(String path){
-        try{
-            zooKeeper.delete("/"+path,-1);
-            log.info("release distributed lock success , path []","/"+ path);
-        }catch (Exception e){
-            log.info("release distributed lock fail , path []","/"+ path);
-            log.info(e.toString(),e);
+    public void releaseDistributedLock(String path) {
+        try {
+            zooKeeper.delete("/" + path, -1);
+            log.info("release distributed lock success , path []", "/" + path);
+        } catch (Exception e) {
+            log.info("release distributed lock fail , path []", "/" + path);
+            log.info(e.toString(), e);
         }
     }
 
@@ -113,6 +116,7 @@ public class ZooKeeperSession implements Serializable {
     /**
      * 功能描述: 建立zk server的watcher<br>
      * 〈〉
+     *
      * @return: void
      * @since: 1.0.0
      * @Author: zeryts
@@ -122,20 +126,21 @@ public class ZooKeeperSession implements Serializable {
 
         @Override
         public void process(WatchedEvent event) {
-            log.info("Receive watched event : [{}]",event.getType());
-            if(Event.KeeperState.SyncConnected == event.getState()){
+            log.info("Receive watched event : [{}]", event.getType());
+            if (Event.KeeperState.SyncConnected == event.getState()) {
                 connectedSemaphore.countDown();
             }
 
         }
     }
 
-    private static class Singleton{
-        private static ZooKeeperSession install ;
+    private static class Singleton {
+        private static ZooKeeperSession install;
 
         static {
             install = new ZooKeeperSession();
         }
+
         public static ZooKeeperSession getInstance() {
             return install;
         }
@@ -150,36 +155,39 @@ public class ZooKeeperSession implements Serializable {
      * @Author: zeryts
      * @Date: 2019/6/30 17:29
      */
-    public static ZooKeeperSession getInstance(){
+    public static ZooKeeperSession getInstance() {
         return Singleton.getInstance();
     }
+
     /**
      * 初始化单例的便捷方法
      */
     public static void init() {
         getInstance();
     }
-    private void create(String path){
+
+    private void create(String path) {
         //如果已经被别人加锁了，就会报错
         int count = 0;
-        while (true){
-            try{
-                zooKeeper.create("/"+path,"".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
-                log.info("创建临时节点成功!节点路径为：[{}]",("/"+path));
-            }catch (Exception ex){
-                count ++ ;
+        while (true) {
+            try {
+                zooKeeper.create("/" + path, "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+                log.info("创建临时节点成功!节点路径为：[{}]", ("/" + path));
+            } catch (Exception ex) {
+                count++;
                 try {
                     Thread.sleep(20);
                 } catch (InterruptedException e) {
-                    log.info(e.toString(),e);
+                    log.info(e.toString(), e);
                 }
-                if(count >= 20)break;
+                if (count >= 20) break;
                 continue;
             }
-            log.info("创建临时节点[{}],[{}]次后成功！",path,count);
+            log.info("创建临时节点[{}],[{}]次后成功！", path, count);
             break;
         }
     }
+
     /**
      * 功能描述: 往zookeeper的中读取数据的方法<br>
      * 〈〉
@@ -190,10 +198,10 @@ public class ZooKeeperSession implements Serializable {
      * @Author: zeryts
      * @Date: 2019/9/22 16:55
      */
-    public String getNodeData(String path){
+    public String getNodeData(String path) {
 
         try {
-            String data = new String(zooKeeper.getData(path,false,new Stat()));
+            String data = new String(zooKeeper.getData(path, false, new Stat()));
             return data;
         } catch (KeeperException e) {
             e.printStackTrace();
@@ -202,6 +210,7 @@ public class ZooKeeperSession implements Serializable {
         }
         return null;
     }
+
     /**
      * 功能描述: 往zookeeper中写数据的方法<br>
      * 〈〉
@@ -213,11 +222,11 @@ public class ZooKeeperSession implements Serializable {
      * @Author: zeryts
      * @Date: 2019/9/22 16:54
      */
-    public void setNodeData(String path ,String data){
+    public void setNodeData(String path, String data) {
 
         Assert.isNonEmpty(data);
         try {
-            zooKeeper.setData(path,data.getBytes(),-1);
+            zooKeeper.setData(path, data.getBytes(), -1);
         } catch (KeeperException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

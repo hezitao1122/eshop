@@ -21,22 +21,21 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/item")
-public class ItemCacheController extends BaseCacheController<TbItemDTO,Long> {
+public class ItemCacheController extends BaseCacheController<TbItemDTO, Long> {
     @Autowired
     private ItemCacheService itemCacheService;
     @Autowired
     private ItemFeign itemFeign;
 
     @PostMapping("/add")
-    public ResultDto<TbItemDTO> add(@RequestBody TbItemDTO dto){
-        return new ResultDto<>(itemCacheService.saveLoadCache(dto.getId(),dto));
+    public ResultDto<TbItemDTO> add(@RequestBody TbItemDTO dto) {
+        return new ResultDto<>(itemCacheService.saveLoadCache(dto.getId(), dto));
     }
 
     @GetMapping("/perwarmCache")
-    public void perwarmCache(){
+    public void perwarmCache() {
         new CachePerwarmThread().start();
     }
-
 
 
     @Override

@@ -16,7 +16,7 @@ import java.util.List;
  * @projectName inventory
  * @date 2019/6/15 16:35
  */
-public abstract class BaseDBServiceImpl<T extends BaseEntity,ID extends Serializable> implements IBaseDBService<T,ID> {
+public abstract class BaseDBServiceImpl<T extends BaseEntity, ID extends Serializable> implements IBaseDBService<T, ID> {
     @Override
     public T add(T t) {
         getMapper().insert(t);

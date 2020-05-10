@@ -23,7 +23,6 @@ public class OrderItemController extends BaseDBController<TbOrderItem, String> {
     private OrderItemServiceI orderItemService;
 
 
-
     @Override
     public IBaseDBService<TbOrderItem, String> getDBService() {
         return orderItemService;

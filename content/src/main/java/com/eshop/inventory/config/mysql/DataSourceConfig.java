@@ -24,7 +24,7 @@ public class DataSourceConfig {
      * 配置数据源并指定前缀
      */
     @Bean
-    @ConfigurationProperties(prefix="spring.datasource")
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         return new org.apache.tomcat.jdbc.pool.DataSource();
     }
@@ -42,9 +42,10 @@ public class DataSourceConfig {
 //        mybatisSqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/*/*.xml"));
         return mybatisSqlSessionFactoryBean.getObject();
     }
+
     //定义 MybatisPlus 的全局策略配置
     @Bean
-    public GlobalConfiguration globalConfiguration(){
+    public GlobalConfiguration globalConfiguration() {
         GlobalConfiguration c = new GlobalConfiguration();
         c.setDbColumnUnderline(true);
         c.setIdType(0);
@@ -62,16 +63,16 @@ public class DataSourceConfig {
 
     //配置mybatis的分页插件pageHelper
     @Bean
-    public PageHelper pageHelper(){
+    public PageHelper pageHelper() {
         System.out.println("开始配置数据分页插件");
         PageHelper pageHelper = new PageHelper();
         // properties暂时放到这里，后期放到配置文件
         Properties properties = new Properties();
-        properties.setProperty("offsetAsPageNum","true");
-        properties.setProperty("rowBoundsWithCount","true");
-        properties.setProperty("reasonable","true");
+        properties.setProperty("offsetAsPageNum", "true");
+        properties.setProperty("rowBoundsWithCount", "true");
+        properties.setProperty("reasonable", "true");
         //配置mysql数据库的方言
-        properties.setProperty("dialect","mysql");
+        properties.setProperty("dialect", "mysql");
         pageHelper.setProperties(properties);
         return pageHelper;
     }

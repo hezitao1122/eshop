@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/item")
-public class ItemController extends BaseDBController<TbItem,Long> {
+public class ItemController extends BaseDBController<TbItem, Long> {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemController.class);
     @Autowired
     private ItemAsyncService itemAsyncService;
@@ -45,7 +45,7 @@ public class ItemController extends BaseDBController<TbItem,Long> {
      */
     @PostMapping("/update")
     public ResultDto<TbItem> update(@RequestBody TbItem item) {
-        log.info("===========日志===========: 接收到更新商品库存的请求，商品=[{}]" , JSON.toJSONString(item) );
+        log.info("===========日志===========: 接收到更新商品库存的请求，商品=[{}]", JSON.toJSONString(item));
 
         //封装请求
         Request<TbItem, Long> tbItemLongRequest = new ItemInventoryDBUpdateRequestI(item, itemService);
@@ -56,13 +56,12 @@ public class ItemController extends BaseDBController<TbItem,Long> {
     }
 
 
-
     /**
      * 获取商品
      */
     @PostMapping("/getNum")
     public ResultDto<TbItem> getNum(Long id) throws Exception {
-        log.info("===========日志===========: 接收到一个商品库存的读请求，商品id=[{}]" , id);
+        log.info("===========日志===========: 接收到一个商品库存的读请求，商品id=[{}]", id);
         TbItem tbItem = null;
 
         //封装请求
@@ -78,15 +77,15 @@ public class ItemController extends BaseDBController<TbItem,Long> {
         long waitTime = 0;
 
 
-        while(true){
+        while (true) {
             //如果等待超过200ms没有从缓存中取到结果，直接返回
-            if(waitTime > 2000L)
+            if (waitTime > 2000L)
                 break;
 
             //尝试去redis中读取一次商品信息
             tbItem = itemService.getCacheById(id);
 
-            if(tbItem != null){
+            if (tbItem != null) {
                 log.info("===========日志===========: 在200ms内读取到了redis中的库存缓存，商品=[{}]", JSON.toJSONString(tbItem));
                 return new ResultDto(tbItem);
             }
@@ -101,7 +100,7 @@ public class ItemController extends BaseDBController<TbItem,Long> {
 
 //        直接尝试从数据库中读取
         TbItem item = itemService.getNumById(id);
-        if(item != null){
+        if (item != null) {
             //有则进行缓存刷新
             //itemService.setCache(item);
 
@@ -113,7 +112,7 @@ public class ItemController extends BaseDBController<TbItem,Long> {
 
             //如果能直接从数据库中进行读取到，但是没有放到队列中去执行，故需要再次放到队列中
             //需要强制刷新的请求
-            Request<TbItem, Long> refreshRequest = new ItemInventoryCacheRefreshRequestI(id, itemService,true);
+            Request<TbItem, Long> refreshRequest = new ItemInventoryCacheRefreshRequestI(id, itemService, true);
             itemAsyncService.process(refreshRequest);
 
             return new ResultDto(item);

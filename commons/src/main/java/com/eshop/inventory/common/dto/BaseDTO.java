@@ -13,9 +13,9 @@ import com.alibaba.fastjson.JSONObject;
  */
 public abstract class BaseDTO<T> {
 
-    public T parseEntity(){
+    public T parseEntity() {
         String s = JSON.toJSONString(this);
         JSONObject jsonObject = JSON.parseObject(s);
-        return (T)jsonObject;
+        return (T) jsonObject;
     }
 }

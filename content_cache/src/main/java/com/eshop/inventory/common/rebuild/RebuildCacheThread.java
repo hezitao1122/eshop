@@ -23,17 +23,18 @@ import java.sql.Timestamp;
 public class RebuildCacheThread implements Runnable {
     //用于获取分布式锁的对象
     private ZooKeeperSession zooKeeperSession = ZooKeeperSession.getInstance();
+
     @Override
     public void run() {
         RebuildCacheQueue instance = RebuildCacheQueue.getInstance();
         while (true) {
             try {
-                 Object obj = instance.take();
-                if(obj instanceof TbItemDTO){
+                Object obj = instance.take();
+                if (obj instanceof TbItemDTO) {
                     //代表是商品详情的信息
-                    TbItemDTO dto = (TbItemDTO)obj;
-                    zooKeeperSession.acquireDistributedLock(RedisCachePrefixEnum.ITEM.getName()+dto.getId());
-                    try{
+                    TbItemDTO dto = (TbItemDTO) obj;
+                    zooKeeperSession.acquireDistributedLock(RedisCachePrefixEnum.ITEM.getName() + dto.getId());
+                    try {
                         ItemCacheService itemCacheService = ProductCacheApplication.app.getBean(ItemCacheService.class);
                         //线从redis中获取数据
                         TbItemDTO loadCache = itemCacheService.getLoadCache(dto.getId());
@@ -51,16 +52,14 @@ public class RebuildCacheThread implements Runnable {
                         itemCacheService.saveLoadEhCache(dto);
                         //缓存到redis中
                         itemCacheService.saveLoadCache(dto.getId(), dto);
-                    }catch (Exception e){
-                        log.info(e.toString(),e);
-                    }finally {
+                    } catch (Exception e) {
+                        log.info(e.toString(), e);
+                    } finally {
                         //释放锁
-                        log.info("释放锁，id=[{}]",dto.getId());
-                        zooKeeperSession.releaseDistributedLock(RedisCachePrefixEnum.ITEM.getName()+dto.getId());
+                        log.info("释放锁，id=[{}]", dto.getId());
+                        zooKeeperSession.releaseDistributedLock(RedisCachePrefixEnum.ITEM.getName() + dto.getId());
                     }
                 }
-
-
 
 
             } catch (Exception e) {

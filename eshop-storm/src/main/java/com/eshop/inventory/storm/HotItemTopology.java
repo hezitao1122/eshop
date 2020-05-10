@@ -35,14 +35,14 @@ public class HotItemTopology {
          * @param 创建一个spout对象
          * @param 设置spout的executor逻辑有几个Field
          */
-        builder.setSpout(AccessLogKafkaSpout.class.getName(),new AccessLogKafkaSpout() , 1);
+        builder.setSpout(AccessLogKafkaSpout.class.getName(), new AccessLogKafkaSpout(), 1);
         /**
          * 构建一个传递blot
          * @param 设置Bolt的名称
          * @param 构建一个Bolt
          * @param 设置Bolt有几个Field
          */
-        builder.setBolt(LogAnalysisBolt.class.getName(),new LogAnalysisBolt(),5)
+        builder.setBolt(LogAnalysisBolt.class.getName(), new LogAnalysisBolt(), 5)
                 /**
                  * 设置每个executoe的数量，，默认为1，不设置的情况下 executor的数量 = task的数量，即5*10代表并行度
                  */
@@ -50,7 +50,7 @@ public class HotItemTopology {
                 /**
                  * 设置spout的名称
                  */
-                shuffleGrouping(AccessLogKafkaSpout.class.getName());
+                        shuffleGrouping(AccessLogKafkaSpout.class.getName());
 
         /**
          * 构建一个统计blot
@@ -58,20 +58,20 @@ public class HotItemTopology {
          * @param 构建一个Bolt
          * @param 设置Bolt有几个Field
          */
-         builder.setBolt(HotCountBolt.class.getName(),new HotCountBolt(),5)
+        builder.setBolt(HotCountBolt.class.getName(), new HotCountBolt(), 5)
 
-                 .setNumTasks(10).
-                 /**
-                  * 代表根据传入的字段的值进行流的分组，WordCount中的new Field中传入的field为字段名，第二个参数为值
-                  */
-                 fieldsGrouping(LogAnalysisBolt.class.getName(),new Fields(KafkaConstant.ID));
+                .setNumTasks(10).
+                /**
+                 * 代表根据传入的字段的值进行流的分组，WordCount中的new Field中传入的field为字段名，第二个参数为值
+                 */
+                        fieldsGrouping(LogAnalysisBolt.class.getName(), new Fields(KafkaConstant.ID));
         /**
          * 下面为创建一个config
          */
         Config config = new Config();
 
 
-        if(args != null && args.length > 0){
+        if (args != null && args.length > 0) {
             //说明在命令行执行，打算提交到storm集群上去
             /**
              * 此处提交到集群的storm要启动几个work
@@ -79,7 +79,7 @@ public class HotItemTopology {
             config.setNumWorkers(3);
 
             try {
-                StormSubmitter.submitTopology(args[0],config,builder.createTopology());
+                StormSubmitter.submitTopology(args[0], config, builder.createTopology());
             } catch (AlreadyAliveException e) {
                 e.printStackTrace();
             } catch (InvalidTopologyException e) {
@@ -89,9 +89,9 @@ public class HotItemTopology {
             }
 
 
-        }else{
+        } else {
             LocalCluster cluster = new LocalCluster();
-            cluster.submitTopology(HotItemTopology.class.getName(),config,builder.createTopology());
+            cluster.submitTopology(HotItemTopology.class.getName(), config, builder.createTopology());
         }
 
 

@@ -65,7 +65,7 @@ logging:
 
   # 打印sql
   level:
-    com.eshopinventory : debug
+    com.eshopinventory: debug
     #自定义配置
 rest:
   ReadTimeout: 35000

@@ -10,5 +10,5 @@ import com.eshop.inventory.common.entity.BaseEntity;
  * @projectName inventory
  * @date 2019/6/15 17:38
  */
-public interface IBaseDBAndCacheService<T extends BaseEntity,ID>  extends IBaseDBService<T,ID>, IBaseCacheService<T,ID> {
+public interface IBaseDBAndCacheService<T extends BaseEntity, ID> extends IBaseDBService<T, ID>, IBaseCacheService<T, ID> {
 }

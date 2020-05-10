@@ -23,7 +23,6 @@ public class ContentServiceImpl extends BaseDBAndCacheServiceImpl<TbContent, Lon
     private ContentMapper contentMapper;
 
 
-
     @Override
     protected String getPrefix() {
         return RedisCachePrefixEnum.CONTENT_CATEGORY.getName();

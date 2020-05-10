@@ -13,11 +13,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 /**
-* @Description:    swagger-ui可视化接口配置类
-* @Author:         zeryts
-* @CreateDate:     2019/6/17 15:30
-* @Version:        1.0
-*/
+ * @Description: swagger-ui可视化接口配置类
+ * @Author: zeryts
+ * @CreateDate: 2019/6/17 15:30
+ * @Version: 1.0
+ */
 
 @Configuration
 @EnableSwagger2
@@ -42,5 +42,5 @@ public class SwaggerConfig {
                 .version("1.0")
                 .build();
     }
-  
+
 }

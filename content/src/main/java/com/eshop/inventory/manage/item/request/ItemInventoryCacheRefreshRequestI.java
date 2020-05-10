@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @projectName inventory
  * @date 2019/5/30 23:26
  */
-public class ItemInventoryCacheRefreshRequestI implements Request<TbItem,Long> , IBaseReaderRequest {
+public class ItemInventoryCacheRefreshRequestI implements Request<TbItem, Long>, IBaseReaderRequest {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemInventoryCacheRefreshRequestI.class);
     /**
      * 商品信息
@@ -32,7 +32,7 @@ public class ItemInventoryCacheRefreshRequestI implements Request<TbItem,Long> ,
     /**
      * 是否强制刷新缓存
      */
-    private boolean forceRefresh ;
+    private boolean forceRefresh;
     /**
      * 标识位map
      */
@@ -40,7 +40,8 @@ public class ItemInventoryCacheRefreshRequestI implements Request<TbItem,Long> ,
 
     /**
      * 构造，传入商品信息
-     * @param id 商品信息id
+     *
+     * @param id          商品信息id
      * @param itemService 商品操作的实体类
      */
     public ItemInventoryCacheRefreshRequestI(Long id, ItemServiceI itemService) {
@@ -48,9 +49,11 @@ public class ItemInventoryCacheRefreshRequestI implements Request<TbItem,Long> ,
         this.itemService = itemService;
         forceRefresh = false;
     }
+
     /**
      * 构造，传入商品信息
-     * @param id 商品信息id
+     *
+     * @param id          商品信息id
      * @param itemService 商品操作的实体类
      */
     public ItemInventoryCacheRefreshRequestI(Long id, ItemServiceI itemService, boolean forceRefresh) {
@@ -58,6 +61,7 @@ public class ItemInventoryCacheRefreshRequestI implements Request<TbItem,Long> ,
         this.itemService = itemService;
         this.forceRefresh = forceRefresh;
     }
+
     /**
      * 功能描述: 修改库存的方法<br>
      * 〈〉
@@ -69,9 +73,9 @@ public class ItemInventoryCacheRefreshRequestI implements Request<TbItem,Long> ,
     @Override
     public void process() {
         TbItem item1 = itemService.getNumById(id);
-        log.info("===========日志===========: 已查询到商品最新的库存数量，商品=[{}]" , JSON.toJSONString(item1));
+        log.info("===========日志===========: 已查询到商品最新的库存数量，商品=[{}]", JSON.toJSONString(item1));
         // 将最新的商品库存数量，刷新到redis缓存中去
-        itemService.setCache(item1.getId(),item1);
+        itemService.setCache(item1.getId(), item1);
     }
 
     @Override

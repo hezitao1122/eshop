@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/content")
-public class ContentController extends BaseDBController<TbContent,Long> {
-
-
-
+public class ContentController extends BaseDBController<TbContent, Long> {
 
 
     @Override

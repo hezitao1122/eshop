@@ -11,5 +11,5 @@ import com.eshop.inventory.manage.item.dto.TbItemDTO;
  * @projectName inventory
  * @date 2019/6/1223:32
  */
-public interface ItemCacheService extends ICacheService<TbItemDTO,Long> {
+public interface ItemCacheService extends ICacheService<TbItemDTO, Long> {
 }

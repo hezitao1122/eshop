@@ -50,14 +50,13 @@ public class ItemAsyncServiceImpl implements ItemAsyncService {
                         }
                         //如果是读请求，并且前面也具有一个相同的写请求
                         if (aBoolean != null && !aBoolean)
-                            return ;
+                            return;
                         //如果是读请求，前面没有相同读请求 , 将此读请求压入队列
                         if (aBoolean != null && aBoolean) {
                             cacheMap.put(request.getId(), Boolean.FALSE);
                         }
                     }
                 }
-
 
 
             } catch (Exception e) {

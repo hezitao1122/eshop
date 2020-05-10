@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @date 2019/6/17 22:41
  */
 @Service
-public class ItemParamItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItemParamItem,Long> implements ItemParamItemServiceI {
+public class ItemParamItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItemParamItem, Long> implements ItemParamItemServiceI {
     @Autowired
     private ItemParamItemMapper itemParamItemMapper;
 

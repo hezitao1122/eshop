@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "tb_item_param", schema = "eshop", catalog = "")
-public class TbItemParam extends BaseEntity  {
+public class TbItemParam extends BaseEntity {
     private long id;
     private Long itemCatId;
     private String paramData;

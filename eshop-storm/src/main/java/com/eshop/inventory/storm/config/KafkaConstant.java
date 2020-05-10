@@ -56,5 +56,4 @@ public class KafkaConstant {
     public static final String TASK_HOT = "task-hot-item-list-";
 
 
-
 }

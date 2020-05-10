@@ -16,12 +16,11 @@
         <module>sdk</module>
         <module>eureka</module>
         <module>eshop-storm</module>
-        <module>eshop-nacos</module>
-        <module>config-ui</module>
-        <module>config</module>
-
-        <module>gateway</module>
-        <module>sentinel-dashboard</module>
+<!--        <module>eshop-nacos</module>-->
+<!--        <module>config-ui</module>-->
+<!--        <module>config</module>-->
+<!--        <module>gateway</module>-->
+<!--        <module>sentinel-dashboard</module>-->
 
     </modules>
 

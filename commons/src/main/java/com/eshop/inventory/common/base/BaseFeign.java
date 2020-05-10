@@ -18,52 +18,60 @@ import java.util.List;
  * @projectName inventory
  * @date 2019/6/1823:17
  */
-public interface BaseFeign<T extends BaseDTO, ID>{
+public interface BaseFeign<T extends BaseDTO, ID> {
 
     /**
      * 功能描述: 添加一条数据<br>
      * 〈〉
+     *
      * @param t 需要添加的数据
      * @return: com.eshop.inventory.common.dto.ResultDto<T>
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2019/6/15 17:33
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    ResultDto<T> add( @RequestBody T t);
+    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    ResultDto<T> add(@RequestBody T t);
+
     /**
      * 功能描述: 删除一条数据<br>
      * 〈〉
+     *
      * @param id 需要数据的id
      * @return: com.eshop.inventory.common.dto.ResultDto<T>
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2019/6/15 17:33
      */
-    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     ResultDto<T> delete(@RequestParam(name = "id") ID id);
+
     /**
      * 功能描述: 根据id查找一条数据<br>
      * 〈〉
+     *
      * @param id
      * @return: com.eshop.inventory.common.dto.ResultDto<T>
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2019/6/15 17:33
      */
-    @RequestMapping(value = "/find",method = RequestMethod.GET)
-    ResultDto<T> find( @RequestParam(name = "id") ID id);
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    ResultDto<T> find(@RequestParam(name = "id") ID id);
+
     /**
      * 功能描述: 修改一条数据<br>
      * 〈〉
+     *
      * @param t
      * @return: com.eshop.inventory.common.dto.ResultDto<T>
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2019/6/15 17:33
      */
-    @RequestMapping(value = "/update",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     ResultDto<T> update(@RequestBody T t);
+
     /**
      * 功能描述: 根据实体类的条件进行查找<br>
      * 〈〉
@@ -74,8 +82,9 @@ public interface BaseFeign<T extends BaseDTO, ID>{
      * @Author: zeryts
      * @Date: 2019/6/29 12:52
      */
-    @RequestMapping(value = "/findByCondition",method =  RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    ResultDto<T> findByCondition( @RequestBody T t);
+    @RequestMapping(value = "/findByCondition", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    ResultDto<T> findByCondition(@RequestBody T t);
+
     /**
      * 功能描述: 根据主键批量进行查找<br>
      * 〈〉
@@ -86,7 +95,7 @@ public interface BaseFeign<T extends BaseDTO, ID>{
      * @Author: zeryts
      * @Date: 2019/6/29 12:52
      */
-    @RequestMapping(value = "/findByIds",method =  RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/findByIds", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     ResultDto<T> findByIds(@RequestBody List<ID> ids);
 
 }

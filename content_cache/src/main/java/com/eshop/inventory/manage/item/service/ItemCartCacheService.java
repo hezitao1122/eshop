@@ -11,5 +11,5 @@ import com.eshop.inventory.manage.item.dto.TbItemCartDTO;
  * @Author: hzt
  * @Date: Create in 2019/6/1814:42
  */
-public interface ItemCartCacheService extends ICacheService<TbItemCartDTO,Long> {
+public interface ItemCartCacheService extends ICacheService<TbItemCartDTO, Long> {
 }

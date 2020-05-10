@@ -18,7 +18,7 @@ import java.util.Properties;
  * @projectName inventory
  * @date 2019/6/15 15:25
  */
-public class KafkaConsumer implements Runnable{
+public class KafkaConsumer implements Runnable {
 
     /**
      * 定义kafka的consumer对象
@@ -32,6 +32,7 @@ public class KafkaConsumer implements Runnable{
     /**
      * 功能描述: 初始化构造函数，传入一个需要消费的topic<br>
      * 〈〉
+     *
      * @param topic 需要消费的topic
      * @since: 1.0.0
      * @Author: zeryts
@@ -61,6 +62,7 @@ public class KafkaConsumer implements Runnable{
     /**
      * 功能描述: 初始化kafka的consumer配置<br>
      * 〈〉
+     *
      * @return: kafka.consumer.ConsumerConfig
      * @since: 1.0.0
      * @Author: zeryts

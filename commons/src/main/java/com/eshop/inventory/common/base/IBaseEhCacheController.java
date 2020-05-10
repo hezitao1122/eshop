@@ -13,14 +13,14 @@ import java.io.Serializable;
  * @projectName inventory
  * @date 2019/6/2023:12
  */
-public interface IBaseEhCacheController<T extends BaseDTO,ID  extends Serializable> {
+public interface IBaseEhCacheController<T extends BaseDTO, ID extends Serializable> {
 
     ResultDto<T> getEhcache(ID id);
 
     ResultDto<T> deleteEhcache(ID id);
 
-    ICacheService<T,ID> getCacheService();
+    ICacheService<T, ID> getCacheService();
 
-    BaseFeign<T,ID> getFeign();
+    BaseFeign<T, ID> getFeign();
 
 }

@@ -17,18 +17,18 @@ public abstract class CacheServiceImpl<T, ID> implements ICacheService<T, ID> {
     private RedisTemplate redisTemplate;
 
     @Override
-    public T saveLoadCache(ID id,T t) {
-        redisTemplate.opsForValue().set(prefix()+id,t);
+    public T saveLoadCache(ID id, T t) {
+        redisTemplate.opsForValue().set(prefix() + id, t);
         return t;
     }
 
     @Override
     public T getLoadCache(ID id) {
         Object o = redisTemplate.opsForValue().get(prefix() + id);
-        if(o == null){
+        if (o == null) {
             return null;
         }
-        return (T)o;
+        return (T) o;
     }
 
     @Override

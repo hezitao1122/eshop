@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
  * @date 2019/6/1 1:17
  */
 @Component
-public class InitListener{
+public class InitListener {
     @PostConstruct
     public void init() {
         // 初始化工作线程池和内存队列

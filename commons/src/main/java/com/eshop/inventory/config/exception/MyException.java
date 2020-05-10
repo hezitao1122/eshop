@@ -19,7 +19,7 @@ public class MyException extends RuntimeException {
         msg = resultEnum.getMsg();
     }
 
-    public MyException(String msg){
+    public MyException(String msg) {
         this.code = 3;
         this.msg = msg;
     }

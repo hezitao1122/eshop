@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @date 2019/6/18 23:20
  */
 @Component
-public class ItemFeignRollback extends BaseFeignImpl<TbItemDTO,Long> implements ItemFeign {
+public class ItemFeignRollback extends BaseFeignImpl<TbItemDTO, Long> implements ItemFeign {
 
     @Override
     public String getClassName() {

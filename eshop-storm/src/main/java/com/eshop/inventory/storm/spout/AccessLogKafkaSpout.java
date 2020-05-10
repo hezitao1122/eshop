@@ -57,10 +57,11 @@ public class AccessLogKafkaSpout extends BaseRichSpout {
         List<KafkaStream<byte[], byte[]>> streams = consumerMap.get(KafkaConsumerConfig.TOPIC);
         //获取到这个流的集合
         for (KafkaStream stream : streams) {
-            new Thread(new KafkaMessageProcessor(stream,queue)).start();
+            new Thread(new KafkaMessageProcessor(stream, queue)).start();
         }
 
     }
+
     /**
      * 功能描述: 这个spout最终会运行在task中，这段代码最终会放在某个worker进程的某个executor线程内部的task中<br>
      * task会负责去无限循环调用此方法<br>
@@ -71,7 +72,7 @@ public class AccessLogKafkaSpout extends BaseRichSpout {
      * @Date: 2019/7/9 23:37
      */
     public void nextTuple() {
-        if(queue.size()> 0 ){
+        if (queue.size() > 0) {
             //如果存在，则需要发射出去
             try {
                 //获取message
@@ -81,11 +82,12 @@ public class AccessLogKafkaSpout extends BaseRichSpout {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             //否则休眠一会再去查询
             Utils.sleep(100);
         }
     }
+
     /**
      * 功能描述: 定义一个你发射出去的每个tuple中的每个field的名称是什么<br>
      * 〈〉

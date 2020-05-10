@@ -17,10 +17,9 @@ public abstract class KafkaBaseVo {
     private String serviceId;
 
 
-
-    public BaseEntity parseEntity(Class<? extends BaseEntity> clazz){
+    public BaseEntity parseEntity(Class<? extends BaseEntity> clazz) {
         String s = JSON.toJSONString(this);
         BaseEntity baseEntity = JSON.parseObject(s, clazz);
-        return  baseEntity;
+        return baseEntity;
     }
 }

@@ -18,10 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/shopping")
-public class OrderShoppingController  extends BaseDBController<TbOrderShipping, String> {
+public class OrderShoppingController extends BaseDBController<TbOrderShipping, String> {
     @Autowired
     private OrderShoppingServiceI orderShoppingService;
-
 
 
     @Override

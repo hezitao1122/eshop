@@ -18,13 +18,10 @@ import org.springframework.stereotype.Service;
  * @date 2019/6/17 22:14
  */
 @Service
-public class ItemCartServiceImpl extends BaseDBAndCacheServiceImpl<TbItemCat,Long> implements ItemCartServiceI {
+public class ItemCartServiceImpl extends BaseDBAndCacheServiceImpl<TbItemCat, Long> implements ItemCartServiceI {
 
     @Autowired
     private ItemCartMapper itemCartMapper;
-
-
-
 
 
     @Override

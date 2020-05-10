@@ -13,7 +13,7 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
 public class DesEncryptionUtil {
-	//算法名称 
+    //算法名称
     public static final String KEY_ALGORITHM = "DES";
     //算法名称/加密模式/填充方式 
     //DES共有四种工作模式-->>ECB：电子密码本模式、CBC：加密分组链接模式、CFB：加密反馈模式、OFB：输出反馈模式
@@ -22,18 +22,18 @@ public class DesEncryptionUtil {
     public static String key = "A1B2C3D4E5F60708";
 
     public String getKey() {
-		return key;
-	}
+        return key;
+    }
 
-	/**
-     *   
+    /**
      * 生成密钥key对象
+     *
      * @param keyStr 密钥字符串
-     * @return 密钥对象 
-     * @throws InvalidKeyException   
-     * @throws NoSuchAlgorithmException   
-     * @throws InvalidKeySpecException   
-     * @throws Exception 
+     * @return 密钥对象
+     * @throws InvalidKeyException
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeySpecException
+     * @throws Exception
      */
     private static SecretKey keyGenerator(String keyStr) throws Exception {
         byte input[] = HexString2Bytes(keyStr);
@@ -62,11 +62,12 @@ public class DesEncryptionUtil {
         return b;
     }
 
-    /** 
+    /**
      * 加密数据
+     *
      * @param data 待加密数据
-     * @param key 密钥
-     * @return 加密后的数据 
+     * @param key  密钥
+     * @return 加密后的数据
      */
     public static String encrypt(String data, String key) throws Exception {
         Key deskey = keyGenerator(key);
@@ -85,11 +86,12 @@ public class DesEncryptionUtil {
         return Base64.encodeBase64String(results);
     }
 
-    /** 
-     * 解密数据 
-     * @param data 待解密数据 
-     * @param key 密钥 
-     * @return 解密后的数据 
+    /**
+     * 解密数据
+     *
+     * @param data 待解密数据
+     * @param key  密钥
+     * @return 解密后的数据
      */
     public static String decrypt(String data, String key) throws Exception {
         Key deskey = keyGenerator(key);

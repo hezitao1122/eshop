@@ -46,6 +46,7 @@ public class LogAnalysisBolt extends BaseRichBolt {
     public void prepare(Map conf, TopologyContext context, OutputCollector collector) {
         this.collector = collector;
     }
+
     /**
      * 功能描述: 每次接收到一条数据后就会交付给此方法来执行<br>
      * 〈〉
@@ -64,12 +65,13 @@ public class LogAnalysisBolt extends BaseRichBolt {
         JSONObject obje = JSON.parseObject(message);
         //获取到这条数据的id
         Long id = obje.getLong(KafkaConstant.ID);
-        if(id != null)
+        if (id != null)
             //发射出去
             collector.emit(new Values(id));
 
 
     }
+
     /**
      * 功能描述: 定义发送field的名称<br>
      * 〈〉

@@ -22,7 +22,7 @@ import java.util.Objects;
 @Table(name = "tb_item", schema = "eshop")
 //@Proxy(lazy = false)
 @TableName(value = "tb_item")
-public class TbItem extends BaseEntity  {
+public class TbItem extends BaseEntity {
     @TableId(value = "id", type = IdType.AUTO)
     private long id;
     private String title;

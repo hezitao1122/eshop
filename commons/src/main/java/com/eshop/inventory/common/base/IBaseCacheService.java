@@ -10,19 +10,20 @@ import com.eshop.inventory.common.entity.BaseEntity;
  * @projectName inventory
  * @date 2019/6/1516:51
  */
-public interface IBaseCacheService<T extends BaseEntity,ID> {
+public interface IBaseCacheService<T extends BaseEntity, ID> {
 
     /**
      * 功能描述: 缓存根据主键查询单条数据<br>
      * 〈〉
      *
      * @param id 在缓存中的key
-     * @param t 存储的对象
+     * @param t  存储的对象
      * @since: 1.0.0
      * @author zeryts
      * @Date: 2019/5/30 23:32
      */
-    void setCache(ID id,T t);
+    void setCache(ID id, T t);
+
     /**
      * 功能描述: 缓存根据主键查询单条数据<br>
      * 〈〉
@@ -33,6 +34,7 @@ public interface IBaseCacheService<T extends BaseEntity,ID> {
      * @Date: 2019/5/30 23:32
      */
     T getCacheById(ID id);
+
     /**
      * 功能描述: 缓存根据主键删除单条数据<br>
      * 〈〉

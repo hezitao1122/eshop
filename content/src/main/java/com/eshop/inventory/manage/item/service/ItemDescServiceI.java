@@ -11,5 +11,5 @@ import com.eshop.inventory.manage.item.entity.TbItemDesc;
  * @projectName inventory
  * @date 2019/6/1722:21
  */
-public interface ItemDescServiceI extends IBaseDBAndCacheService<TbItemDesc,Long> {
+public interface ItemDescServiceI extends IBaseDBAndCacheService<TbItemDesc, Long> {
 }

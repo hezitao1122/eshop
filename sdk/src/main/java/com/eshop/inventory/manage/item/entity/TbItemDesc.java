@@ -21,8 +21,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_item_desc", schema = "eshop", catalog = "")
 @TableName(value = "tb_item_desc")
-public class TbItemDesc extends BaseEntity  {
-    @TableId(value = "item_id",type = IdType.ID_WORKER)
+public class TbItemDesc extends BaseEntity {
+    @TableId(value = "item_id", type = IdType.ID_WORKER)
     private long itemId;
     @TableField(value = "item_desc")
     private String itemDesc;

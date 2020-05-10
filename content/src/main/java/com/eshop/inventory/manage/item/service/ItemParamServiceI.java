@@ -11,5 +11,5 @@ import com.eshop.inventory.manage.item.entity.TbItemParam;
  * @projectName inventory
  * @date 2019/6/1722:30
  */
-public interface ItemParamServiceI extends IBaseDBAndCacheService<TbItemParam,Long> {
+public interface ItemParamServiceI extends IBaseDBAndCacheService<TbItemParam, Long> {
 }

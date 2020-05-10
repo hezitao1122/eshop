@@ -34,10 +34,10 @@ public interface RuleConsts {
     String GROUPID = "SENTINEL_GROUP";
     String NAMESPACE_SET = "cluster-server-namespace-set";
     String TRANSPORT_CONFIG = "cluster-server-transport-config";
-    String CONFIG_DATA_ID =  "-cluster-client-config";
-    String CONFIG_DATA_ID_CHANNEL =  "-cluster-client-config-channel";
-    String CONFIG_ASSIGN_DATA_ID =  "-cluster-client-config-assign";
-    String CONFIG_ASSIGN_DATA_ID_CHANNEL =  "-cluster-client-config-assign-channel";
+    String CONFIG_DATA_ID = "-cluster-client-config";
+    String CONFIG_DATA_ID_CHANNEL = "-cluster-client-config-channel";
+    String CONFIG_ASSIGN_DATA_ID = "-cluster-client-config-assign";
+    String CONFIG_ASSIGN_DATA_ID_CHANNEL = "-cluster-client-config-assign-channel";
     String CLUSTER_MAP_DATA_ID = "-cluster-map";
     String FLOW_POSTFIX = "-flow-rules";
     String FLOW_POSTFIX_CHANNEL = "-flow-rules-chennel";

@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "tb_order_shipping", schema = "eshop", catalog = "")
-public class TbOrderShipping extends BaseEntity  {
+public class TbOrderShipping extends BaseEntity {
     private String orderId;
     private String receiverName;
     private String receiverPhone;

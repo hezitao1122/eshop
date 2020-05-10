@@ -51,7 +51,7 @@ public class HotCountBolt extends BaseRichBolt {
      */
     public void prepare(Map conf, TopologyContext context, OutputCollector collector) {
         this.collector = collector;
-        new Thread(new ItemCountThread(countMap,session,context.getThisTaskId())).start();
+        new Thread(new ItemCountThread(countMap, session, context.getThisTaskId())).start();
         //1. 将自己的一个taskid写入一个zookeeper node中，形成taskid的列表
         //2. 然后每次都将自己的热门商品列表,写入自己的taskid对应的zookeeper节点
         //3. 并行的预热程序才能从第一步中知道,那些taskid
@@ -71,15 +71,15 @@ public class HotCountBolt extends BaseRichBolt {
     private void initTaskId(int taskId) {
         //加锁
         session.acquireDistributedLock(KafkaConstant.TASK_ID_LIST);
-        log.info("[Item获取到taskid list] taskid list = {}",taskId);
+        log.info("[Item获取到taskid list] taskid list = {}", taskId);
         String nodeData = session.getNodeData("/" + KafkaConstant.TASK_ID_LIST);
-        if(StringUtils.isNotEmpty(nodeData)){
-            nodeData += ","+taskId;
-        }else{
-            nodeData = taskId+"";
+        if (StringUtils.isNotEmpty(nodeData)) {
+            nodeData += "," + taskId;
+        } else {
+            nodeData = taskId + "";
         }
-        session.setNodeData("/" + KafkaConstant.TASK_ID_LIST,nodeData);
-        log.info("[ItemCountBlot设置taskId List] taskIdList = {}" , nodeData);
+        session.setNodeData("/" + KafkaConstant.TASK_ID_LIST, nodeData);
+        log.info("[ItemCountBlot设置taskId List] taskIdList = {}", nodeData);
         //释放锁
         session.releaseDistributedLock(KafkaConstant.TASK_ID_LIST);
 
@@ -97,14 +97,14 @@ public class HotCountBolt extends BaseRichBolt {
     public void execute(Tuple tuple) {
         //获取id
         Long id = tuple.getLongByField(KafkaConstant.ID);
-        log.info("[接收到一个itemId] id ->[{}]",id);
+        log.info("[接收到一个itemId] id ->[{}]", id);
         Long count = countMap.get(id);
         if (count == null)
             count = 0L;
         count++;
         //计算
         countMap.put(id, count);
-        log.info("[ItemId 完成商品访问次数统计]， id->[{}] , count->[{}]",id,count);
+        log.info("[ItemId 完成商品访问次数统计]， id->[{}] , count->[{}]", id, count);
 
     }
 

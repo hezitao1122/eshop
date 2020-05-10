@@ -26,9 +26,9 @@ public class RequestQueue<ID> {
 
     /**
      * 单例有很多种方式去实现：我采取绝对线程安全的一种方式
-     *
+     * <p>
      * 静态内部类的方式，去初始化单例
-     *
+     * <p>
      * 内部类的初始化，一定只会发生一次，不管多少个线程并发去初始化
      */
     private static class Singleton {
@@ -44,8 +44,10 @@ public class RequestQueue<ID> {
         }
 
     }
+
     /**
      * 功能描述: 获取单例的请求内存队列<br>
+     *
      * @return: com.eshop.inventory.manage.item.request.RequestQueue
      * @since: 1.0.0
      * @author zeryts
@@ -54,6 +56,7 @@ public class RequestQueue<ID> {
     public static RequestQueue getInstance() {
         return Singleton.getInstance();
     }
+
     /**
      * 功能描述: 添加一个内存队列<br>
      * 〈〉
@@ -63,18 +66,22 @@ public class RequestQueue<ID> {
      * @author zeryts
      * @Date: 2019/5/31 22:19
      */
-    public void addRequestQueue(ArrayBlockingQueue<Request> queue){this.queues.add(queue);}
+    public void addRequestQueue(ArrayBlockingQueue<Request> queue) {
+        this.queues.add(queue);
+    }
 
     /**
      * 功能描述: 获取内存队列的数量<br>
+     *
      * @return: int
      * @since: 1.0.0
      * @author zeryts
      * @Date: 2019/5/30 23:14
      */
-    public int getSize(){
+    public int getSize() {
         return queues.size();
     }
+
     /**
      * 功能描述: 根据hash的路由路径获取对应的内存队列<br>
      * 〈〉
@@ -85,7 +92,7 @@ public class RequestQueue<ID> {
      * @author zeryts
      * @Date: 2019/5/30 23:17
      */
-    public ArrayBlockingQueue<Request> getQueue(int index){
+    public ArrayBlockingQueue<Request> getQueue(int index) {
         return queues.get(index);
     }
 

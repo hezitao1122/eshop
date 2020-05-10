@@ -8,9 +8,8 @@ package com.eshop.inventory.manage.common.enums;
  * @projectName inventory
  * @date 2019/6/15 22:17
  */
-public enum  EhcacheTypeEnum {
-    ITEM("EHCACHE:ITEM:","商品信息")
-    ;
+public enum EhcacheTypeEnum {
+    ITEM("EHCACHE:ITEM:", "商品信息");
 
 
     private String name;
@@ -30,6 +29,7 @@ public enum  EhcacheTypeEnum {
     public String getMsg() {
         return msg;
     }
+
     /**
      * 功能描述: 根据名称获取枚举对象<br>
      * 〈〉
@@ -40,9 +40,9 @@ public enum  EhcacheTypeEnum {
      * @author zeryts
      * @Date: 2019/5/30 23:47
      */
-    public EhcacheTypeEnum getEnumByName(String name){
-        for (EhcacheTypeEnum  e:EhcacheTypeEnum.values() ){
-            if(e.name.equals(name) ){
+    public EhcacheTypeEnum getEnumByName(String name) {
+        for (EhcacheTypeEnum e : EhcacheTypeEnum.values()) {
+            if (e.name.equals(name)) {
                 return e;
             }
         }

@@ -18,11 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/item/cart")
-public class ItemCartController extends BaseDBController<TbItemCat,Long> {
+public class ItemCartController extends BaseDBController<TbItemCat, Long> {
     @Autowired
     private ItemCartServiceI itemCartService;
-
-
 
 
     @Override

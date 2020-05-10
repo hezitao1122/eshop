@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @date 2019/6/12 23:32
  */
 @Service
-public class ItemCacheServiceImpl extends CacheServiceImpl<TbItemDTO,Long> implements ItemCacheService {
+public class ItemCacheServiceImpl extends CacheServiceImpl<TbItemDTO, Long> implements ItemCacheService {
     /**
      * redis对应商品信息的前缀
      */
@@ -28,6 +28,7 @@ public class ItemCacheServiceImpl extends CacheServiceImpl<TbItemDTO,Long> imple
     /**
      * 功能描述: 将商品存入缓存中<br>
      * 〈〉
+     *
      * @param tbItemDTO
      * @return: com.eshop.inventory.manage.item.dto.TbItemDTO
      * @since: 1.0.0
@@ -38,9 +39,11 @@ public class ItemCacheServiceImpl extends CacheServiceImpl<TbItemDTO,Long> imple
     public TbItemDTO saveLoadEhCache(TbItemDTO tbItemDTO) {
         return tbItemDTO;
     }
+
     /**
      * 功能描述: 从缓存中取商品信息，没取到就是null<br>
      * 〈〉
+     *
      * @param id 商品的id
      * @return: com.eshop.inventory.manage.item.dto.TbItemDTO
      * @since: 1.0.0
@@ -52,7 +55,7 @@ public class ItemCacheServiceImpl extends CacheServiceImpl<TbItemDTO,Long> imple
         return null;
     }
 
-    @CacheEvict(value = "local" , key = "'EHCACHE:ITEM:'+#id")
+    @CacheEvict(value = "local", key = "'EHCACHE:ITEM:'+#id")
     public void delLoadEhCache(Long id) {
     }
 

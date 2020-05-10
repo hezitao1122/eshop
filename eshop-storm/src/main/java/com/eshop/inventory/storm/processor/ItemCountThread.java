@@ -20,29 +20,29 @@ import java.util.*;
  * @projectName inventory
  * @date 2019/9/21 15:46
  */
-public class ItemCountThread implements Runnable{
+public class ItemCountThread implements Runnable {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     /**
      * 需要传入一个Map
      */
-    private LRUMap<Long,Long> countMap ;
+    private LRUMap<Long, Long> countMap;
 
     /**
      * 和一个zookeeper工具类
      */
-    private  ZooKeeperSession session;
+    private ZooKeeperSession session;
 
     /**
      * 任务的id
      */
     private int taskId;
 
-    public ItemCountThread(LRUMap<Long,Long> countMap , ZooKeeperSession session , int taskId){
-         this.countMap = countMap;
-         this.session = session;
-         this.taskId = taskId;
+    public ItemCountThread(LRUMap<Long, Long> countMap, ZooKeeperSession session, int taskId) {
+        this.countMap = countMap;
+        this.session = session;
+        this.taskId = taskId;
     }
 
     public void run() {
@@ -50,27 +50,27 @@ public class ItemCountThread implements Runnable{
 //        List<Map.Entry<Long,Long>> topList = new ArrayList<Map.Entry<Long, Long>>();
 
 
-        while(true){
+        while (true) {
 
-            Map<Long,Long> resourceMap = new LinkedHashMap<>(countMap);
-            log.info("[ItemCountThread打印topNItemList的长度] size ->[{}]",resourceMap.size());
-            if(resourceMap == null || resourceMap.isEmpty()){
+            Map<Long, Long> resourceMap = new LinkedHashMap<>(countMap);
+            log.info("[ItemCountThread打印topNItemList的长度] size ->[{}]", resourceMap.size());
+            if (resourceMap == null || resourceMap.isEmpty()) {
                 Utils.sleep(100);
                 continue;
             }
             Map<Long, Long> topNMap = SoltUtil.soltByValue(resourceMap, false);
-            List<Map<String,Long>> topNList = new ArrayList<>();
+            List<Map<String, Long>> topNList = new ArrayList<>();
 
-            topNMap.forEach((k,v)->{
-                Map<String,Long> map = new HashMap<>();
-                map.put("key",k);
-                map.put("value",v);
+            topNMap.forEach((k, v) -> {
+                Map<String, Long> map = new HashMap<>();
+                map.put("key", k);
+                map.put("value", v);
                 topNList.add(map);
             });
             String str = JSONArray.toJSONString(topNList);
-            log.info("[ItemCountThread计算出一份topN热门商品数据]， TopN信息为-》["+str+"]");
-            session.setNodeData("/" + KafkaConstant.TASK_HOT + taskId,str);
-            log.info("task hot node taskId -> [{}] , value -> [{}]",taskId,str);
+            log.info("[ItemCountThread计算出一份topN热门商品数据]， TopN信息为-》[" + str + "]");
+            session.setNodeData("/" + KafkaConstant.TASK_HOT + taskId, str);
+            log.info("task hot node taskId -> [{}] , value -> [{}]", taskId, str);
             //间隔性的
             Utils.sleep(60000);
         }
@@ -78,14 +78,14 @@ public class ItemCountThread implements Runnable{
 
 
     public static void main(String[] args) {
-        Map<Integer,Integer> re = new HashMap<>();
+        Map<Integer, Integer> re = new HashMap<>();
         Random r = new Random(1999);
-        for(int i =0; i< 100; i++)
-            re.put(i,r.nextInt(199));
+        for (int i = 0; i < 100; i++)
+            re.put(i, r.nextInt(199));
 
-        Map<Integer, Integer> map= SoltUtil.soltByValue(re, false);
+        Map<Integer, Integer> map = SoltUtil.soltByValue(re, false);
 
-        map.forEach((k,v)-> System.out.println("k = "+ k + ", v = " + v));
+        map.forEach((k, v) -> System.out.println("k = " + k + ", v = " + v));
 
     }
 }

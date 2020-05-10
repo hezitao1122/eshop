@@ -37,18 +37,22 @@ public class KafkaConfig {
     public void setZookeeperConnect(String zookeeperConnect) {
         ZOOKEEPER_CONNECT = zookeeperConnect;
     }
+
     @Value("#{zookeeper.group.id}")
     public void setGroupId(String groupId) {
         GROUP_ID = groupId;
     }
+
     @Value("#{zookeeper.session.timeout}")
     public void setZookeeperSessionTimeout(String zookeeperSessionTimeout) {
         ZOOKEEPER_SESSION_TIMEOUT = zookeeperSessionTimeout;
     }
+
     @Value("#{zookeeper.sync.time}")
     public void setZookeeperSyncTime(String zookeeperSyncTime) {
         ZOOKEEPER_SYNC_TIME = zookeeperSyncTime;
     }
+
     @Value("#{zookeeper.auto.commit.interval}")
     public void setAutoCommitInterval(String autoCommitInterval) {
         AUTO_COMMIT_INTERVAL = autoCommitInterval;

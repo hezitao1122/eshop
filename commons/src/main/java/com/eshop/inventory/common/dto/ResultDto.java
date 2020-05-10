@@ -31,15 +31,7 @@ public class ResultDto<T> {
      * @param data 返回结果集
      */
     public ResultDto(T data) {
-        this(ResultEnum.SUCCESS,data);
-    }
-    /**
-     * 用于返回结果的方法,带data
-     *
-     * @param dataLis 返回结果集
-     */
-    public ResultDto(List<T> dataLis) {
-        this(ResultEnum.SUCCESS,dataLis);
+        this(ResultEnum.SUCCESS, data);
     }
 
     /**
@@ -47,7 +39,16 @@ public class ResultDto<T> {
      *
      * @param dataLis 返回结果集
      */
-    public ResultDto(ResultEnum resultEnum,List<T> dataLis) {
+    public ResultDto(List<T> dataLis) {
+        this(ResultEnum.SUCCESS, dataLis);
+    }
+
+    /**
+     * 用于返回结果的方法,带data
+     *
+     * @param dataLis 返回结果集
+     */
+    public ResultDto(ResultEnum resultEnum, List<T> dataLis) {
         this.dataLis = dataLis;
         this.code = resultEnum.getCode();
         this.msg = resultEnum.getMsg();
@@ -74,12 +75,13 @@ public class ResultDto<T> {
         code = resultEnum.getCode();
         msg = resultEnum.getMsg();
     }
+
     /**
      * 用于返回结果的方法,不带data
      *
      * @param resultEnum 结果枚举
      */
-    private ResultDto(ResultEnum resultEnum,String msg) {
+    private ResultDto(ResultEnum resultEnum, String msg) {
         this.code = resultEnum.getCode();
         this.msg = msg;
     }
@@ -95,6 +97,7 @@ public class ResultDto<T> {
         this.code = e.getCode();
         this.msg = e.getMsg();
     }
+
     /**
      * 不通过枚举进行返回的方法,不带参数
      *

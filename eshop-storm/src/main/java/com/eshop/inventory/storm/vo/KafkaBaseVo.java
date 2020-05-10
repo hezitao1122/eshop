@@ -11,9 +11,9 @@ package com.eshop.inventory.storm.vo;
 public abstract class KafkaBaseVo {
     private String serviceId;
 
-     private Long id;
+    private Long id;
 
-   public String getServiceId() {
+    public String getServiceId() {
         return serviceId;
     }
 

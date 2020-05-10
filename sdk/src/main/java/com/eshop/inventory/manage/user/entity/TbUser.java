@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "tb_user", schema = "eshop", catalog = "")
-public class TbUser extends BaseEntity  {
+public class TbUser extends BaseEntity {
     private long id;
     private String username;
     private String password;

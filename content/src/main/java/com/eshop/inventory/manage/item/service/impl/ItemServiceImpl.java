@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  * @date 2019/5/30 23:37
  */
 @Service
-public class ItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItem,Long> implements ItemServiceI {
+public class ItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItem, Long> implements ItemServiceI {
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(ItemServiceImpl.class);
     @Autowired
@@ -32,7 +32,7 @@ public class ItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItem,Long> impl
 
     @Override
     public TbItem update(TbItem tbItem) {
-        log.info("===========日志===========: 已修改数据库中的库存，商品id=[{}]" , JSON.toJSONString(tbItem) );
+        log.info("===========日志===========: 已修改数据库中的库存，商品id=[{}]", JSON.toJSONString(tbItem));
         TbItem item = new TbItem();
         item.setId(tbItem.getId());
         item.setNum(tbItem.getNum());
@@ -51,13 +51,13 @@ public class ItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItem,Long> impl
     }
 
     @Override
-    public void setCache(Long id,TbItem tbItem) {
+    public void setCache(Long id, TbItem tbItem) {
         //       stringRedisTemplate.opsForValue().set(RedisCachePrefixEnum.ITEM_NUM.getName()+tbItem.getId(), JSON.toJSONString(tbItem));
         TbItem item = new TbItem();
         item.setNum(tbItem.getNum());
         item.setId(tbItem.getId());
-        log.info("===========日志===========: 已更新商品库存的缓存，商品=[{}]" , JSON.toJSONString(tbItem) + ", key = [{}]", RedisCachePrefixEnum.ITEM_NUM.getName()+tbItem.getId());
-        redisTemplate.opsForValue().set(RedisCachePrefixEnum.ITEM_NUM.getName()+tbItem.getId(),item);
+        log.info("===========日志===========: 已更新商品库存的缓存，商品=[{}]", JSON.toJSONString(tbItem) + ", key = [{}]", RedisCachePrefixEnum.ITEM_NUM.getName() + tbItem.getId());
+        redisTemplate.opsForValue().set(RedisCachePrefixEnum.ITEM_NUM.getName() + tbItem.getId(), item);
     }
 
 
@@ -65,6 +65,7 @@ public class ItemServiceImpl extends BaseDBAndCacheServiceImpl<TbItem,Long> impl
     protected String getPrefix() {
         return RedisCachePrefixEnum.ITEM_NUM.getName();
     }
+
     @Override
     protected BaseMapper<TbItem> getMapper() {
         return itemMapper;

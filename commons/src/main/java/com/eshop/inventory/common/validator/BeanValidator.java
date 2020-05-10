@@ -24,7 +24,7 @@ public class BeanValidator {
      * @param groups 校验的集合
      * @description: 校验类的发膜护发
      * @author: hzt
-     * @return: java.util.Map<java.lang.String                                                               ,                                                               java.lang.String>
+     * @return: java.util.Map<java.lang.String, java.lang.String>
      * @date: 2018/11/4 15:42
      */
     public static <T> Map<String, String> validate(T t, Class... groups) {
@@ -52,7 +52,7 @@ public class BeanValidator {
      * @param collection 校验的集合
      * @description: 校验集合的方法
      * @author: hzt
-     * @return: java.util.Map<java.lang.String               ,               java.lang.String>
+     * @return: java.util.Map<java.lang.String, java.lang.String>
      * @date: 2018/11/4 15:43
      */
     public static Map<String, String> valisatorList(Collection<?> collection) {
@@ -74,7 +74,7 @@ public class BeanValidator {
      * @param objects 传入此值则校验集合
      * @description: 校验object的方法 进行封装
      * @author: hzt
-     * @return: java.util.Map<java.lang.String               ,               java.lang.String>
+     * @return: java.util.Map<java.lang.String, java.lang.String>
      * @date: 2018/11/4 15:45
      * @throws:
      */

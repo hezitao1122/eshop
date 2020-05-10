@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/item/param")
-public class ItemParamController extends BaseDBController<TbItemParam,Long> {
+public class ItemParamController extends BaseDBController<TbItemParam, Long> {
     @Autowired
     private ItemParamServiceI itemParamService;
 

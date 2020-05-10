@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @Date: Create in 2019/6/1814:44
  */
 @Service
-public class ItemCartCacheServiceImpl extends CacheServiceImpl<TbItemCartDTO,Long> implements ItemCartCacheService {
+public class ItemCartCacheServiceImpl extends CacheServiceImpl<TbItemCartDTO, Long> implements ItemCartCacheService {
     /**
      * redis对应商品信息的前缀
      */

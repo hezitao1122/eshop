@@ -11,7 +11,7 @@ import com.eshop.inventory.manage.item.entity.TbItem;
  * @projectName inventory
  * @date 2019/5/3023:27
  */
-public interface ItemServiceI extends IBaseDBAndCacheService<TbItem,Long> {
+public interface ItemServiceI extends IBaseDBAndCacheService<TbItem, Long> {
 
     TbItem getNumById(Long itemId);
 

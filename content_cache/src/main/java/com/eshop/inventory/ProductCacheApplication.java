@@ -25,14 +25,12 @@ import org.springframework.context.annotation.Bean;
 @EnableFeignClients //开启feign的注解
 public class ProductCacheApplication {
 
-    public static ApplicationContext app= null;
+    public static ApplicationContext app = null;
 
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(ProductCacheApplication.class, args);
         app = run;
     }
-
-
 
 
     @Bean
