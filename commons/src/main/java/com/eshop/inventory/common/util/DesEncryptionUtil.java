@@ -28,7 +28,7 @@ public class DesEncryptionUtil {
 	/**
      *   
      * 生成密钥key对象
-     * @param KeyStr 密钥字符串
+     * @param keyStr 密钥字符串
      * @return 密钥对象 
      * @throws InvalidKeyException   
      * @throws NoSuchAlgorithmException   
