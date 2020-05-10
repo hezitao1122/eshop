@@ -11,7 +11,7 @@ import com.eshop.inventory.manage.user.entity.TbUser;
  * @projectName inventory
  * @date 2019/6/1723:36
  */
-public interface UserServiceI extends IBaseDBAndCacheService<TbUser, Long> {
+public interface UserService extends IBaseDBAndCacheService<TbUser, Long> {
 
 
 }

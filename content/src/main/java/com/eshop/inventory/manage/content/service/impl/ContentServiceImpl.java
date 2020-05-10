@@ -5,7 +5,7 @@ import com.eshop.inventory.common.base.impl.BaseDBAndCacheServiceImpl;
 import com.eshop.inventory.manage.common.enums.RedisCachePrefixEnum;
 import com.eshop.inventory.manage.content.entity.TbContent;
 import com.eshop.inventory.manage.content.mapper.ContentMapper;
-import com.eshop.inventory.manage.content.service.ContentServiceI;
+import com.eshop.inventory.manage.content.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @date 2019/6/17 23:01
  */
 @Service
-public class ContentServiceImpl extends BaseDBAndCacheServiceImpl<TbContent, Long> implements ContentServiceI {
+public class ContentServiceImpl extends BaseDBAndCacheServiceImpl<TbContent, Long> implements ContentService {
     @Autowired
     private ContentMapper contentMapper;
 

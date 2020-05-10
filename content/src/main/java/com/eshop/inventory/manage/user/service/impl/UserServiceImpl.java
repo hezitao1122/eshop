@@ -5,7 +5,7 @@ import com.eshop.inventory.common.base.impl.BaseDBAndCacheServiceImpl;
 import com.eshop.inventory.manage.common.enums.RedisCachePrefixEnum;
 import com.eshop.inventory.manage.user.entity.TbUser;
 import com.eshop.inventory.manage.user.mapper.UserMapper;
-import com.eshop.inventory.manage.user.service.UserServiceI;
+import com.eshop.inventory.manage.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @date 2019/6/17 23:36
  */
 @Service
-public class UserServiceImpl extends BaseDBAndCacheServiceImpl<TbUser, Long> implements UserServiceI {
+public class UserServiceImpl extends BaseDBAndCacheServiceImpl<TbUser, Long> implements UserService {
     @Autowired
     private UserMapper userMapper;
 

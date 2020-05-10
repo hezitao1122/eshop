@@ -11,5 +11,5 @@ import com.eshop.inventory.manage.content.entity.TbContentCategory;
  * @projectName inventory
  * @date 2019/6/1723:10
  */
-public interface ContentCategoryServiceI extends IBaseDBAndCacheService<TbContentCategory, Long> {
+public interface ContentCategoryService extends IBaseDBAndCacheService<TbContentCategory, Long> {
 }
