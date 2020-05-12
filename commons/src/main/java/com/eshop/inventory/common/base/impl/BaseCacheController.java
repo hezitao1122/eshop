@@ -5,6 +5,7 @@ import com.eshop.inventory.common.base.IBaseEhCacheController;
 import com.eshop.inventory.common.dto.BaseDTO;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.common.queue.RebuildCacheQueue;
+import com.netflix.hystrix.HystrixCommand;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.Serializable;
@@ -54,8 +55,15 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
          * 4.后台异步去执行更新缓存
          */
         if (t == null) {
-            ResultDto<T> tResultDto = getFeign().find(id);
-            t = tResultDto.getData();
+            HystrixCommand<T> hystrixyCommand = getHystrixyCommand(id);
+            if (hystrixyCommand == null) {
+                //如果HystrixCommand为空，直接调用
+                ResultDto<T> tResultDto = getFeign().find(id);
+                t = tResultDto.getData();
+            } else {
+                //如果HystrixCommand不为空,使用Hystrix调用
+                t = hystrixyCommand.execute();
+            }
             RebuildCacheQueue.getInstance().add(t);
         }
         return new ResultDto<T>(t);

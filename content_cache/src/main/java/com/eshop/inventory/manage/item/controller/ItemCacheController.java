@@ -8,6 +8,7 @@ import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.manage.item.dto.TbItemDTO;
 import com.eshop.inventory.manage.item.feign.ItemFeign;
 import com.eshop.inventory.manage.item.service.ItemCacheService;
+import com.netflix.hystrix.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +47,11 @@ public class ItemCacheController extends BaseCacheController<TbItemDTO, Long> {
     @Override
     public BaseFeign<TbItemDTO, Long> getFeign() {
         return itemFeign;
+    }
+
+    @Override
+    public HystrixCommand<TbItemDTO> getHystrixyCommand(Long id) {
+        return null;
     }
 
 }

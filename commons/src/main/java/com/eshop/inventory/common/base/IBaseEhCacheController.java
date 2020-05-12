@@ -2,6 +2,7 @@ package com.eshop.inventory.common.base;
 
 import com.eshop.inventory.common.dto.BaseDTO;
 import com.eshop.inventory.common.dto.ResultDto;
+import com.netflix.hystrix.HystrixCommand;
 
 import java.io.Serializable;
 
@@ -22,5 +23,7 @@ public interface IBaseEhCacheController<T extends BaseDTO, ID extends Serializab
     ICacheService<T, ID> getCacheService();
 
     BaseFeign<T, ID> getFeign();
+
+    HystrixCommand<T> getHystrixyCommand(ID id);
 
 }
