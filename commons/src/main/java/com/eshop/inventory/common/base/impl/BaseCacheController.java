@@ -69,7 +69,24 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
                 t = tResultDto.getData();
             } else {
                 //如果HystrixCommand不为空,使用Hystrix调用
+                /**
+                 * execute 代表同步执行
+                 */
+
                 t = hystrixyCommand.execute();
+
+                /**
+                 * 异步执行
+                 */
+                /*
+                    Future<T> queue = hystrixyCommand.queue();
+                    try {
+                        Thread.sleep(1000);
+                        T t1 = queue.get();
+                    } catch (Exception e) {
+                        log.info(e.toString(), e);
+                    }
+                 */
             }
             RebuildCacheQueue.getInstance().add(t);
         }
@@ -86,7 +103,16 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
     @Override
     public ResultDto<List<T>> getBatchCache(List<ID> ids) {
         HystrixObservableCommand<T> command = getHystrixObservableCommand(ids);
+
+        /**
+         *  消息队列模式，订阅一个从依赖请求中响应的Observable对象，拿到后就执行了
+         */
         Observable<T> observe = command.observe();
+        /**
+         *  消息队列模式，延迟订阅,订阅一个从依赖请求中响应的Observable对象， 在subscribe方法执行的时候才去执行
+         */
+//        Observable<T> observe1 = command.toObservable();
+
         ResultDto<List<T>> dto = new ResultDto<List<T>>();
         List<T> list = new ArrayList<>();
         dto.setData(list);
@@ -105,13 +131,13 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
                 /**
                  * 抛错的情况调用此方法
                  */
-                log.info(e.toString(),e);
+                log.info(e.toString(), e);
             }
 
             @Override
             public void onNext(T t) {
                 // on next里面执行的方法的返回
-                log.info("执行的返回数据为：[result -> {}]" , t);
+                log.info("执行的返回数据为：[result -> {}]", t);
                 list.add(t);
             }
         });
@@ -121,15 +147,18 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
     /**
      * 功能描述: 抽象的Feign<br>
      * 〈〉
-     * @return: com.eshop.inventory.common.base.BaseFeign<T,ID>
+     *
+     * @return: com.eshop.inventory.common.base.BaseFeign<T, ID>
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2020/5/14 21:42
      */
     abstract public BaseFeign<T, ID> getFeign();
+
     /**
      * 功能描述: 高可用Hystrix根据ID查询的HystrixCommand<br>
      * 〈〉
+     *
      * @param id 查询的数据ID
      * @return: com.netflix.hystrix.HystrixCommand<T>
      * @since: 1.0.0
@@ -141,6 +170,7 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
     /**
      * 功能描述: 高可用Hystrix下批量查询的HystrixObservableCommand<br>
      * 〈〉
+     *
      * @param ids 批量查询的id
      * @return: com.netflix.hystrix.HystrixObservableCommand<T>
      * @since: 1.0.0

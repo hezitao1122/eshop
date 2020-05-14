@@ -24,12 +24,12 @@ import java.util.List;
 @Slf4j
 public class ItemCacheBatchPerwarmCommand extends HystrixObservableCommand<TbItemDTO> {
 
-    private List<Long> ids ;
+    private List<Long> ids;
 
     @Autowired
     private ItemFeign itemFeign;
 
-    public ItemCacheBatchPerwarmCommand(List<Long> ids){
+    public ItemCacheBatchPerwarmCommand(List<Long> ids) {
         super(HystrixCommandGroupKey.Factory.asKey("ItemCachePerwarmCommandGroup"));
         this.ids = ids;
     }
@@ -39,19 +39,17 @@ public class ItemCacheBatchPerwarmCommand extends HystrixObservableCommand<TbIte
         return Observable.create(new Observable.OnSubscribe<TbItemDTO>() {
             @Override
             public void call(Subscriber<? super TbItemDTO> subscriber) {
-                try{
-                    if(subscriber.isUnsubscribed()){
-                        for (Long id:ids) {
-                            ResultDto<TbItemDTO> result= itemFeign.find(id);
-                            // ON NEXT 代表执行完这次继续下一次
-                            subscriber.onNext(result.getData());
-                        }
-                        // ON Completed 代表结束返回的拼接
-                        subscriber.onCompleted();
+                try {
+                    for (Long id : ids) {
+                        ResultDto<TbItemDTO> result = itemFeign.find(id);
+                        // ON NEXT 代表执行完这次继续下一次
+                        subscriber.onNext(result.getData());
                     }
-                }catch (Exception e){
+                    // ON Completed 代表结束返回的拼接
+                    subscriber.onCompleted();
+                } catch (Exception e) {
                     subscriber.onError(e);
-                    log.info(e.toString(),e);
+                    log.info(e.toString(), e);
                 }
             }
         }).subscribeOn(Schedulers.io());
