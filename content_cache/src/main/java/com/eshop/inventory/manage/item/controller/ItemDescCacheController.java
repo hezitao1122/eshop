@@ -9,11 +9,14 @@ import com.eshop.inventory.manage.item.dto.TbItemDescDTO;
 import com.eshop.inventory.manage.item.feign.ItemDescFeign;
 import com.eshop.inventory.manage.item.service.ItemDescCacheService;
 import com.netflix.hystrix.HystrixCommand;
+import com.netflix.hystrix.HystrixObservableCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author zeryts
@@ -50,6 +53,11 @@ public class ItemDescCacheController extends BaseCacheController<TbItemDescDTO, 
     @Override
     public HystrixCommand<TbItemDescDTO> getHystrixyCommand(Long id) {
         return new ItemDescCachePerwarmCommand(id);
+    }
+
+    @Override
+    public HystrixObservableCommand<TbItemDescDTO> getHystrixObservableCommand(List<Long> longs) {
+        return null;
     }
 
 

@@ -1,5 +1,7 @@
 package com.eshop.inventory.manage.item.controller;
 
+import com.eshop.inventory.cache.hystrixy.ItemCacheBatchPerwarmCommand;
+import com.eshop.inventory.cache.hystrixy.ItemCachePerwarmCommand;
 import com.eshop.inventory.cache.perwarm.CachePerwarmThread;
 import com.eshop.inventory.common.base.BaseFeign;
 import com.eshop.inventory.common.base.ICacheService;
@@ -9,8 +11,11 @@ import com.eshop.inventory.manage.item.dto.TbItemDTO;
 import com.eshop.inventory.manage.item.feign.ItemFeign;
 import com.eshop.inventory.manage.item.service.ItemCacheService;
 import com.netflix.hystrix.HystrixCommand;
+import com.netflix.hystrix.HystrixObservableCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author zeryts
@@ -51,7 +56,12 @@ public class ItemCacheController extends BaseCacheController<TbItemDTO, Long> {
 
     @Override
     public HystrixCommand<TbItemDTO> getHystrixyCommand(Long id) {
-        return null;
+        return new ItemCachePerwarmCommand(id);
+    }
+
+    @Override
+    public HystrixObservableCommand<TbItemDTO> getHystrixObservableCommand(List<Long> ids) {
+        return new ItemCacheBatchPerwarmCommand(ids);
     }
 
 }
