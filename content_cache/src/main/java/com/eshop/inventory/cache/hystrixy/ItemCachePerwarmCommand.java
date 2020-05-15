@@ -2,8 +2,7 @@ package com.eshop.inventory.cache.hystrixy;
 
 import com.eshop.inventory.manage.item.dto.TbItemDTO;
 import com.eshop.inventory.manage.item.feign.ItemFeign;
-import com.netflix.hystrix.HystrixCommand;
-import com.netflix.hystrix.HystrixCommandGroupKey;
+import com.netflix.hystrix.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -32,8 +31,65 @@ public class ItemCachePerwarmCommand extends HystrixCommand<TbItemDTO> {
      * @Date: 2020/5/10 18:46
      */
     public ItemCachePerwarmCommand(Long id) {
-        //绑定一个线程池
-        super(HystrixCommandGroupKey.Factory.asKey("ItemCachePerwarmCommandGroup"));
+        //绑定一个线程池 ， 默认为线程池模式
+//        super(HystrixCommandGroupKey.Factory.asKey("ItemCachePerwarmCommandGroup"));
+        super(
+                /**
+                 * GroupKey代表了一类底层服务 , 如果没有设置 threadpool的情况下,所有这一类服务使用同一个线程池
+                 * 多个Command组成一组Group
+                 */
+                Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("ItemCachePerwarmCommandGroup"))
+                /**
+                * 代表了一类Command , 即底层服务依赖的某一个接口 , 可以单独设置 threadpool 即每个接口使用不同的线程池
+                */
+                .andCommandKey(HystrixCommandKey.Factory.asKey("ItemCachePerwarmCommand"))
+                 /**
+                 *  代表了使用一类线程池pool , 同一个pool使用同一组线程池, 如果不进行设置,则默认同一个 groupkey使用同一组线程
+                 */
+                .andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("ItemCachePerwarmCommandPool"))
+                        /**
+                         * 这个参数用来设置线程池
+                         */
+                .andThreadPoolPropertiesDefaults(
+                        /**
+                         * 线程池使用这个Setter
+                         */
+                        HystrixThreadPoolProperties.Setter()
+                            /**
+                            * 默认为10
+                            * 设置该线程池的大小
+                            */
+                            .withCoreSize(10)
+                        /**
+                        *   默认为5
+                         *   1. 如果线程池满了,则其他线程会进入一个queue,等待线程释放
+                         *   2.如果queue也满了,其他请求会进入reject,然后走fallback逻辑
+                        */
+                        .withQueueSizeRejectionThreshold(10)
+                )
+                        /**
+                         * 此用于设置Command的一些通用设置
+                         */
+                .andCommandPropertiesDefaults(
+                        /**
+                         * 此为设置当隔离策略为信号量模式的情况下queue的最大大小,即允许访问的最大线程数,
+                         * 超过此线程数会直接reject,并且进入fallback状态  仅仅对Sempaphore状态为有效的
+                         */
+                        HystrixCommandProperties.Setter().withExecutionIsolationSemaphoreMaxConcurrentRequests(10)
+                )
+        );
+
+        /**
+         * 信号链模式 SEMAPHORE为信号量模式
+         */
+        /*
+        super(Setter.withGroupKey(
+                HystrixCommandGroupKey.Factory.asKey("ItemCachePerwarmCommandGroup")).
+                andCommandPropertiesDefaults( HystrixCommandProperties.Setter()
+                        .withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.SEMAPHORE))
+        );
+         */
+
         this.id = id;
     }
 
