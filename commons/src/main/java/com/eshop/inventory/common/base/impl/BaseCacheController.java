@@ -6,16 +6,17 @@ import com.eshop.inventory.common.base.IBaseEhCacheController;
 import com.eshop.inventory.common.dto.BaseDTO;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.common.queue.RebuildCacheQueue;
+import com.netflix.hystrix.HystrixCollapser;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixObservableCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
-import rx.Observable;
-import rx.Observer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * @author zeryts
@@ -102,46 +103,81 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
 
     @Override
     public ResultDto<List<T>> getBatchCache(List<ID> ids) {
-        HystrixObservableCommand<T> command = getHystrixObservableCommand(ids);
 
-        /**
-         *  消息队列模式，订阅一个从依赖请求中响应的Observable对象，拿到后就执行了
-         */
-        Observable<T> observe = command.observe();
-        /**
-         *  消息队列模式，延迟订阅,订阅一个从依赖请求中响应的Observable对象， 在subscribe方法执行的时候才去执行
-         */
-//        Observable<T> observe1 = command.toObservable();
+        // TODO  方案一
+//
+//        HystrixObservableCommand<T> command = getHystrixObservableCommand(ids);
+//        /**
+//         *  订阅一个从依赖请求中响应的Observable对象，拿到后就执行了
+//         */
+//        Observable<T> observe = command.observe();
+//        /**
+//         *  延迟订阅,订阅一个从依赖请求中响应的Observable对象， 在subscribe方法执行的时候才去执行
+//         */
+////        Observable<T> observe1 = command.toObservable();
+//
+//        ResultDto<List<T>> dto = new ResultDto<List<T>>();
+//        List<T> list = new ArrayList<>();
+//        dto.setData(list);
+//        observe.subscribe(new Observer<T>() {
+//            @Override
+//            public void onCompleted() {
+//                /**
+//                 * 代表执行完成后调用的方法
+//                 */
+//                log.info("执行完成了！");
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                /**
+//                 * 抛错的情况调用此方法
+//                 */
+//                log.info(e.toString(), e);
+//            }
+//
+//            @Override
+//            public void onNext(T t) {
+//                // on next里面执行的方法的返回
+//                log.info("执行的返回数据为：[result -> {}]", t);
+//                list.add(t);
+//            }
+//        });
+//        return dto;
 
-        ResultDto<List<T>> dto = new ResultDto<List<T>>();
-        List<T> list = new ArrayList<>();
-        dto.setData(list);
-        observe.subscribe(new Observer<T>() {
-            @Override
-            public void onCompleted() {
-                /**
-                 * 代表执行完成后调用的方法
-                 */
-                log.info("执行完成了！");
+        //TODO 方案二
+//        List<T> list = new ArrayList<>();
+//        for (ID id:ids) {
+//            HystrixCommand<T> command = getHystrixyCommand(id);
+//            T t = command.execute();
+//
+//            //是否走的是缓存
+//            boolean isCache = command.isResponseFromCache();
+//            log.info("isCache ? [res->{}]" , isCache);
+//            list.add(t);
+//        }
+//        return list
 
+        //TODO 方案三
+        List<Future<T>> futures = new ArrayList<>();
+        for (ID id:ids) {
+            HystrixCollapser command = getHystrixCollapser(id);
+            futures.add(command.queue());
+        }
+        final List<T> list = new ArrayList<>();
+        futures.forEach(f -> {
+            try {
+                T dto = f.get();
+                list.add(dto);
+            } catch (InterruptedException e) {
+                log.info(e.toString(),e);
+            } catch (ExecutionException e) {
+                log.info(e.toString(),e);
             }
 
-            @Override
-            public void onError(Throwable e) {
-                /**
-                 * 抛错的情况调用此方法
-                 */
-                log.info(e.toString(), e);
-            }
-
-            @Override
-            public void onNext(T t) {
-                // on next里面执行的方法的返回
-                log.info("执行的返回数据为：[result -> {}]", t);
-                list.add(t);
-            }
         });
-        return dto;
+        return new ResultDto<List<T>>(list);
     }
 
     /**
@@ -178,4 +214,15 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
      * @Date: 2020/5/14 21:40
      */
     abstract public HystrixObservableCommand<T> getHystrixObservableCommand(List<ID> ids);
+    /**
+     * 功能描述: 高可用Hystrix下批量查询的HystrixCollapser带请求拼接功能<br>
+     * 〈〉
+     *
+     * @param id 批量查询的id
+     * @return: com.netflix.hystrix.HystrixObservableCommand<T>
+     * @since: 1.0.0
+     * @Author: zeryts
+     * @Date: 2020/5/14 21:40
+     */
+    abstract public HystrixCollapser<List<T>,T,ID> getHystrixCollapser(ID id);
 }

@@ -1,4 +1,4 @@
-package com.eshop.inventory.cache.hystrixy;
+package com.eshop.inventory.hystrixy.commands;
 
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.manage.item.dto.TbItemDescDTO;

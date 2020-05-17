@@ -1,6 +1,6 @@
 package com.eshop.inventory.manage.item.controller;
 
-import com.eshop.inventory.cache.hystrixy.ItemDescCachePerwarmCommand;
+import com.eshop.inventory.hystrixy.commands.ItemDescCachePerwarmCommand;
 import com.eshop.inventory.common.base.BaseFeign;
 import com.eshop.inventory.common.base.ICacheService;
 import com.eshop.inventory.common.base.impl.BaseCacheController;
@@ -8,6 +8,7 @@ import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.manage.item.dto.TbItemDescDTO;
 import com.eshop.inventory.manage.item.feign.ItemDescFeign;
 import com.eshop.inventory.manage.item.service.ItemDescCacheService;
+import com.netflix.hystrix.HystrixCollapser;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixObservableCommand;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,11 @@ public class ItemDescCacheController extends BaseCacheController<TbItemDescDTO, 
 
     @Override
     public HystrixObservableCommand<TbItemDescDTO> getHystrixObservableCommand(List<Long> longs) {
+        return null;
+    }
+
+    @Override
+    public HystrixCollapser<List<TbItemDescDTO>, TbItemDescDTO, Long> getHystrixCollapser(Long aLong) {
         return null;
     }
 

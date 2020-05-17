@@ -1,8 +1,10 @@
 package com.eshop.inventory;
 
 import com.eshop.inventory.config.kafka.InitKafkaListener;
+import com.eshop.inventory.hystrixy.filter.HystrixRequestContextFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
@@ -40,4 +42,24 @@ public class ProductCacheApplication {
         servletListenerRegistrationBean.setListener(new InitKafkaListener());
         return servletListenerRegistrationBean;
     }
+
+    /**
+     * 功能描述: 注册一个Filter,用于Hystrix的上下文操作<br>
+     * 〈〉
+     *
+     * @return: org.springframework.boot.web.servlet.FilterRegistrationBean<com.eshop.inventory.hystrixy.filter.HystrixRequestContextFilter>
+     * @since: 1.0.0
+     * @Author: zeryts
+     * @Date: 2020/5/16 11:44
+     */
+    @Bean
+    public FilterRegistrationBean<HystrixRequestContextFilter> hystrixRegisterBean(){
+        FilterRegistrationBean<HystrixRequestContextFilter> registration = new FilterRegistrationBean<>(new HystrixRequestContextFilter());
+        /**
+         * 代表需要缓存的路径
+         */
+        registration.addUrlPatterns("/*");
+        return registration;
+    }
+
 }
