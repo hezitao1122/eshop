@@ -1,5 +1,6 @@
 package com.eshop.inventory.manage.item.controller;
 
+import com.eshop.inventory.hystrixy.collapser.ItemDesCollasperCommand;
 import com.eshop.inventory.hystrixy.commands.ItemDescCachePerwarmCommand;
 import com.eshop.inventory.common.base.BaseFeign;
 import com.eshop.inventory.common.base.ICacheService;
@@ -63,7 +64,7 @@ public class ItemDescCacheController extends BaseCacheController<TbItemDescDTO, 
 
     @Override
     public HystrixCollapser<List<TbItemDescDTO>, TbItemDescDTO, Long> getHystrixCollapser(Long aLong) {
-        return null;
+        return new ItemDesCollasperCommand(aLong,itemDescFeign);
     }
 
 

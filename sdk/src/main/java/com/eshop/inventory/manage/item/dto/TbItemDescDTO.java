@@ -16,7 +16,7 @@ import java.sql.Timestamp;
  */
 @Data
 public class TbItemDescDTO extends BaseDTO<TbItemDesc> {
-    private long itemId;
+    private Long itemId;
     private String itemDesc;
     private Timestamp created;
     private Timestamp updated;

@@ -98,10 +98,6 @@ public class ItemCollapserCommand extends HystrixCollapser<List<TbItemDTO>,TbIte
         for (CollapsedRequest<TbItemDTO, Long> coll:collapsedRequests) {
             coll.setResponse(collect.get(coll.getArgument()));
         }
-
-
-
-
     }
 
     /**
