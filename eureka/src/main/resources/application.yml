@@ -6,11 +6,23 @@ spring:
     name: eureka-server-1
 eureka:
   client:
-    register-with-eureka: false
-    fetch-registry: false
     service-url:
       defaultZone: http://127.0.0.1:${server.port}/eureka/
+    #是否注册到eureka
+    register-with-eureka: true
+    fetch-registry: false
   server:
-    eviction-interval-timer-in-ms: 4000
+    # eureka server清理无效节点的时间间隔，默认60000毫秒，即60秒  建议为6s
+    eviction-interval-timer-in-ms: 6000
+    #此参数为自我保护机制, 即如果此参数打开,遇到大量不发心跳监测,服务会断定其为自身网络机制,不会将其下架
+    # 此功能有很多bug , 生产一定不要上
     enable-self-preservation: false
-    renewal-percent-threshold: 0.9
+    #触发自我保护机制的阈值配置信息 默认为0.85
+    renewal-percent-threshold: 0.85
+    #此参数为 线程由writeOnly同步到readonly缓存检查的时间间隔  ms
+    response-cache-update-interval-ms: 3000
+  instance:
+    #此参数为,多久没发送心跳就当节点为宕机的阈值, 超过此时间无心跳,则移除节点 默认为90s 设置为9s
+    lease-expiration-duration-in-seconds: 9
+    # 发送心跳的间隔, 默认为30  建议为3
+    lease-renewal-interval-in-seconds: 3

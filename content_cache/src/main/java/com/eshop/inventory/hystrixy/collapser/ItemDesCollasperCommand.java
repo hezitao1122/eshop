@@ -1,12 +1,8 @@
 package com.eshop.inventory.hystrixy.collapser;
 
 import com.eshop.inventory.common.dto.ResultDto;
-import com.eshop.inventory.manage.item.dto.TbItemDTO;
 import com.eshop.inventory.manage.item.dto.TbItemDescDTO;
-import com.eshop.inventory.manage.item.entity.TbItem;
-import com.eshop.inventory.manage.item.entity.TbItemDesc;
 import com.eshop.inventory.manage.item.feign.ItemDescFeign;
-import com.eshop.inventory.manage.item.feign.ItemFeign;
 import com.netflix.hystrix.HystrixCollapser;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
