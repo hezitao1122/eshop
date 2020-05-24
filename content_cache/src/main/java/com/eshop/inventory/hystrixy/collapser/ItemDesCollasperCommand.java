@@ -21,20 +21,22 @@ import java.util.stream.Collectors;
  * @projectName eshop
  * @date 2020/5/18 22:11
  */
-public class ItemDesCollasperCommand extends HystrixCollapser<List<TbItemDescDTO>,TbItemDescDTO,Long> {
+public class ItemDesCollasperCommand extends HystrixCollapser<List<TbItemDescDTO>, TbItemDescDTO, Long> {
 
 
     private Long itemDescId;
 
     private ItemDescFeign feign;
 
-    public ItemDesCollasperCommand(Long itemDescId , ItemDescFeign feign){
+    public ItemDesCollasperCommand(Long itemDescId, ItemDescFeign feign) {
         this.itemDescId = itemDescId;
         this.feign = feign;
     }
 
 
-    /** description: 返回请求参数的方法
+    /**
+     * description: 返回请求参数的方法
+     *
      * @return: java.lang.Long
      * @Author: zeryts
      * @email: hezitao@agree.com
@@ -44,41 +46,46 @@ public class ItemDesCollasperCommand extends HystrixCollapser<List<TbItemDescDTO
     public Long getRequestArgument() {
         return itemDescId;
     }
-    /** description: 初始化一个批量查询的请求command
+
+    /**
+     * description: 初始化一个批量查询的请求command
+     *
      * @param collection
-     * @return: com.netflix.hystrix.HystrixCommand<java.util.List<com.eshop.inventory.manage.item.dto.TbItemDescDTO>>
+     * @return: com.netflix.hystrix.HystrixCommand<java.util.List < com.eshop.inventory.manage.item.dto.TbItemDescDTO>>
      * @Author: zeryts
      * @email: hezitao@agree.com
      * @Date: 2020/5/18 22:14
      */
     @Override
     protected HystrixCommand<List<TbItemDescDTO>> createCommand(Collection<CollapsedRequest<TbItemDescDTO, Long>> collection) {
-        return new ItemDesCollasperCommand.BatchCommand(collection,feign);
+        return new ItemDesCollasperCommand.BatchCommand(collection, feign);
     }
 
     @Override
     protected void mapResponseToRequests(List<TbItemDescDTO> tbItemDescDTOS, Collection<CollapsedRequest<TbItemDescDTO, Long>> collection) {
         Map<Long, TbItemDescDTO> collect = tbItemDescDTOS.stream().collect(Collectors.toMap(TbItemDescDTO::getItemId, dto -> dto));
 
-        for (CollapsedRequest<TbItemDescDTO, Long> coll:collection) {
+        for (CollapsedRequest<TbItemDescDTO, Long> coll : collection) {
             coll.setResponse(collect.get(coll.getArgument()));
         }
     }
 
-    private static final class BatchCommand extends HystrixCommand<List<TbItemDescDTO>>{
-        public final Collection<CollapsedRequest<TbItemDescDTO,Long>> requests;
+    private static final class BatchCommand extends HystrixCommand<List<TbItemDescDTO>> {
+        public final Collection<CollapsedRequest<TbItemDescDTO, Long>> requests;
 
         public final ItemDescFeign feign;
+
         /**
          * 功能描述: 批量查询的结果拼接command<br>
          * 〈〉
+         *
          * @param requests 传入的需要拼接的参数
-         * @param feign item操作的Feign
+         * @param feign    item操作的Feign
          * @since: 1.0.0
          * @Author: zeryts
          * @Date: 2020/5/17 16:19
          */
-        public BatchCommand(Collection<CollapsedRequest<TbItemDescDTO,Long>> requests,ItemDescFeign feign){
+        public BatchCommand(Collection<CollapsedRequest<TbItemDescDTO, Long>> requests, ItemDescFeign feign) {
 
             super(Setter.withGroupKey(
                     HystrixCommandGroupKey.Factory.asKey("ItemDescCachePerwarmCommandGroup"))
@@ -90,6 +97,7 @@ public class ItemDesCollasperCommand extends HystrixCollapser<List<TbItemDescDTO
 
         /**
          * 功能描述: 执行拼接命令<br>
+         *
          * @return: java.util.List<com.eshop.inventory.manage.item.dto.TbItemDTO>
          * @since: 1.0.0
          * @Author: zeryts

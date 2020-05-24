@@ -12,6 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.retry.annotation.EnableRetry;
 
 /**
  * @ClassName: ProductCacheApplication
@@ -25,6 +26,7 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 @EnableHystrix //开启Hystrix支持
 @EnableFeignClients //开启feign的注解
+@EnableRetry //开启重试机制
 public class ProductCacheApplication {
 
     public static ApplicationContext app = null;
@@ -53,7 +55,7 @@ public class ProductCacheApplication {
      * @Date: 2020/5/16 11:44
      */
     @Bean
-    public FilterRegistrationBean<HystrixRequestContextFilter> hystrixRegisterBean(){
+    public FilterRegistrationBean<HystrixRequestContextFilter> hystrixRegisterBean() {
         FilterRegistrationBean<HystrixRequestContextFilter> registration = new FilterRegistrationBean<>(new HystrixRequestContextFilter());
         /**
          * 代表需要缓存的路径

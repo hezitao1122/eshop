@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @author zeryts
  * @description: 用语查询多条数据的Command
- *  HystrixCommand :是用来获取一条数据的Command
- *  HystrixObservableCommand :是用来获取多条数据的Command
- *
+ * HystrixCommand :是用来获取一条数据的Command
+ * HystrixObservableCommand :是用来获取多条数据的Command
+ * <p>
  * -----------------------------------
  * @title: ItemCachePerwarmCommand
  * @projectName inventory
@@ -29,6 +29,7 @@ public class ItemCachePerwarmCommand extends HystrixCommand<TbItemDTO> {
 
     /**
      * description: 初始化构造方法 ， 需要传入你在run使用的值，并且传入全局变量
+     *
      * @param id item的ID
      * @Author: zeryts
      * @email: hezitao@agree.com
@@ -124,6 +125,7 @@ public class ItemCachePerwarmCommand extends HystrixCommand<TbItemDTO> {
     protected TbItemDTO run() throws Exception {
         return itemFeign.find(id).getData();
     }
+
     /**
      * 功能描述: 用于请求上下文缓存到内存的key<br>
      * 〈〉
@@ -136,26 +138,30 @@ public class ItemCachePerwarmCommand extends HystrixCommand<TbItemDTO> {
     @Override
     protected String getCacheKey() {
 
-        return "item_cache_"+ id;
+        return "item_cache_" + id;
     }
+
     /**
      * 功能描述:  刷新内存缓存的方法, 使得下一次请求不会走上下文的请求<br>
      * 〈〉
+     *
      * @param id 商品的ID
      * @return: boolean
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2020/5/16 12:18
      */
-    public static boolean flush(Long id){
+    public static boolean flush(Long id) {
 
         HystrixRequestCache.getInstance(COMMAND_KEY, HystrixConcurrencyStrategyDefault.getInstance()).
-                clear("item_cache_"+ id);
+                clear("item_cache_" + id);
         return true;
     }
+
     /**
      * 功能描述:降级的逻辑代码 <br>
      * 〈〉
+     *
      * @return: com.eshop.inventory.manage.item.dto.TbItemDTO
      * @since: 1.0.0
      * @Author: zeryts

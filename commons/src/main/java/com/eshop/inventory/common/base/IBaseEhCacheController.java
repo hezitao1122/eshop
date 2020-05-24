@@ -17,6 +17,7 @@ public interface IBaseEhCacheController<T extends BaseDTO, ID extends Serializab
     /**
      * 功能描述: 获取内存队列的缓存接口<br>
      * 〈〉
+     *
      * @param id 主键
      * @return: com.eshop.inventory.common.dto.ResultDto<T>
      * @since: 1.0.0
@@ -24,9 +25,11 @@ public interface IBaseEhCacheController<T extends BaseDTO, ID extends Serializab
      * @Date: 2020/5/14 21:44
      */
     ResultDto<T> getEhcache(ID id);
+
     /**
      * 功能描述: 删除内存队列的缓存接口<br>
      * 〈〉
+     *
      * @param id 主键
      * @return: com.eshop.inventory.common.dto.ResultDto<T>
      * @since: 1.0.0
@@ -34,10 +37,12 @@ public interface IBaseEhCacheController<T extends BaseDTO, ID extends Serializab
      * @Date: 2020/5/14 21:43
      */
     ResultDto<T> deleteEhcache(ID id);
+
     /**
      * 功能描述: 获取的缓存Service接口<br>
      * 〈〉
-     * @return: com.eshop.inventory.common.base.ICacheService<T,ID>
+     *
+     * @return: com.eshop.inventory.common.base.ICacheService<T, ID>
      * @since: 1.0.0
      * @Author: zeryts
      * @Date: 2020/5/14 21:42

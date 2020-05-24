@@ -161,7 +161,7 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
 
         //TODO 方案三
         List<Future<T>> futures = new ArrayList<>();
-        for (ID id:ids) {
+        for (ID id : ids) {
             HystrixCollapser command = getHystrixCollapser(id);
             futures.add(command.queue());
         }
@@ -171,9 +171,9 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
                 T dto = f.get();
                 list.add(dto);
             } catch (InterruptedException e) {
-                log.info(e.toString(),e);
+                log.info(e.toString(), e);
             } catch (ExecutionException e) {
-                log.info(e.toString(),e);
+                log.info(e.toString(), e);
             }
 
         });
@@ -214,6 +214,7 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
      * @Date: 2020/5/14 21:40
      */
     abstract public HystrixObservableCommand<T> getHystrixObservableCommand(List<ID> ids);
+
     /**
      * 功能描述: 高可用Hystrix下批量查询的HystrixCollapser带请求拼接功能<br>
      * 〈〉
@@ -224,5 +225,5 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
      * @Author: zeryts
      * @Date: 2020/5/14 21:40
      */
-    abstract public HystrixCollapser<List<T>,T,ID> getHystrixCollapser(ID id);
+    abstract public HystrixCollapser<List<T>, T, ID> getHystrixCollapser(ID id);
 }

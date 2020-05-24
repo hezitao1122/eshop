@@ -15,17 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 每个command(每次服务调用请求)都是使用线程池的一个线程去执行的
  * 所以哪怕是对这个依赖服务,商品服务同时发起的调用已经达到了1000,但是线程池也就使用10个线程,最多就只会用这10个线程去执行
  * 不会说,对商品服务的请求,因为接口的调用延迟,将tomcat内部所有的线程资源全部耗尽
- *
+ * <p>
  * 有4种方式可以执行一个Hystrix命令。
  * 1. execute()—该方法是阻塞的，从依赖请求中接收到单个响应（或者出错时抛出异常）。
  * 2. queue()—从依赖请求中返回一个包含单个响应的Future对象。
  * 3. observe()—订阅一个从依赖请求中返回的代表响应的Observable对象。
  * 4. toObservable()—返回一个Observable对象，只有当你订阅它时，它才会执行Hystrix命令并发射响应。
- *
+ * <p>
  * HystrixCommand 查询的为单条数据
  * HystrixObservableCommand 查询的为多条数据
- *
- *
+ * <p>
+ * <p>
  * -----------------------------------
  * @title: ItemDescCachePerwarmCommand
  * @projectName inventory
@@ -38,7 +38,7 @@ public class ItemDescCachePerwarmCommand extends HystrixCommand<TbItemDescDTO> {
     @Autowired
     private ItemDescFeign itemDescFeign;
 
-    public ItemDescCachePerwarmCommand(Long id){
+    public ItemDescCachePerwarmCommand(Long id) {
         //绑定的线程池  所有请求都用此线程池
         super(HystrixCommandGroupKey.Factory.asKey("ItemCachePerwarmCommandGroup"));
         //传入的构造值

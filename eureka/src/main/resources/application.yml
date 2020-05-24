@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: eureka-server-1
+  security:
+    user:
+      name: admin
+      password: admin
 eureka:
   client:
     service-url:
@@ -11,6 +15,8 @@ eureka:
     #是否注册到eureka
     register-with-eureka: true
     fetch-registry: false
+
+
   server:
     # eureka server清理无效节点的时间间隔，默认60000毫秒，即60秒  建议为6s
     eviction-interval-timer-in-ms: 6000
@@ -26,3 +32,10 @@ eureka:
     lease-expiration-duration-in-seconds: 9
     # 发送心跳的间隔, 默认为30  建议为3
     lease-renewal-interval-in-seconds: 3
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+ribbon:
+  eager-load:
+    # ribbon的饥饿加载 , 默认为开启懒加载 , 所以会导致第一次请求某个微服务会出现请求超时问题
+    enabled: true

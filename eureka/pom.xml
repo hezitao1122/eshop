@@ -14,14 +14,12 @@
     <name>eureka</name>
     <description>eshop eureka</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
+
+
     </dependencies>
 </project>

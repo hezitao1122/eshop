@@ -22,9 +22,9 @@ public class HystrixRequestContextFilter implements Filter {
          * 初始化一个Hystrix的上下文
          */
         HystrixRequestContext context = HystrixRequestContext.initializeContext();
-        try{
-            filterChain.doFilter(servletRequest,servletResponse);
-        }finally {
+        try {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } finally {
             /**
              * 关闭上下文
              */

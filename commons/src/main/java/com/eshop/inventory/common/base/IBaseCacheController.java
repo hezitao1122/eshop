@@ -18,6 +18,7 @@ public interface IBaseCacheController<T extends BaseDTO, ID extends Serializable
     /**
      * 功能描述: 从redis中获取缓存<br>
      * 〈〉
+     *
      * @param id 主键
      * @return: com.eshop.inventory.common.dto.ResultDto<T>
      * @since: 1.0.0
@@ -25,9 +26,11 @@ public interface IBaseCacheController<T extends BaseDTO, ID extends Serializable
      * @Date: 2020/5/14 21:45
      */
     ResultDto<T> getCache(ID id);
+
     /**
      * 功能描述: 从redis中删除缓存<br>
      * 〈〉
+     *
      * @param id 主键
      * @return: com.eshop.inventory.common.dto.ResultDto<T>
      * @since: 1.0.0
@@ -35,9 +38,11 @@ public interface IBaseCacheController<T extends BaseDTO, ID extends Serializable
      * @Date: 2020/5/14 21:45
      */
     ResultDto<T> deleteCache(ID id);
+
     /**
      * 功能描述: 缓存的service<br>
      * 〈〉
+     *
      * @return: com.eshop.inventory.common.dto.ResultDto<T>
      * @since: 1.0.0
      * @Author: zeryts
@@ -48,6 +53,7 @@ public interface IBaseCacheController<T extends BaseDTO, ID extends Serializable
     /**
      * 功能描述: 批量从redis中获取缓存<br>
      * 〈〉
+     *
      * @param ids 主键集合
      * @return: com.eshop.inventory.common.dto.ResultDto<T>
      * @since: 1.0.0
