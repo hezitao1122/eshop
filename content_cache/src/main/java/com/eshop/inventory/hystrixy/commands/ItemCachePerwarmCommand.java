@@ -1,10 +1,17 @@
 package com.eshop.inventory.hystrixy.commands;
 
+import cn.hutool.db.DaoTemplate;
 import com.eshop.inventory.manage.item.dto.TbItemDTO;
+import com.eshop.inventory.manage.item.entity.TbItem;
 import com.eshop.inventory.manage.item.feign.ItemFeign;
+import com.eshop.inventory.manage.item.service.ItemCacheService;
 import com.netflix.hystrix.*;
 import com.netflix.hystrix.strategy.concurrency.HystrixConcurrencyStrategyDefault;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @author zeryts
@@ -17,14 +24,19 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @projectName inventory
  * @date 2020/5/10 16:47
  */
+@Slf4j
 public class ItemCachePerwarmCommand extends HystrixCommand<TbItemDTO> {
 
     private Long id;
 
     @Autowired
     private ItemFeign itemFeign;
+    @Autowired
+    private ItemCacheService service;
+
 
     public static HystrixCommandGroupKey GROUP_KEY = HystrixCommandGroupKey.Factory.asKey("ItemCachePerwarmCommandGroup");
+    public static HystrixCommandGroupKey TWO_GROUP_KEY = HystrixCommandGroupKey.Factory.asKey("TwoItemCachePerwarmCommandGroup");
     public static HystrixCommandKey COMMAND_KEY = HystrixCommandKey.Factory.asKey("ItemCachePerwarmCommand");
 
     /**
@@ -137,7 +149,6 @@ public class ItemCachePerwarmCommand extends HystrixCommand<TbItemDTO> {
      */
     @Override
     protected String getCacheKey() {
-
         return "item_cache_" + id;
     }
 
@@ -152,7 +163,6 @@ public class ItemCachePerwarmCommand extends HystrixCommand<TbItemDTO> {
      * @Date: 2020/5/16 12:18
      */
     public static boolean flush(Long id) {
-
         HystrixRequestCache.getInstance(COMMAND_KEY, HystrixConcurrencyStrategyDefault.getInstance()).
                 clear("item_cache_" + id);
         return true;
@@ -169,8 +179,45 @@ public class ItemCachePerwarmCommand extends HystrixCommand<TbItemDTO> {
      */
     @Override
     protected TbItemDTO getFallback() {
+        log.info("id为[{}]的商品走二次回调!",id);
+        return new TwoItemCachePerwamCommand(id).execute();
+    }
+    /**
+     * @author zeryts
+     * @description: 二次降级的方法
+     * <p>
+     * -----------------------------------
+     * @title: TwoItemCachePerwamCommand
+     * @projectName inventory
+     * @date 2020/5/10 16:47
+     */
+    private final class TwoItemCachePerwamCommand extends HystrixCommand<TbItemDTO>{
 
-        return super.getFallback();
+        private Long id;
+
+        public TwoItemCachePerwamCommand(Long id){
+            super(Setter.withGroupKey(TWO_GROUP_KEY)
+                    .andCommandKey(COMMAND_KEY)
+            );
+            this.id = id;
+        }
+
+
+        @Override
+        protected TbItemDTO run() throws Exception {
+            return service.getLoadCache(id);
+        }
+
+
+        @Override
+        protected TbItemDTO getFallback() {
+            log.info("id为[{}]的商品二次回调也没查询到商品信息!",id);
+            TbItemDTO dto = new TbItemDTO();
+            TbItem item = new TbItem();
+            item.setId(id);
+            dto.setEntity(item);
+            return dto;
+        }
     }
 
 
