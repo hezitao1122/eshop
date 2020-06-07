@@ -4,6 +4,7 @@ import com.eshop.inventory.common.base.BaseFeign;
 import com.eshop.inventory.common.dto.ResultDto;
 import com.eshop.inventory.manage.item.dto.TbItemDescDTO;
 import com.eshop.inventory.manage.item.feign.rollback.ItemDescFeignRollback;
+import com.netflix.ribbon.proxy.annotation.Hystrix;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;

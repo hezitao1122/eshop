@@ -4,6 +4,7 @@ import com.eshop.inventory.common.enums.RedisOperateEnums;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
+import com.netflix.hystrix.HystrixCommandProperties;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.concurrent.TimeUnit;
@@ -37,6 +38,21 @@ public class RedisOperateCommand<V> extends HystrixCommand<V> {
         //绑定一个线程池 ， 默认为线程池模式
         super(Setter.withGroupKey(GROUP_KEY)
                 .andCommandKey(COMMAND_KEY)
+                .andCommandPropertiesDefaults(
+                        HystrixCommandProperties.Setter()
+                                /**
+                                 * 10秒内多少个请求访问才开始走熔断
+                                 */
+                        .withCircuitBreakerRequestVolumeThreshold(100)
+                                /**
+                                 * 上述条件生效的情况下,多少的异常比例才走熔断
+                                 */
+                        .withCircuitBreakerErrorThresholdPercentage(60)
+                                /**
+                                 * 断路器打开后多少秒才进入半开状态  默认为5
+                                 */
+                        .withCircuitBreakerSleepWindowInMilliseconds(60 * 1000)
+                )
         );
         this.key = key;
         this.value = value;
@@ -72,5 +88,11 @@ public class RedisOperateCommand<V> extends HystrixCommand<V> {
             template.opsForValue().get(key);
         }
         return value;
+    }
+
+    @Override
+    protected V getFallback() {
+
+        return null;
     }
 }

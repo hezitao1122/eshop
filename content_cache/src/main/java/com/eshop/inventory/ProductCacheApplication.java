@@ -27,6 +27,7 @@ import org.springframework.retry.annotation.EnableRetry;
 @EnableHystrix //开启Hystrix支持
 @EnableFeignClients //开启feign的注解
 @EnableRetry //开启重试机制
+
 public class ProductCacheApplication {
 
     public static ApplicationContext app = null;

@@ -25,8 +25,8 @@ public abstract class BaseDBAndCacheServiceImpl<T extends BaseEntity, ID extends
 
     @Override
     public void setCache(ID id, T t) {
-        log.info("===========日志===========: 将数据加入缓存中，key=[{}]", getPrefix() + id + ", data=[{}]", JSON.toJSONString(t));
-        redisTemplate.opsForValue().set(id, t);
+        log.info("===========日志===========: 将数据加入缓存中，key=[{}] , data=[{}]", getPrefix() + id , JSON.toJSONString(t));
+        redisTemplate.opsForValue().set(getPrefix() + id , t);
     }
 
     @Override
@@ -44,5 +44,4 @@ public abstract class BaseDBAndCacheServiceImpl<T extends BaseEntity, ID extends
     }
 
     protected abstract String getPrefix();
-
 }

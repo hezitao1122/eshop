@@ -3,6 +3,8 @@ package com.eshop.inventory.manage.item.feign;
 import com.eshop.inventory.common.base.BaseFeign;
 import com.eshop.inventory.manage.item.dto.TbItemDTO;
 import com.eshop.inventory.manage.item.feign.rollback.ItemFeignRollback;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,5 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @FeignClient(name = "eshop-content", path = "/api/v1/item", fallback = ItemFeignRollback.class)
 @Component
+
 public interface ItemFeign extends BaseFeign<TbItemDTO, Long> {
 }

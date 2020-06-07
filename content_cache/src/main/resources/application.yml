@@ -29,7 +29,10 @@ feign:
   hystrix:
     #开启feign的hystrix支持,默认是false
     enabled: true
-
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
 #线程池配置
 thread:
   corePoolSize: 20
@@ -52,15 +55,19 @@ ribbon:
   eager-load:
     # ribbon的饥饿加载 , 默认为开启懒加载 , 所以会导致第一次请求某个微服务会出现请求超时问题
     enabled: true
-
   eureka:
     enabled: true
     #请求的超时时间
-  ConnectTimeout: 1000
-  ReadTimeout: 1000
+  connectTimeout: 1000
+  readTimeout: 1000
   #请求的重试次数,当请求一个服务超时的时候,重试其他机器
   MaxAutoRetries: 1
   MaxAutoRetriesNextServer: 1
+  http:
+    client:
+      enabled: false
+  okhttp:
+    enabled: true
 
 
 
@@ -69,10 +76,15 @@ hystrix:
     default:
       execution:
         isolation:
+          strategy: THREAD
           thread:
-            timeoutInMilliseconds: 100000
+            timeoutInMilliseconds: 2000
         timeout:
-          enabled: false
+          enabled: true
+
+
+
+
   # 打印sql
   level:
     com.eshopinventory: debug
