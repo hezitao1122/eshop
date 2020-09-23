@@ -67,8 +67,8 @@ public class ItemCacheController extends BaseCacheController<TbItemDTO, Long> {
     }
 
     @Override
-    public HystrixCollapser<List<TbItemDTO>, TbItemDTO, Long> getHystrixCollapser(Long id) {
-        return new ItemCollapserCommand(id, itemFeign);
+    public HystrixCollapser<List<TbItemDTO>, TbItemDTO, Long> getHystrixCollapser(Long aLong) {
+        return null;
     }
 
 }

@@ -2,6 +2,7 @@ package com.eshop.inventory.common.dto;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import lombok.Data;
 
 /**
  * @author zeryts
@@ -11,7 +12,8 @@ import com.alibaba.fastjson.JSONObject;
  * @projectName inventory
  * @date 2019/6/12 22:30
  */
-public abstract class BaseDTO<T> {
+@Data
+public class BaseDTO<T> {
 
     public T parseEntity() {
         String s = JSON.toJSONString(this);

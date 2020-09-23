@@ -36,8 +36,16 @@ if itemDescCache == "" or itemDescCache == nil then
         keepalive=false
 
     })
+
+
+
     itemDescCache = resp.body
-    cache_ngx:set(itemDescKey,itemDescCache,10*60)
+
+    math.randomseed(tostring(os.time()):reverse():sub(1,7))
+    local expireTime = math.random(600,1200)
+
+
+    cache_ngx:set(itemDescKey,itemDescCache,expireTime)
 end
 
 local cjson = require("cjson")

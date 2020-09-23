@@ -91,6 +91,10 @@ public abstract class BaseCacheController<T extends BaseDTO, ID extends Serializ
             }
             RebuildCacheQueue.getInstance().add(t);
         }
+        if(t == null){
+            getCacheService().saveLoadCache(id,null);
+
+        }
         return new ResultDto<T>(t);
     }
 
