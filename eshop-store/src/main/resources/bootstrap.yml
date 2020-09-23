@@ -8,7 +8,7 @@ spring:
     url: jdbc:mysql://192.168.31.223:3306/eshop?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: hezitao
     password: hezitao
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.alibaba.druid.proxy.DruidDriver
     initialSize: 5
     maxActive: 200
     minIdle: 5
@@ -21,13 +21,6 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
-  jpa:
-    database: mysql
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
     properties:
       hibernate: dialect:org.hibernate.dialect.MySQL5Dialect
       hibernate.format_sql: true

@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>content_cache</artifactId>
+    <artifactId>eshop-cache</artifactId>
 
     <dependencies>
         <dependency>

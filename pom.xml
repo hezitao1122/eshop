@@ -10,18 +10,13 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>content</module>
-        <module>content_cache</module>
+        <module>eshop-cache</module>
+        <module>eshop-store</module>
         <module>commons</module>
         <module>sdk</module>
         <module>eureka</module>
         <module>eshop-storm</module>
         <module>eshop-gateway</module>
-<!--        <module>eshop-nacos</module>-->
-<!--        <module>config-ui</module>-->
-<!--        <module>config</module>-->
-<!--        <module>gateway</module>-->
-<!--        <module>sentinel-dashboard</module>-->
 
     </modules>
 
@@ -63,8 +58,14 @@
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-<!--                <version>${spring.boot.version}</version>-->
                 <version>2.2.5.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.2.1.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -254,6 +255,12 @@
         </plugins>
     </build>
     <repositories>
+        <!--使用阿里云镜像-->
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
         <repository>
             <id>spring-milestone</id>
             <url>https://repo.spring.io/libs-release</url>
