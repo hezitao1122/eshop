@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.zeryts.c2c</groupId>
     <artifactId>eshop</artifactId>
@@ -18,6 +16,7 @@
 
     <properties>
         <project.version>1.0</project.version>
+        <eshop.version>1.0</eshop.version>
         <java.version>1.8</java.version>
         <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
         <spring-boot.version>2.3.6.RELEASE</spring-boot.version>
@@ -33,6 +32,7 @@
         <http-clent.version>4.5.5</http-clent.version>
         <ttl.version>2.11.4</ttl.version>
         <hutool.version>5.5.1</hutool.version>
+
         <spring.checkstyle.version>0.0.23</spring.checkstyle.version>
         <docker.plugin.version>0.33.0</docker.plugin.version>
         <git.commit.version>2.2.5</git.commit.version>
@@ -46,6 +46,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.zeryts.c2c</groupId>
+                <artifactId>eshop-common-bom</artifactId>
+                <version>${eshop.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -69,6 +76,7 @@
     </dependencyManagement>
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter</artifactId>

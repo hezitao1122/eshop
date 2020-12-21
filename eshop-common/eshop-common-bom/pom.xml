@@ -50,6 +50,7 @@
         <commons-lang.version>2.6</commons-lang.version>
         <hutool.version>5.5.1</hutool.version>
         <ttl.version>2.11.4</ttl.version>
+        <jackson.modules>2.9.6</jackson.modules>
 
         <spring-boot-admin.version>2.3.0</spring-boot-admin.version>
 
@@ -57,6 +58,8 @@
         <knife4j.version>2.0.8</knife4j.version>
 
         <aws.version>1.11.543</aws.version>
+        <jedis.version>2.9.0</jedis.version>
+        <shiro.version>1.6.0</shiro.version>
     </properties>
 
 
@@ -259,6 +262,29 @@
                 <version>${sentinel.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!--jacksonJSR310规范-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-modules-java8</artifactId>
+                <version>${jackson.modules}</version>
+                <type>pom</type>
+            </dependency>
+            <!-- jedis工具类 -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-core</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-all</artifactId>
+                <version>${shiro.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
