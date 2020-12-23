@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.zeryts.c2c</groupId>
+		<artifactId>eshop</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<artifactId>eshop-upms</artifactId>
+
+	<description>eshop 通用用户权限管理聚合模块</description>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>eshop-upms-api</module>
+		<module>eshop-upms-biz</module>
+	</modules>
+</project>

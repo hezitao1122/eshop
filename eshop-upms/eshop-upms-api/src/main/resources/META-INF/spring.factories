@@ -1,0 +1,8 @@
+# 配置 feignclient 的全类名路径， 避免包名不规范无法扫描问题
+PigxFeignAutoConfiguration=\
+  com.zeryts.c2c.admin.api.feign.RemoteDataScopeService,\
+  com.zeryts.c2c.admin.api.feign.RemoteLogService,\
+  com.zeryts.c2c.admin.api.feign.RemoteParamService,\
+  com.zeryts.c2c.admin.api.feign.RemoteTenantService,\
+  com.zeryts.c2c.admin.api.feign.RemoteTokenService,\
+  com.zeryts.c2c.admin.api.feign.RemoteUserService

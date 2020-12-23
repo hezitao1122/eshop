@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.zeryts.c2c.common.feign.SocialFeignAutoConfiguration
