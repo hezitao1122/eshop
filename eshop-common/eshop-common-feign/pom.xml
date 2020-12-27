@@ -4,13 +4,13 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>com.zeryts.c2c</groupId>
-		<artifactId>social-common</artifactId>
+		<artifactId>eshop-common</artifactId>
 		<version>1.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>jar</packaging>
-	<artifactId>social-common-feign</artifactId>
+	<artifactId>eshop-common-feign</artifactId>
 	<description>feign 通用组件</description>
 	<dependencies>
 		<!--feign 依赖-->

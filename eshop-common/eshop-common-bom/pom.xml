@@ -18,7 +18,7 @@
 
 
     <properties>
-        <social.version>1.0</social.version>
+        <eshop.version>1.0</eshop.version>
         <project.version>1.0</project.version>
         <java.version>1.8</java.version>
         <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
@@ -65,6 +65,26 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.zeryts.c2c</groupId>
+                <artifactId>eshop-common-core</artifactId>
+                <version>${eshop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zeryts.c2c</groupId>
+                <artifactId>eshop-common-feign</artifactId>
+                <version>${eshop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zeryts.c2c</groupId>
+                <artifactId>eshop-upms-api</artifactId>
+                <version>${eshop.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zeryts.c2c</groupId>
+                <artifactId>eshop-upms-biz</artifactId>
+                <version>${eshop.version}</version>
+            </dependency>
             <!-- hutool工具类 -->
             <dependency>
                 <groupId>cn.hutool</groupId>

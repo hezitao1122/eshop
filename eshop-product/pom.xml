@@ -13,6 +13,6 @@
     <description>产品模块,管理一些单独的服务</description>
 
     <modules>
-
+        <module>storm-wordcount</module>
     </modules>
 </project>

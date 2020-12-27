@@ -13,6 +13,7 @@
         <module>eshop-common</module>
         <module>eshop-register</module>
         <module>eshop-upms</module>
+        <module>eshop-product</module>
     </modules>
 
     <properties>
