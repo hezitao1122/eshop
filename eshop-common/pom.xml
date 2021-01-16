@@ -16,6 +16,8 @@
         <module>eshop-common-bom</module>
         <module>eshop-common-core</module>
         <module>eshop-common-feign</module>
+        <module>eshop-common-data</module>
+        <module>eshop-common-gateway</module>
 
     </modules>
 </project>

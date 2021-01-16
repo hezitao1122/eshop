@@ -1,0 +1,9 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.zeryts.c2c.common.data.cache.RedisTemplateConfig,\
+    com.zeryts.c2c.common.data.cache.RedisCacheManagerConfig,\
+    com.zeryts.c2c.common.data.cache.RedisCacheAutoConfiguration,\
+    com.zeryts.c2c.common.data.tenant.SocialTenantConfigProperties,\
+    com.zeryts.c2c.common.data.tenant.TenantContextHolderFilter,\
+    com.zeryts.c2c.common.data.tenant.SocialTenantConfiguration,\
+    com.zeryts.c2c.common.data.mybatis.MybatisPlusConfiguration,\
+    com.zeryts.c2c.common.data.resolver.TenantKeyStrResolver
