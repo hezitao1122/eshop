@@ -1,5 +1,6 @@
 package com.eshop.inventory.config.mysql;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.entity.GlobalConfiguration;
 import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
 import com.github.pagehelper.PageHelper;
@@ -26,7 +27,7 @@ public class DataSourceConfig {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
-        return new org.apache.tomcat.jdbc.pool.DataSource();
+        return new DruidDataSource();
     }
 
     /**
