@@ -1,0 +1,2 @@
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+com.zeryts.c2c.common.gateway.exception.RouteCheckFailureAnalyzer

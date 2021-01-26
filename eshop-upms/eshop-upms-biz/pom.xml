@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.zeryts.c2c</groupId>
+		<artifactId>eshop-upms</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<artifactId>eshop-upms-biz</artifactId>
+	<packaging>jar</packaging>
+
+	<description>social 通用用户权限管理系统业务处理模块</description>
+
+	<dependencies>
+		<!--upms api、model 模块-->
+		<dependency>
+			<groupId>com.zeryts.c2c</groupId>
+			<artifactId>eshop-upms-api</artifactId>
+		</dependency>
+		<!--日志处理-->
+		<dependency>
+			<groupId>com.zeryts.c2c</groupId>
+			<artifactId>eshop-common-log</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.zeryts.c2c</groupId>
+			<artifactId>eshop-common-data</artifactId>
+		</dependency>
+		<!--swagger-->
+		<dependency>
+			<groupId>com.zeryts.c2c</groupId>
+			<artifactId>eshop-common-swagger</artifactId>
+		</dependency>
+		<!--文件系统-->
+		<dependency>
+			<groupId>com.zeryts.c2c</groupId>
+			<artifactId>eshop-common-oss</artifactId>
+		</dependency>
+		<!--注册中心客户端-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+		<!--配置中心客户端-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+		<!--spring security 、oauth、jwt依赖-->
+		<dependency>
+			<groupId>com.zeryts.c2c</groupId>
+			<artifactId>eshop-common-security</artifactId>
+		</dependency>
+		<!--XSS 安全过滤-->
+		<dependency>
+			<groupId>com.zeryts.c2c</groupId>
+			<artifactId>eshop-common-xss</artifactId>
+		</dependency>
+		<!--支持动态路由配置 -->
+		<dependency>
+			<groupId>com.zeryts.c2c</groupId>
+			<artifactId>eshop-common-gateway</artifactId>
+		</dependency>
+		<!--sentinel 依赖-->
+		<dependency>
+			<groupId>com.zeryts.c2c</groupId>
+			<artifactId>eshop-common-sentinel</artifactId>
+		</dependency>
+		<!--路由控制-->
+		<dependency>
+			<groupId>com.zeryts.c2c</groupId>
+			<artifactId>eshop-common-gray</artifactId>
+		</dependency>
+		<!--mybatis-->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+		</dependency>
+		<!-- druid 连接池 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+		</dependency>
+		<!--数据库-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!--web 模块-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!--undertow容器-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
