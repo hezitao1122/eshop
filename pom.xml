@@ -31,7 +31,7 @@
         <sentinel.version>1.8.1-SNAPSHOT</sentinel.version>
         <maven.deploy.version>2.8.2</maven.deploy.version>
         <apollo.version>1.5.0</apollo.version>
-        <http-clent.version>4.5.5</http-clent.version>
+        <http-clent.version>4.5.13</http-clent.version>
         <ttl.version>2.11.4</ttl.version>
         <hutool.version>5.5.1</hutool.version>
 
