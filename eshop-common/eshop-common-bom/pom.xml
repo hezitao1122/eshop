@@ -40,7 +40,7 @@
         <mp.weixin.version>3.9.0</mp.weixin.version>
         <ijpay.version>2.7.0</ijpay.version>
         <groovy.version>3.0.3</groovy.version>
-        <jsoup.version>1.13.1</jsoup.version>
+        <jsoup.version>1.14.2</jsoup.version>
         <security.oauth.version>2.3.6.RELEASE</security.oauth.version>
         <cloud.plugin.version>1.1.1</cloud.plugin.version>
         <javaformat.plugin.version>0.0.23</javaformat.plugin.version>
