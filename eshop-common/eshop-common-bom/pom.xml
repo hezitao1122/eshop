@@ -57,7 +57,7 @@
         <swagger.fox.version>3.0.0</swagger.fox.version>
         <knife4j.version>2.0.8</knife4j.version>
 
-        <aws.version>1.11.543</aws.version>
+        <aws.version>1.12.261</aws.version>
         <jedis.version>2.9.0</jedis.version>
         <shiro.version>1.6.0</shiro.version>
     </properties>
